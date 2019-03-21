@@ -16,25 +16,29 @@ public class Game implements Model {
      * @param current
      * @param opponent
      */
-
     public Game(Board board, Player current, Player opponent) {
         this.board = board;
         this.current = current;
         this.opponent = opponent;
     }
-    /**
-     * 
-     */
 
-   
+    /**
+     * This method initialized the board of the game
+     */
     @Override
     public void initialize() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Square[][] square = null;
+        Board board = new Board(square);
+        board.put(new Piece(0, PlayerColor.RED), new Position(0, 1));
+        board.put(new Piece(0, PlayerColor.RED), new Position(3, 2));
+        board.put(new Piece(0, PlayerColor.BLUE), new Position(4, 2));
+        board.put(new Piece(9, PlayerColor.BLUE), new Position(4, 1));
     }
 
     @Override
     public void start() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+
     }
 
     @Override

@@ -16,6 +16,7 @@ public class Board {
         this.square = square;
     }
 
+    
     /**
      *
      * @return
@@ -45,7 +46,8 @@ public class Board {
     }
 
     /**
-     *This methode return the square at the position given in a parameter
+     * This methode return the square at the position given in a parameter
+     *
      * @param position
      * @return
      */
@@ -53,8 +55,10 @@ public class Board {
         Square square1 = new Square();
         for (int i = 0; i < this.square.length; i++) {
             for (int j = 0; j < this.square[i].length; j++) {
-                if (position.equals(i)) {
+                if (position.equals(i * j)) {
                     square1 = this.square[i][j];
+                } else if (!position.equals(i * j)) {
+                    throw new IllegalArgumentException("La position est hors du tableau");
 
                 }
 
@@ -66,11 +70,13 @@ public class Board {
     }
 
     /**
+     * This method put a piece at the postion in parameter
      *
      * @param piece
      * @param position
      */
     public void put(Piece piece, Position position) {
+        square[position.getColumn()][position.getRow()].put(piece);
 
     }
 
