@@ -1,4 +1,4 @@
-package G53554.stratego.controller;
+package g53554.stratego.controller;
 
 import g53554.stratego.model.Model;
 import g53554.stratego.view.View;
