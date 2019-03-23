@@ -2,11 +2,13 @@ package g53554.stratego.view;
 
 import g53554.stratego.model.Square;
 import g53554.stratego.model.Board;
+import java.io.InputStream;
 import java.util.Scanner;
 
 /**
- *This class interact with the player or the user by doing a display 
- * or asking information from the keyboard
+ * This class interact with the player or the user by doing a display or asking
+ * information from the keyboard
+ *
  * @author 53554
  */
 public class View {

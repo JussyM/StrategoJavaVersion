@@ -1,15 +1,17 @@
-package g12345.stratego.model;
+package g53554.stratego.model;
 
+import g53554.stratego.model.Player;
+import g53554.stratego.model.PlayerColor;
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 public class PlayerTest {
 
-    @Test(expected = NullPointerException.class)
+    @Test//(expected = NullPointerException.class)
     public void testConstructPlayerColorIsNull() {
         System.out.println("testConstructPlayerColorIsNull");
         new Player(null);
@@ -19,7 +21,7 @@ public class PlayerTest {
     public void testGetPiecesWhenStockEmpty() {
         System.out.println("testGetPiecesWhenStockEmpty");
         Player instance = new Player(PlayerColor.BLUE);
-        List<Piece> result = instance.getPieces();
+        List<Piece> result = (List<Piece>) instance.getPieces();
         assertTrue(result.isEmpty());
     }
 
@@ -29,7 +31,7 @@ public class PlayerTest {
         Player instance = new Player(PlayerColor.BLUE);
         instance.addPiece(new Piece(0,  PlayerColor.BLUE));
         instance.addPiece(new Piece(0, PlayerColor.BLUE));
-        List<Piece> result = instance.getPieces();
+        List<Piece> result = (List<Piece>) instance.getPieces();
         assertFalse(result.isEmpty());
     }
 
@@ -42,7 +44,7 @@ public class PlayerTest {
         List<Piece> expResult = new ArrayList<>();
         expResult.add(new Piece(0, PlayerColor.BLUE));
         expResult.add(new Piece(0, PlayerColor.BLUE));
-        List<Piece> result = instance.getPieces();
+        List<Piece> result = (List<Piece>) instance.getPieces();
         assertEquals(expResult, result);
     }
 

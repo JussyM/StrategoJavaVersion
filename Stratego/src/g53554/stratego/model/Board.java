@@ -2,6 +2,7 @@ package g53554.stratego.model;
 
 /**
  * This class is the board of the game with an arrays of double dimension
+ *
  * @author 53554
  */
 public class Board {
@@ -15,13 +16,13 @@ public class Board {
      */
     public Board(Square[][] square) {
         this.square = square;
-        square = new Square[4][5];
     }
 
     /**
      * This also a build with no parameter
      */
     public Board() {
+        square = new Square[4][5];
     }
 
     /**
@@ -83,7 +84,7 @@ public class Board {
      * @param position
      */
     public void put(Piece piece, Position position) {
-        if(isInside(position)==false){
+        if (isInside(position) == false) {
             throw new IllegalArgumentException("La position est hors du tableau");
         }
         square[position.getColumn()][position.getRow()].put(piece);

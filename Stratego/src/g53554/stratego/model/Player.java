@@ -18,6 +18,11 @@ public class Player {
      * @param color
      * @param pieces
      */
+    public Player(PlayerColor color) {
+        this.color = color;
+
+    }
+
     public Player(PlayerColor color, Piece pieces) {
         this.color = color;
         this.pieces = pieces;

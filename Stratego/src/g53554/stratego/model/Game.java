@@ -23,6 +23,10 @@ public class Game implements Model {
         this.opponent = opponent;
     }
 
+    public Game() {
+        
+    }
+
     /**
      * This method initialized the board of the game with default parameter
      */
