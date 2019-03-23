@@ -10,6 +10,7 @@ public class Position {
     private int column;
 
     /**
+     * This method build the object postion with row and line in parameter
      *
      * @param row
      * @param column
@@ -20,19 +21,19 @@ public class Position {
     }
 
     /**
+     * Tjis method get the column
      *
-     * @return
+     * @return column
      */
-
     public int getColumn() {
         return column;
     }
 
     /**
+     * This method get the row
      *
-     * @return
+     * @return row
      */
-
     public int getRow() {
         return row;
     }

@@ -4,8 +4,9 @@ import g53554.stratego.model.Model;
 import g53554.stratego.view.View;
 
 /**
- *
- * @author jussy
+ * This class creat the dynamism of the game 
+ * is where we put all the method usful to control the game 
+ * @author 53554
  */
 public class Controller {
 
@@ -35,8 +36,17 @@ public class Controller {
     /**
      * This method enable to begin the game
      */
-
     public void startGame() {
+        game.start();
+        view.displayHelp();
+        while (game.isOver() == false) {
+            game.getBoard();
+
+        }
+        view.askCommand();
+        if(view.askCommand().equals("quit")){
+            view.displayOver();
+        }
 
     }
 

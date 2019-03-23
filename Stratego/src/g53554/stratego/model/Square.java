@@ -24,10 +24,10 @@ public class Square {
     }
 
     /**
-     *This method put piece in the square 
+     * This method put piece in the square
+     *
      * @param piece
      */
-
     public void put(Piece piece) {
         this.piece = piece;
     }

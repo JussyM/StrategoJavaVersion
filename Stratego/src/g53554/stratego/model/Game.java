@@ -1,8 +1,8 @@
 package g53554.stratego.model;
 
 /**
- *
- * @author jussy
+ * This class 
+ * @author g53554
  */
 public class Game implements Model {
 
@@ -11,6 +11,7 @@ public class Game implements Model {
     Player opponent;
 
     /**
+     * This method build the game and his attribut
      *
      * @param board
      * @param current
@@ -23,32 +24,53 @@ public class Game implements Model {
     }
 
     /**
-     * This method initialized the board of the game
+     * This method initialized the board of the game with default parameter
      */
     @Override
     public void initialize() {
-        Square[][] square = null;
-        Board board = new Board(square);
+        Board board = new Board();
         board.put(new Piece(0, PlayerColor.RED), new Position(0, 1));
         board.put(new Piece(0, PlayerColor.RED), new Position(3, 2));
         board.put(new Piece(0, PlayerColor.BLUE), new Position(4, 2));
         board.put(new Piece(9, PlayerColor.BLUE), new Position(4, 1));
+        current.addPiece(new Piece(0, PlayerColor.BLUE));
+        opponent.addPiece(new Piece(0, PlayerColor.RED));
     }
 
+    /**
+     * This method verifie if the game can start
+     */
     @Override
     public void start() {
-        
+        if (board == null || isOver() == true) {
+            throw new IllegalStateException();
+
+        }
 
     }
 
+    /**
+     * Thos method return true of fals if the game is over
+     *
+     * @return over
+     */
     @Override
     public boolean isOver() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean over = false;
+
+        return over;
     }
+
+    /**
+     * This method return th board of the game
+     *
+     * @return board
+     */
 
     @Override
     public Square[][] getBoard() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        return board.getSquare();
     }
 
 }

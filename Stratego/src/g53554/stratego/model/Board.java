@@ -1,25 +1,33 @@
 package g53554.stratego.model;
 
 /**
- *
- * @author jussy
+ * This class is the board of the game with an arrays of double dimension
+ * @author 53554
  */
 public class Board {
 
     private Square[][] square;
 
     /**
+     * This method build the board with a square of four column and 5 rows
      *
      * @param square
      */
     public Board(Square[][] square) {
         this.square = square;
+        square = new Square[4][5];
     }
 
-    
     /**
+     * This also a build with no parameter
+     */
+    public Board() {
+    }
+
+    /**
+     * This method get the square
      *
-     * @return
+     * @return square
      */
     public Square[][] getSquare() {
         return square;
@@ -32,13 +40,10 @@ public class Board {
      * @return inside
      */
     public boolean isInside(Position position) {
-        boolean inside = false;
-        for (int i = 0; i < this.square.length; i++) {
-            for (int j = 0; j < this.square[i].length; j++) {
-                if (position.equals(i * j)) {
-                    inside = true;
-                }
-
+        boolean inside = true;
+        for (int i = 0; i < square.length; i++) {
+            if (position.getColumn() > square.length && position.getRow() > square[i].length) {
+                inside = false;
             }
 
         }
@@ -52,20 +57,22 @@ public class Board {
      * @return
      */
     public Square getSquare(Position position) {
-        Square square1 = new Square();
+        if (isInside(position) == false) {
+            throw new IllegalArgumentException("La position est hors du tableau");
+        }
+        Square square = new Square();
+
         for (int i = 0; i < this.square.length; i++) {
             for (int j = 0; j < this.square[i].length; j++) {
                 if (position.equals(i * j)) {
-                    square1 = this.square[i][j];
-                } else if (!position.equals(i * j)) {
-                    throw new IllegalArgumentException("La position est hors du tableau");
+                    square = this.square[i][j];
 
                 }
 
             }
 
         }
-        return square1;
+        return square;
 
     }
 
@@ -76,6 +83,9 @@ public class Board {
      * @param position
      */
     public void put(Piece piece, Position position) {
+        if(isInside(position)==false){
+            throw new IllegalArgumentException("La position est hors du tableau");
+        }
         square[position.getColumn()][position.getRow()].put(piece);
 
     }

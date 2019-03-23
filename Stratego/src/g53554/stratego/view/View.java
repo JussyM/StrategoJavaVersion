@@ -1,18 +1,20 @@
 package g53554.stratego.view;
 
 import g53554.stratego.model.Square;
+import g53554.stratego.model.Board;
 import java.util.Scanner;
 
 /**
- *
- * @author jussy
+ *This class interact with the player or the user by doing a display 
+ * or asking information from the keyboard
+ * @author 53554
  */
 public class View {
 
     Scanner in;
 
     /**
-     * This method initialize the attribute of the class
+     * This method build the the class view and his attribut
      *
      * @param in
      */
@@ -24,7 +26,9 @@ public class View {
      * This method display a welcome message for the user or the player
      */
     public void initialize() {
-        System.out.println("Bienvenu au Stratego");
+        System.out.println("******************************");
+        System.out.println("*****Bienvenu au Stratego*****");
+        System.out.println("******************************");
 
     }
 
@@ -49,6 +53,8 @@ public class View {
      * This method display some guide line that the user can encode
      */
     public void displayHelp() {
+        System.out.println("Usage :");
+        System.out.println("     " + "Taper quit pour arrêter le jeu");
 
     }
 
@@ -58,7 +64,11 @@ public class View {
      * @return
      */
     public String askCommand() {
-        return null;
+        Scanner keyboard = this.in;
+        System.out.println("Veuillez entrez une commande");
+        String cmde = keyboard.next();
+
+        return cmde;
     }
 
     /**
@@ -67,13 +77,16 @@ public class View {
      * @param square
      */
     public void displayBoard(Square[][] square) {
+        Board board = new Board(square);
+        board.getSquare();
 
     }
 
     /**
-     *This method diplay to the user that the game is over
+     * This method diplay to the user that the game is over
      */
     public void displayOver() {
+        System.out.println("Le jeux est terminer");
 
     }
 
