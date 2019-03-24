@@ -1,7 +1,8 @@
 package g53554.stratego.model;
 
 /**
- * This class 
+ * This class
+ *
  * @author g53554
  */
 public class Game implements Model {
@@ -24,7 +25,7 @@ public class Game implements Model {
     }
 
     public Game() {
-        
+
     }
 
     /**
@@ -32,13 +33,14 @@ public class Game implements Model {
      */
     @Override
     public void initialize() {
-        Board board = new Board();
         board.put(new Piece(0, PlayerColor.RED), new Position(0, 1));
         board.put(new Piece(0, PlayerColor.RED), new Position(3, 2));
         board.put(new Piece(0, PlayerColor.BLUE), new Position(4, 2));
         board.put(new Piece(9, PlayerColor.BLUE), new Position(4, 1));
-        current.addPiece(new Piece(0, PlayerColor.BLUE));
-        opponent.addPiece(new Piece(0, PlayerColor.RED));
+        current.addPiece(new Piece(0, PlayerColor.RED));
+        opponent.addPiece(new Piece(0, PlayerColor.BLUE));
+        current.addPiece(new Piece(9, PlayerColor.RED));
+        opponent.addPiece(new Piece(9, PlayerColor.BLUE));
     }
 
     /**
@@ -70,11 +72,9 @@ public class Game implements Model {
      *
      * @return board
      */
-
     @Override
     public Square[][] getBoard() {
-
-        return board.getSquare();
+        return this.board.getSquare();
     }
 
 }

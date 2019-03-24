@@ -1,5 +1,3 @@
-
-
 import g53554.stratego.model.Board;
 import g53554.stratego.model.Piece;
 import g53554.stratego.model.PlayerColor;

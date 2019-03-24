@@ -7,7 +7,7 @@ package g53554.stratego.model;
  */
 public class Board {
 
-    private Square[][] square;
+    private Square[][] square= new Square[4][5];
 
     /**
      * This method build the board with a square of four column and 5 rows
@@ -16,6 +16,8 @@ public class Board {
      */
     public Board(Square[][] square) {
         this.square = square;
+        //square = new Square[4][5];
+       
     }
 
     /**
@@ -87,7 +89,7 @@ public class Board {
         if (isInside(position) == false) {
             throw new IllegalArgumentException("La position est hors du tableau");
         }
-        square[position.getColumn()][position.getRow()].put(piece);
+        this.square[position.getColumn()][position.getRow()].put(piece);
 
     }
 
