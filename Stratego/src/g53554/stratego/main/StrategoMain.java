@@ -25,7 +25,7 @@ public class StrategoMain {
         Player current = new Player(PlayerColor.BLUE, new Piece(0, PlayerColor.RED));
         Player opponent = new Player(PlayerColor.BLUE, new Piece(0, PlayerColor.BLUE));
         Game stratego = new Game(board, current, opponent);
-        //stratego.initialize();
+        stratego.initialize();
         //vue.initialize();
         //vue.displayHelp();
         vue.displayBoard(stratego.getBoard());

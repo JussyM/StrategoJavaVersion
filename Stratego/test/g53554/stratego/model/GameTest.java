@@ -1,13 +1,11 @@
+package g53554.stratego.model;
 
-import g53554.stratego.model.Game;
-import g53554.stratego.model.Piece;
 import static g53554.stratego.model.PlayerColor.BLUE;
 import static g53554.stratego.model.PlayerColor.RED;
-import g53554.stratego.model.Square;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import org.junit.jupiter.api.Test;
-
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertFalse;
+import org.junit.Before;
+import org.junit.Test;
 
 public class GameTest {
 
@@ -18,7 +16,7 @@ public class GameTest {
         {new Square(), new Square(), new Square(), new Square()},
         {new Square(), new Square(), new Square(), new Square()}};
 
-    //@Before
+    @Before
     public void setUp() throws Exception {
         defaultBoard[0][1].put(new Piece(0, RED));
         defaultBoard[3][2].put(new Piece(9, RED));
@@ -35,7 +33,7 @@ public class GameTest {
         assertArrayEquals(defaultBoard, result);
     }
 
-    @Test//(expected = IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void testStartWhenNoBoard() {
         System.out.println("testStartWhenNoBoard");
         Game instance = new Game();

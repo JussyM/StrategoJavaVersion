@@ -1,13 +1,11 @@
+package g53554.stratego.model;
 
-import g53554.stratego.model.Piece;
-import g53554.stratego.model.PlayerColor;
 import static g53554.stratego.model.PlayerColor.BLUE;
-import g53554.stratego.model.Square;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 public class SquareTest {
 
@@ -30,7 +28,7 @@ public class SquareTest {
 //        assertEquals(expResult, result);
 //    }
 
-    @Test//(expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testPutWhenPieceIsNull() {
         System.out.println("testPutWhenPieceIsNull");
         Piece piece = null;
@@ -48,7 +46,7 @@ public class SquareTest {
         assertEquals(expResult, piece);
     }
 
-    @Test//(expected = IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void testGetPieceWhenSquareFill() {
         System.out.println("testGetPieceWhenSquareFill");
         Piece piece1 = new Piece(8, PlayerColor.RED);

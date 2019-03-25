@@ -1,12 +1,11 @@
 package g53554.stratego.model;
-import g53554.stratego.model.Piece;
+
 import static g53554.stratego.model.PlayerColor.BLUE;
 import static g53554.stratego.model.PlayerColor.RED;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 public class PieceTest {
 
@@ -18,7 +17,7 @@ public class PieceTest {
         assertEquals(0, instance.getRank());
     }
 
-    @Test//(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testConstructPieceWhenRankIsNegative() {
         System.out.println("testConstructPieceWhenRankIsNegative");
         Piece instance = new Piece(-1, BLUE);

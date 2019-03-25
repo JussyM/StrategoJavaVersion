@@ -1,11 +1,8 @@
-import g53554.stratego.model.Board;
-import g53554.stratego.model.Piece;
-import g53554.stratego.model.PlayerColor;
-import g53554.stratego.model.Position;
-import g53554.stratego.model.Square;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.Test;
+package g53554.stratego.model;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class BoardTest {
 
@@ -38,7 +35,7 @@ public class BoardTest {
         assertEquals(expResult, result);
     }
 
-    @Test//(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testGetSquareWhenPositionOutside() {
         System.out.println("testGetSquareWhenPositionOutside");
         Position position = new Position(-1, 2);
@@ -81,7 +78,7 @@ public class BoardTest {
         assertEquals(expResult, result);
     }
 
-    @Test//(expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testPutWhenPieceIsNull() {
         System.out.println("testPutWhenPieceIsNull");
         Piece piece = null;
@@ -90,7 +87,7 @@ public class BoardTest {
         instance.put(piece, position);
     }
 
-    @Test//(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testPuWhenPositionIsOutside() {
         System.out.println("testPuWhenPositionIsOutside");
         Piece piece = new Piece(1, PlayerColor.BLUE);
@@ -229,7 +226,7 @@ public class BoardTest {
         assertEquals(expResult, result);
     }
 
-    @Test//(expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testIsInsideWhenPositionIsNull() {
         System.out.println("testIsInsideWhenPositionIsNull");
         Board instance = new Board();
