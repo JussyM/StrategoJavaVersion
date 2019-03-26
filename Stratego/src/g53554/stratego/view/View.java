@@ -5,7 +5,6 @@ import g53554.stratego.model.Board;
 import java.util.Scanner;
 import g53554.stratego.main.Color;
 
-
 /**
  * This class interact with the player or the user by doing a display or asking
  * information from the keyboard
@@ -60,7 +59,7 @@ public class View {
     public void displayHelp() {
         Color couleur = new Color();
         System.out.println(couleur.toYellow("Usage :"));
-        System.out.println(couleur.toYellow("     " + "Taper " +couleur.toRed("quit") + couleur.toYellow(" pour arrêter le jeu")));
+        System.out.println(couleur.toYellow("     " + "Taper " + couleur.toRed("quit") + couleur.toYellow(" pour arrêter le jeu")));
 
     }
 
@@ -92,7 +91,7 @@ public class View {
                 System.out.println("");
                 System.out.println("==============================");
                 for (int j = 0; j < board.getSquare()[i].length; j++) {
-                    System.out.println("row#" + String.format("%02d", j) + "||" + " |" + "   |" + "    |"+"    |"+"    |");
+                    System.out.println("row#" + String.format("%02d", j) + "||" + " |" + "   |" + "    |" + "    |" + "    |");
 
                 }
 

@@ -38,14 +38,17 @@ public class Controller {
      */
     public void startGame() {
         game.start();
+        view.initialize();
         view.displayHelp();
-        while (game.isOver() == false) {
-            game.getBoard();
+        System.out.println("");
+        if (game.isOver() == false) {
+            view.displayBoard(game.getBoard());
 
         }
-        view.askCommand();
+        System.out.println("");
         if(view.askCommand().equals("quit")){
-            view.displayOver();
+            view.quit();
+            //view.displayOver();
         }
 
     }

@@ -1,6 +1,6 @@
 package g53554.stratego.main;
 
-//import g53554.stratego.controller.Controller;
+import g53554.stratego.controller.Controller;
 //import g53554.stratego.model.Game;
 import g53554.stratego.model.Player;
 import g53554.stratego.model.Piece;
@@ -19,16 +19,17 @@ import java.util.Scanner;
 public class StrategoMain {
 
     public static void main(String[] args) {
-        Scanner keyboard = new Scanner(System.in);
-        View vue = new View(keyboard);
-        Board board = new Board(new Square[4][5]);
         Player current = new Player(PlayerColor.BLUE, new Piece(0, PlayerColor.RED));
         Player opponent = new Player(PlayerColor.BLUE, new Piece(0, PlayerColor.BLUE));
+        Scanner keyboard = new Scanner(System.in);
+        View vue = new View(keyboard);
+        Board board = new Board();
         Game stratego = new Game(board, current, opponent);
-        stratego.initialize();
-        //vue.initialize();
-        //vue.displayHelp();
-        vue.displayBoard(stratego.getBoard());
+        Controller controller= new Controller(stratego, vue);
+        controller.startGame();
+        
+        
+        
         
 
     }
