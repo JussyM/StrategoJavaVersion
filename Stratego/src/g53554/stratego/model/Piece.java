@@ -18,11 +18,11 @@ public class Piece {
      * @param color
      */
     public Piece(int rank, PlayerColor color) {
+        this.rank = rank;
+        this.color = color;
         if (this.rank < 0) {
             throw new IllegalArgumentException("Le rang est négatif");
         }
-        this.rank = rank;
-        this.color = color;
 
     }
 
@@ -70,7 +70,6 @@ public class Piece {
      * @return rank
      */
     public int getRank() {
-
         return rank;
     }
 

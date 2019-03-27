@@ -37,7 +37,7 @@ public class Controller {
      * This method enable to begin the game
      */
     public void startGame() {
-        game.start();
+        //game.start();
         view.initialize();
         view.displayHelp();
         System.out.println("");

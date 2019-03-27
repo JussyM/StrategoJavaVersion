@@ -27,7 +27,6 @@ public class SquareTest {
 //        boolean result = instance.isFree();
 //        assertEquals(expResult, result);
 //    }
-
     @Test(expected = NullPointerException.class)
     public void testPutWhenPieceIsNull() {
         System.out.println("testPutWhenPieceIsNull");
@@ -78,23 +77,22 @@ public class SquareTest {
         assertTrue(square1.equals(square2));
         assertTrue(square1.hashCode() == square2.hashCode());
     }
-    
+
     @Test
     public void equalsTrueSameContent() {
         Square square1 = new Square();
         Square square2 = new Square();
-        square1.put(new Piece(1,  BLUE));
-        square2.put(new Piece(1,  BLUE));
+        square1.put(new Piece(1, BLUE));
+        square2.put(new Piece(1, BLUE));
         assertTrue(square1.equals(square2));
     }
-
 
     @Test
     public void equalsFalseDifferentContent() {
         Square square1 = new Square();
         Square square2 = new Square();
-        square1.put(new Piece(1,  BLUE));
-        square2.put(new Piece(3,  BLUE));
+        square1.put(new Piece(1, BLUE));
+        square2.put(new Piece(3, BLUE));
         assertFalse(square1.equals(square2));
     }
 

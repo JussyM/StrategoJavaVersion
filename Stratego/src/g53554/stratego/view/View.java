@@ -4,6 +4,8 @@ import g53554.stratego.model.Square;
 import g53554.stratego.model.Board;
 import java.util.Scanner;
 import g53554.stratego.main.Color;
+import g53554.stratego.model.Piece;
+import g53554.stratego.model.PlayerColor;
 
 /**
  * This class interact with the player or the user by doing a display or asking
@@ -83,7 +85,7 @@ public class View {
      */
     public void displayBoard(Square[][] square) {
         Color couleur = new Color();
-        Board board = new Board(square);
+        Board board = new Board();
         System.out.print("Col#  ||" + " |");
         for (int i = 0; i < board.getSquare().length; i++) {
             System.out.print(String.format("%02d", i) + " | ");
@@ -92,12 +94,24 @@ public class View {
                 System.out.println("==============================");
                 for (int j = 0; j < board.getSquare()[i].length; j++) {
                     System.out.println("row#" + String.format("%02d", j) + "||" + " |" + "   |" + "    |" + "    |" + "    |");
+                    Piece piece = square[i][j].getPiece();
+                    displayPeiece(piece);
 
                 }
 
             }
 
         }
+    }
+
+    private void displayPeiece(Piece piece) {
+        Color couleur = new Color();
+        if (piece.getColor() == PlayerColor.BLUE) {
+            System.out.print(couleur.toBlue("PE"));
+        } else {
+            System.out.print(couleur.toRed("PE"));
+        }
+
     }
 
     /**

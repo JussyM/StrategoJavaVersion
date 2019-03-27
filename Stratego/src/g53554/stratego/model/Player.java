@@ -1,7 +1,8 @@
 package g53554.stratego.model;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -9,8 +10,8 @@ import java.util.ArrayList;
  */
 public class Player {
 
-    private PlayerColor color;
-    private Piece pieces;
+     PlayerColor color;
+     List<Piece> pieces;
 
     /**
      * This method initialized the attribute of the class
@@ -19,13 +20,41 @@ public class Player {
      * @param pieces
      */
     public Player(PlayerColor color) {
+        if(color==null){
+            throw new NullPointerException();
+        }
         this.color = color;
-
+        this.pieces = new ArrayList<>();
     }
 
-    public Player(PlayerColor color, Piece pieces) {
-        this.color = color;
-        this.pieces = pieces;
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.color);
+        hash = 37 * hash + Objects.hashCode(this.pieces);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Player other = (Player) obj;
+        if (this.color != other.color) {
+            return false;
+        }
+        if (!Objects.equals(this.pieces, other.pieces)) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -42,8 +71,9 @@ public class Player {
      *
      * @return
      */
-    public Piece getPieces() {
+    public List<Piece> getPieces() {    
         return pieces;
+
     }
 
     /**
@@ -52,9 +82,6 @@ public class Player {
      * @param piece
      */
     public void addPiece(Piece piece) {
-        List<Piece> listePiece = new ArrayList<Piece>();
-        listePiece.add(piece);
-
+        pieces.add(piece);
     }
-
 }

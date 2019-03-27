@@ -1,5 +1,7 @@
 package g53554.stratego.model;
 
+import java.util.Objects;
+
 /**
  * This class
  *
@@ -11,36 +13,61 @@ public class Game implements Model {
     Player current;
     Player opponent;
 
-    /**
-     * This method build the game and his attribut
-     *
-     * @param board
-     * @param current
-     * @param opponent
-     */
-    public Game(Board board, Player current, Player opponent) {
-        this.board = board;
-        this.current = current;
-        this.opponent = opponent;
-    }
-
     public Game() {
+        this.current= new Player(PlayerColor.RED);
+        this.opponent= new Player(PlayerColor.BLUE);
 
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 89 * hash + Objects.hashCode(this.board);
+        hash = 89 * hash + Objects.hashCode(this.current);
+        hash = 89 * hash + Objects.hashCode(this.opponent);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Game other = (Game) obj;
+        if (!Objects.equals(this.board, other.board)) {
+            return false;
+        }
+        if (!Objects.equals(this.current, other.current)) {
+            return false;
+        }
+        if (!Objects.equals(this.opponent, other.opponent)) {
+            return false;
+        }
+        return true;
+    }
+    
 
     /**
      * This method initialized the board of the game with default parameter
      */
     @Override
     public void initialize() {
-        board.put(new Piece(0, PlayerColor.RED), new Position(0, 1));
-        board.put(new Piece(0, PlayerColor.RED), new Position(3, 2));
-        board.put(new Piece(0, PlayerColor.BLUE), new Position(4, 2));
-        board.put(new Piece(9, PlayerColor.BLUE), new Position(4, 1));
+        Board board= new Board();
+        this.board.put(new Piece(0, PlayerColor.RED), new Position(0, 1));
+        this.board.put(new Piece(0, PlayerColor.RED), new Position(3, 2));
+        this.board.put(new Piece(0, PlayerColor.BLUE), new Position(4, 2));
+        this.board.put(new Piece(9, PlayerColor.BLUE), new Position(4, 1));
         current.addPiece(new Piece(0, PlayerColor.RED));
         opponent.addPiece(new Piece(0, PlayerColor.BLUE));
         current.addPiece(new Piece(9, PlayerColor.RED));
         opponent.addPiece(new Piece(9, PlayerColor.BLUE));
+        
     }
 
     /**

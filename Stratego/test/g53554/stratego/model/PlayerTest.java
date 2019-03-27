@@ -29,7 +29,7 @@ public class PlayerTest {
         Player instance = new Player(PlayerColor.BLUE);
         instance.addPiece(new Piece(0,  PlayerColor.BLUE));
         instance.addPiece(new Piece(0, PlayerColor.BLUE));
-        List<Piece> result = (List<Piece>) instance.getPieces();
+        List<Piece> result = instance.getPieces();
         assertFalse(result.isEmpty());
     }
 
