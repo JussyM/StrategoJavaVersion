@@ -20,6 +20,9 @@ public class Controller {
      * @param view
      */
     public Controller(Model game, View view) {
+        if(game==null || view==null){
+            throw new IllegalArgumentException("Le jeu n'est pas initialiser");
+        }
         this.game = game;
         this.view = view;
     }
@@ -30,6 +33,7 @@ public class Controller {
     public void initialized() {
         game.initialize();
         view.initialize();
+        
 
     }
 
@@ -37,8 +41,7 @@ public class Controller {
      * This method enable to begin the game
      */
     public void startGame() {
-        //game.start();
-        view.initialize();
+        game.start();
         view.displayHelp();
         System.out.println("");
         if (game.isOver() == false) {
@@ -48,7 +51,8 @@ public class Controller {
         System.out.println("");
         if(view.askCommand().equals("quit")){
             view.quit();
-            //view.displayOver();
+            System.out.println("");
+            view.displayOver();
         }
 
     }

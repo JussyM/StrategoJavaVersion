@@ -14,9 +14,62 @@ public class Game implements Model {
     Player opponent;
 
     public Game() {
-        this.current= new Player(PlayerColor.RED);
-        this.opponent= new Player(PlayerColor.BLUE);
+        this.current = new Player(PlayerColor.RED);
+        this.opponent = new Player(PlayerColor.BLUE);
 
+    }
+
+    /**
+     * This method initialized the board of the game with default parameter
+     */
+    @Override
+    public void initialize() {
+        board = new Board();
+        this.current = new Player(PlayerColor.RED);
+        this.opponent = new Player(PlayerColor.BLUE);
+        board.put(new Piece(0, PlayerColor.RED), new Position(0, 1));
+        board.put(new Piece(9, PlayerColor.RED), new Position(3, 2));
+        board.put(new Piece(0, PlayerColor.BLUE), new Position(4, 2));
+        board.put(new Piece(9, PlayerColor.BLUE), new Position(4, 1));
+        current.addPiece(new Piece(0, PlayerColor.RED));
+        opponent.addPiece(new Piece(0, PlayerColor.BLUE));
+        current.addPiece(new Piece(9, PlayerColor.RED));
+        opponent.addPiece(new Piece(9, PlayerColor.BLUE));
+
+    }
+
+    /**
+     * This method verifie if the game can start
+     */
+    @Override
+    public void start() {
+        if (board == null || isOver() == true) {
+            throw new IllegalStateException(" ");
+
+        }
+
+    }
+
+    /**
+     * Thos method return true of fals if the game is over
+     *
+     * @return over
+     */
+    @Override
+    public boolean isOver() {
+        boolean over = false;
+
+        return over;
+    }
+
+    /**
+     * This method return th board of the game
+     *
+     * @return board
+     */
+    @Override
+    public Square[][] getBoard() {
+        return this.board.getSquare();
     }
 
     @Override
@@ -51,57 +104,10 @@ public class Game implements Model {
         }
         return true;
     }
-    
 
-    /**
-     * This method initialized the board of the game with default parameter
-     */
     @Override
-    public void initialize() {
-        Board board= new Board();
-        this.board.put(new Piece(0, PlayerColor.RED), new Position(0, 1));
-        this.board.put(new Piece(0, PlayerColor.RED), new Position(3, 2));
-        this.board.put(new Piece(0, PlayerColor.BLUE), new Position(4, 2));
-        this.board.put(new Piece(9, PlayerColor.BLUE), new Position(4, 1));
-        current.addPiece(new Piece(0, PlayerColor.RED));
-        opponent.addPiece(new Piece(0, PlayerColor.BLUE));
-        current.addPiece(new Piece(9, PlayerColor.RED));
-        opponent.addPiece(new Piece(9, PlayerColor.BLUE));
-        
-    }
-
-    /**
-     * This method verifie if the game can start
-     */
-    @Override
-    public void start() {
-        if (board == null || isOver() == true) {
-            throw new IllegalStateException();
-
-        }
-
-    }
-
-    /**
-     * Thos method return true of fals if the game is over
-     *
-     * @return over
-     */
-    @Override
-    public boolean isOver() {
-        boolean over = false;
-
-        return over;
-    }
-
-    /**
-     * This method return th board of the game
-     *
-     * @return board
-     */
-    @Override
-    public Square[][] getBoard() {
-        return this.board.getSquare();
+    public String toString() {
+        return "Game{" + "board=" + board + ", current=" + current + ", opponent=" + opponent + '}';
     }
 
 }

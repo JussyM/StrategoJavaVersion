@@ -42,7 +42,7 @@ public class View {
      */
     public void quit() {
         Color couleur = new Color();
-        System.out.println(couleur.toPurple("Bye Bye Thanks for Playing"));
+        System.out.println(couleur.toRed("Bye Bye Thanks for Playing"));
 
     }
 
@@ -84,18 +84,16 @@ public class View {
      * @param square
      */
     public void displayBoard(Square[][] square) {
-        Color couleur = new Color();
         Board board = new Board();
-        System.out.print("Col#  ||" + " |");
-        for (int i = 0; i < board.getSquare().length; i++) {
-            System.out.print(String.format("%02d", i) + " | ");
-            if (i == board.getSquare().length - 1) {
+        System.out.print("  " + "Col#||");
+        for (int i = 0; i < board.getSquare()[0].length; i++) {
+            System.out.print(" |" + String.format("%02d", i) + " | ");
+            if (i == square[0].length - 1) {
                 System.out.println("");
-                System.out.println("==============================");
-                for (int j = 0; j < board.getSquare()[i].length; j++) {
-                    System.out.println("row#" + String.format("%02d", j) + "||" + " |" + "   |" + "    |" + "    |" + "    |");
-                    Piece piece = square[i][j].getPiece();
-                    displayPeiece(piece);
+                PrintEqualSign(square);
+                System.out.println("");
+                for (int j = 0; j < board.getSquare().length; j++) {
+                    System.out.println("row#" + String.format("%02d", j) + "||" + PrintLine(square));
 
                 }
 
@@ -104,13 +102,43 @@ public class View {
         }
     }
 
-    private void displayPeiece(Piece piece) {
+    private void displayPiece(Square square[][]) {
         Color couleur = new Color();
-        if (piece.getColor() == PlayerColor.BLUE) {
-            System.out.print(couleur.toBlue("PE"));
-        } else {
-            System.out.print(couleur.toRed("PE"));
+        for (int i = 0; i < square.length; i++) {
+            for (int j = 0; j < square[i].length; j++) {
+                Piece piece = square[i][j].getPiece();
+                if (piece.getColor() == PlayerColor.BLUE) {
+                    System.out.print(couleur.toBlue("PE"));
+                } else {
+                    System.out.print(couleur.toRed("PE"));
+                }
+
+            }
+
         }
+
+    }
+
+    /**
+     * This method expand the equal sign for the board
+     *
+     * @param tab
+     */
+    private void PrintEqualSign(Square tab[][]) {
+        int i = 0;
+        while (i < tab.length) {
+            System.out.print("=======");
+            i++;
+
+        }
+
+    }
+
+    private String PrintLine(Square tab[][]) {
+        String line = " |" + "   |" + "  |" + "   |" + "  |" + "   |" + "  |" + "   |";
+        ;
+
+        return line;
 
     }
 
