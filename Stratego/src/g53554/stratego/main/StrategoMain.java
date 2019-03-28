@@ -17,7 +17,8 @@ public class StrategoMain {
         Scanner keyboard = new Scanner(System.in);
         View vue = new View(keyboard);
         Board board = new Board();
-        Controller controller = new Controller(new Game(), vue);
+        Model model= new Game();
+        Controller controller = new Controller(model, vue);
         controller.initialized();
         controller.startGame();
 

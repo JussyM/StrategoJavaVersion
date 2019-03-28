@@ -34,7 +34,7 @@ public class Game implements Model {
         current.addPiece(new Piece(0, PlayerColor.RED));
         opponent.addPiece(new Piece(0, PlayerColor.BLUE));
         current.addPiece(new Piece(9, PlayerColor.RED));
-        opponent.addPiece(new Piece(9, PlayerColor.BLUE));
+       opponent.addPiece(new Piece(9, PlayerColor.BLUE));
 
     }
 

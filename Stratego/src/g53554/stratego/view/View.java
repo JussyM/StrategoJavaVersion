@@ -98,32 +98,20 @@ public class View {
                 }
 
             }
+            
 
         }
     }
 
-    private void displayPiece(Square square[][]) {
-        Color couleur = new Color();
-        for (int i = 0; i < square.length; i++) {
-            for (int j = 0; j < square[i].length; j++) {
-                Piece piece = square[i][j].getPiece();
-                if (piece.getColor() == PlayerColor.BLUE) {
-                    System.out.print(couleur.toBlue("PE"));
-                } else {
-                    System.out.print(couleur.toRed("PE"));
-                }
+    
 
-            }
+        /**
+         * This method expand the equal sign for the board
+         *
+         * @param tab
+         */
+    
 
-        }
-
-    }
-
-    /**
-     * This method expand the equal sign for the board
-     *
-     * @param tab
-     */
     private void PrintEqualSign(Square tab[][]) {
         int i = 0;
         while (i < tab.length) {
