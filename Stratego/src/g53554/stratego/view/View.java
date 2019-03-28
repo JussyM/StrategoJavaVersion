@@ -84,49 +84,61 @@ public class View {
      * @param square
      */
     public void displayBoard(Square[][] square) {
+        Color couleur = new Color();
         Board board = new Board();
-        System.out.print("  " + "Col#||");
+        System.out.print("  " + "Col#| |");
         for (int i = 0; i < board.getSquare()[0].length; i++) {
-            System.out.print(" |" + String.format("%02d", i) + " | ");
+            System.out.printf(" |%02d|", i);
             if (i == square[0].length - 1) {
                 System.out.println("");
                 PrintEqualSign(square);
-                System.out.println("");
                 for (int j = 0; j < board.getSquare().length; j++) {
-                    System.out.println("row#" + String.format("%02d", j) + "||" + PrintLine(square));
+                    System.out.printf("%nrow#%02d| |",j);
+                        for (int k = 0; k < square[j].length; k++) {
+                            Piece piece = square[j][k].getPiece();
+                            displayPiece(piece);
+
+                        
+
+                    }
 
                 }
+               // System.out.println("");
 
             }
-            
+
+        }
+
+    }
+
+    private void displayPiece(Piece piece) {
+        Color couleur = new Color();
+        System.out.print("");
+        if (piece == null) {
+            System.out.print(" |  |");
+        }else{
+            if (piece.getColor() == PlayerColor.BLUE) {
+                System.out.print(" |"+couleur.toBlue("PE")+"|");
+            }
+            if (piece.getColor() == PlayerColor.RED) {
+                System.out.print(" |"+couleur.toRed("PE")+"|");
+            }
 
         }
     }
 
-    
-
-        /**
-         * This method expand the equal sign for the board
-         *
-         * @param tab
-         */
-    
-
+    /**
+     * This method expand the equal sign for the board
+     *
+     * @param tab
+     */
     private void PrintEqualSign(Square tab[][]) {
         int i = 0;
         while (i < tab.length) {
-            System.out.print("=======");
+            System.out.print("===== =");
             i++;
 
         }
-
-    }
-
-    private String PrintLine(Square tab[][]) {
-        String line = " |" + "   |" + "  |" + "   |" + "  |" + "   |" + "  |" + "   |";
-        ;
-
-        return line;
 
     }
 
