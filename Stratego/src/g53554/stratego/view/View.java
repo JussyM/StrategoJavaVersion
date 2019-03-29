@@ -41,8 +41,7 @@ public class View {
      * This method display a goodbye message to the user or the player
      */
     public void quit() {
-        Color couleur = new Color();
-        System.out.println(couleur.RED_BOLD_BRIGHT + "Bye Bye Thanks for Playing");
+        System.out.println("Bye Bye Thanks for Playing");
 
     }
 
@@ -93,7 +92,7 @@ public class View {
                 System.out.println("");
                 PrintEqualSign(square);
                 for (int j = 0; j < board.getSquare().length; j++) {
-                    System.out.printf("%nrow#%02d|| ", j);
+                    System.out.printf("  %nrow#%02d|| ", j);
                     for (int k = 0; k < square[j].length; k++) {
                         Piece piece = square[j][k].getPiece();
                         displayPiece(piece);
@@ -116,12 +115,12 @@ public class View {
     private void displayPiece(Piece piece) {
         Color couleur = new Color();
         if (piece == null) {
-            System.out.print(" |"+"\u001b[43m"+"  "+"\u001b[0m"+"|");
+            System.out.print(" |" + "\u001b[47m" + "  " + "\u001b[0m" + "|");
         } else if (piece.getColor() == PlayerColor.BLUE) {
-            System.out.print(" |" +"\u001b[43m"+ couleur.toBlue("PE") + "|");
+            System.out.print(" |" + "\u001b[47m" + couleur.toBlue("PE") + "|");
 
         } else {
-            System.out.print(" |" +"\u001b[43m"+ couleur.toRed("PE") + "|");
+            System.out.print(" |" + "\u001b[47m" + couleur.toRed("PE") + "|");
 
         }
 

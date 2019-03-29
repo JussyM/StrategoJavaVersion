@@ -53,7 +53,7 @@ public class Controller {
         if(view.askCommand().equals("quit")){
             view.quit();
             System.out.println("");
-            view.displayOver();
+            //view.displayOver();
         }
 
     }
