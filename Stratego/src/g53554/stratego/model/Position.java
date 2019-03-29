@@ -1,6 +1,7 @@
 package g53554.stratego.model;
 
 /**
+ * This class creat the position for the piece in the board
  *
  * @author jussy
  */
@@ -21,13 +22,18 @@ public class Position {
     }
 
     /**
-     * Tjis method get the column
+     * This method get the column
      *
      * @return column
      */
     public int getColumn() {
         return column;
     }
+
+    /**
+     * This method is the hashcode of position
+     * @return hash
+     */
 
     @Override
     public int hashCode() {
@@ -36,6 +42,12 @@ public class Position {
         hash = 61 * hash + this.column;
         return hash;
     }
+
+    /**
+     * Compare the attribut
+     * @param obj
+     * @return boolean
+     */
 
     @Override
     public boolean equals(Object obj) {

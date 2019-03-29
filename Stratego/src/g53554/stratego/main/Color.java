@@ -1,13 +1,13 @@
 package g53554.stratego.main;
 
 /**
- * Cette classe permet l'écriture d'un texte coloré 4/11/2104 - Ajout d'un main
- * - MCD
+ * This class help us to put String message in color
+ * 
  */
 public class Color {
 
     /**
-     * Méthode de couleur default du BASH.
+     *  This method build the Bash default color
      *
      * @return La couleur default.
      */
@@ -16,20 +16,20 @@ public class Color {
     }
 
     /**
-     * Colorie une chaine en noir.
+     * This method color in black
      *
-     * @param a La chaine à colorer.
-     * @return La chaine colorée.
+     * @param a The String that has to be color
+     * @return The String already colored
      */
     public String toBlack(String a) {
         return "\033[30m" + a + toDefault();
     }
 
     /**
-     * Colorie une chaine en rouge.
+     * This method color in red
      *
-     * @param a La chaine à colorer.
-     * @return La chaine colorée.
+     * @param a The String that has to be color
+     * @return The String already colored
      */
     public String toRed(String a) {
         return "\033[31m" + a + toDefault();
@@ -99,17 +99,6 @@ public class Color {
      * Affiche un message coloré pour montrer le but de la classe.
      */
      public   String RESET = "\033[0m";  // Text Reset
-
-    // Regular Colors
-    public   String BLACK = "\033[0;30m";   // BLACK
-    public   String RED = "\033[0;31m";     // RED
-    public   String GREEN = "\033[0;32m";   // GREEN
-    public   String YELLOW = "\033[0;33m";  // YELLOW
-    public   String BLUE = "\033[0;34m";    // BLUE
-    public   String PURPLE = "\033[0;35m";  // PURPLE
-    public   String CYAN = "\033[0;36m";    // CYAN
-    public   String WHITE = "\033[0;37m";   // WHITE
-
     // Bold
     public   String BLACK_BOLD = "\033[1;30m";  // BLACK
     public   String RED_BOLD = "\033[1;31m";    // RED

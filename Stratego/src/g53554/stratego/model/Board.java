@@ -1,9 +1,9 @@
 package g53554.stratego.model;
 
-import java.util.Arrays;
 
 /**
- * This class is the board of the game with an arrays of double dimension
+ * This class is the board of the game with an arrays of double dimension it
+ * will help us to creat the board with all element include
  *
  * @author 53554
  */
@@ -12,7 +12,8 @@ public class Board {
     private Square[][] square;
 
     /**
-     * This also a build with no parameter
+     * This is constructor that build the board with no parameter with no
+     * parameter And put the board to default setting
      */
     public Board() {
         square = new Square[5][4];
@@ -26,7 +27,7 @@ public class Board {
     }
 
     /**
-     * This method get the square
+     * This method get the square of the board
      *
      * @return square
      */
@@ -35,25 +36,27 @@ public class Board {
     }
 
     /**
-     * This method verified if position equals to a position in the square
+     * This method verified if position give in parameter is inside the square
+     * if it will return a boolean
      *
      * @param position
      * @return inside
      */
     public boolean isInside(Position position) {
         boolean isinside = false;
-        if((position.getRow()>=0 && position.getRow()<square.length)&&( position.getColumn()>=0 && position.getColumn()<square[0].length)){
-            isinside=true;
+        if ((position.getRow() >= 0 && position.getRow() < square.length) && (position.getColumn() >= 0 && position.getColumn() < square[0].length)) {
+            isinside = true;
         }
 
         return isinside;
     }
 
     /**
-     * This methode return the square at the position given in a parameter
+     * This methode return the square at the position given in a parameter and
+     * display an exeption if the postion is out of the board
      *
      * @param position
-     * @return
+     * @return square
      */
     public Square getSquare(Position position) {
         if (isInside(position) == false) {
@@ -76,7 +79,8 @@ public class Board {
     }
 
     /**
-     * This method put a piece at the postion in parameter
+     * This method put a piece at the postion in parameter and also display an
+     * expetion if the position is out of the board
      *
      * @param piece
      * @param position

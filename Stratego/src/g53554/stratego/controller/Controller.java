@@ -5,7 +5,7 @@ import g53554.stratego.view.View;
 
 /**
  * This class creat the dynamism of the game 
- * is where we put all the method usful to control the game 
+ * is where we put all the method usful to control and play the game 
  * @author 53554
  */
 public class Controller {
@@ -46,6 +46,7 @@ public class Controller {
         System.out.println("");
         if (game.isOver() == false) {
             view.displayBoard(game.getBoard());
+            System.out.println("");
 
         }
         System.out.println("");

@@ -42,7 +42,7 @@ public class View {
      */
     public void quit() {
         Color couleur = new Color();
-        System.out.println(couleur.toRed("Bye Bye Thanks for Playing"));
+        System.out.println(couleur.RED_BOLD_BRIGHT + "Bye Bye Thanks for Playing");
 
     }
 
@@ -86,24 +86,21 @@ public class View {
     public void displayBoard(Square[][] square) {
         Color couleur = new Color();
         Board board = new Board();
-        System.out.print("  " + "Col#| |");
+        System.out.print("  " + "Col#|| ");
         for (int i = 0; i < board.getSquare()[0].length; i++) {
             System.out.printf(" |%02d|", i);
             if (i == square[0].length - 1) {
                 System.out.println("");
                 PrintEqualSign(square);
                 for (int j = 0; j < board.getSquare().length; j++) {
-                    System.out.printf("%nrow#%02d| |",j);
-                        for (int k = 0; k < square[j].length; k++) {
-                            Piece piece = square[j][k].getPiece();
-                            displayPiece(piece);
-
-                        
+                    System.out.printf("%nrow#%02d|| ", j);
+                    for (int k = 0; k < square[j].length; k++) {
+                        Piece piece = square[j][k].getPiece();
+                        displayPiece(piece);
 
                     }
 
                 }
-               // System.out.println("");
 
             }
 
@@ -111,20 +108,23 @@ public class View {
 
     }
 
+    /**
+     * This method display the piece inside the board with background colour
+     *
+     * @param piece
+     */
     private void displayPiece(Piece piece) {
         Color couleur = new Color();
-        System.out.print("");
         if (piece == null) {
-            System.out.print(" |  |");
-        }else{
-            if (piece.getColor() == PlayerColor.BLUE) {
-                System.out.print(" |"+couleur.toBlue("PE")+"|");
-            }
-            if (piece.getColor() == PlayerColor.RED) {
-                System.out.print(" |"+couleur.toRed("PE")+"|");
-            }
+            System.out.print(" |"+"\u001b[43m"+"  "+"\u001b[0m"+"|");
+        } else if (piece.getColor() == PlayerColor.BLUE) {
+            System.out.print(" |" +"\u001b[43m"+ couleur.toBlue("PE") + "|");
+
+        } else {
+            System.out.print(" |" +"\u001b[43m"+ couleur.toRed("PE") + "|");
 
         }
+
     }
 
     /**
@@ -135,7 +135,7 @@ public class View {
     private void PrintEqualSign(Square tab[][]) {
         int i = 0;
         while (i < tab.length) {
-            System.out.print("===== =");
+            System.out.print("======");
             i++;
 
         }

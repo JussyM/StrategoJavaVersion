@@ -3,6 +3,7 @@ package g53554.stratego.model;
 import java.util.Objects;
 
 /**
+ * This class is the piece that will be use in the game principally on the board
  *
  * @author jussy
  */
@@ -26,6 +27,11 @@ public class Piece {
 
     }
 
+    /**
+     * This method is the hashcode of the piece
+     *
+     * @return hash
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -34,6 +40,12 @@ public class Piece {
         return hash;
     }
 
+    /**
+     * This method compare the attribut of each piece
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -56,7 +68,7 @@ public class Piece {
     }
 
     /**
-     * This method get the value of color
+     * This method get the color
      *
      * @return color
      */

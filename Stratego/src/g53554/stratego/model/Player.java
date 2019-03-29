@@ -5,13 +5,15 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * This is the class that creat the player and all his option like the color of
+ * the player and a list of piece
  *
  * @author jussy
  */
 public class Player {
 
-     PlayerColor color;
-     List<Piece> pieces;
+    PlayerColor color;
+    List<Piece> pieces;
 
     /**
      * This method initialized the attribute of the class
@@ -20,14 +22,18 @@ public class Player {
      * @param pieces
      */
     public Player(PlayerColor color) {
-        if(color==null){
+        if (color == null) {
             throw new NullPointerException();
         }
         this.color = color;
         this.pieces = new ArrayList<>();
     }
 
-
+    /**
+     * This method is the hascode of the player
+     *
+     * @return hash
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -35,6 +41,12 @@ public class Player {
         hash = 37 * hash + Objects.hashCode(this.pieces);
         return hash;
     }
+
+    /**
+     * This method also compare all the attribut
+     * @param obj
+     * @return boolean
+     */
 
     @Override
     public boolean equals(Object obj) {
@@ -58,7 +70,7 @@ public class Player {
     }
 
     /**
-     * This method get the color
+     * This method get the color for the player
      *
      * @return
      */
@@ -67,11 +79,11 @@ public class Player {
     }
 
     /**
-     * This method get the Piece
+     * This method get a list of Piece for the player
      *
      * @return
      */
-    public List<Piece> getPieces() {    
+    public List<Piece> getPieces() {
         return pieces;
 
     }

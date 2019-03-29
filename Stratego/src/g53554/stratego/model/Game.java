@@ -3,7 +3,8 @@ package g53554.stratego.model;
 import java.util.Objects;
 
 /**
- * This class
+ * This class is specified in initializing the game option and verifie if the
+ * game can start or not and also is the game is over
  *
  * @author g53554
  */
@@ -13,6 +14,10 @@ public class Game implements Model {
     Player current;
     Player opponent;
 
+    /**
+     * This method is the constructor of the game with no parameter and
+     * initialized the players
+     */
     public Game() {
         this.current = new Player(PlayerColor.RED);
         this.opponent = new Player(PlayerColor.BLUE);
@@ -20,7 +25,8 @@ public class Game implements Model {
     }
 
     /**
-     * This method initialized the board of the game with default parameter
+     * This method initialized the board of the game with default parameter give
+     * in
      */
     @Override
     public void initialize() {
@@ -34,12 +40,12 @@ public class Game implements Model {
         current.addPiece(new Piece(0, PlayerColor.RED));
         opponent.addPiece(new Piece(0, PlayerColor.BLUE));
         current.addPiece(new Piece(9, PlayerColor.RED));
-       opponent.addPiece(new Piece(9, PlayerColor.BLUE));
+        opponent.addPiece(new Piece(9, PlayerColor.BLUE));
 
     }
 
     /**
-     * This method verifie if the game can start
+     * This method verifie if the game can start if not an exeption is displays
      */
     @Override
     public void start() {
@@ -51,7 +57,7 @@ public class Game implements Model {
     }
 
     /**
-     * Thos method return true of fals if the game is over
+     * Thos method return true or false if the game is over
      *
      * @return over
      */
@@ -72,6 +78,11 @@ public class Game implements Model {
         return this.board.getSquare();
     }
 
+    /**
+     * This is the method that generate the hascode of game
+     *
+     * @return hash
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -81,6 +92,12 @@ public class Game implements Model {
         return hash;
     }
 
+    /**
+     * This method verfie if all the attribut of the game are equals
+     *
+     * @param obj
+     * @return true
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -104,6 +121,11 @@ public class Game implements Model {
         }
         return true;
     }
+
+    /**
+     * This method diplays the board and the players
+     * @return bord and players 
+     */
 
     @Override
     public String toString() {

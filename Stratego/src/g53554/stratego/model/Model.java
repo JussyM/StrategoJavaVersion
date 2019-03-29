@@ -1,11 +1,13 @@
 package g53554.stratego.model;
 
 /**
+ * This is the interface that game has to follow to build his method in his class
  *
  * @author jussy
  */
 public interface Model {
-   /**
+
+    /**
      * Initializes the stratego game with a default board.
      */
     void initialize();

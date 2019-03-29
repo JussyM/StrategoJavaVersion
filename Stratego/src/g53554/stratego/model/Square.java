@@ -16,11 +16,22 @@ public class Square {
     public Square() {
     }
 
+    /**
+     *
+     * @return
+     */
+
     @Override
     public int hashCode() {
         int hash = 3;
         return hash;
     }
+
+    /**
+     *
+     * @param obj
+     * @return
+     */
 
     @Override
     public boolean equals(Object obj) {
@@ -59,7 +70,7 @@ public class Square {
             throw new NullPointerException();
 
         }
-        if(this.piece!=null){
+        if (this.piece != null) {
             throw new IllegalStateException();
         }
         this.piece = piece;
