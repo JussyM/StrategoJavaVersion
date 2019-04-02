@@ -233,4 +233,32 @@ public class BoardTest {
         instance.isInside(null);
 
     }
+
+    @Test
+    public void testIsFree() {
+        System.out.println("TestWhenSquareIsFree");
+        Board instance = new Board();
+        boolean expResult = true;
+        boolean result = instance.isFree(new Position(0, 0));
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testIsNotFree() {
+        System.out.println("TestWhenSquareIsNotFree");
+        Game game= new Game();
+        game.initialize();
+        boolean expResult = false;
+        boolean result = game.board.isFree(new Position(4, 1));
+        assertEquals(expResult, result);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWhenPositionIsOutside() {
+        System.out.println("testPuWhenPositionIsOutside");
+        Position position = new Position(6, 2);
+        Board instance = new Board();
+        instance.isFree(position);
+    }
+
 }

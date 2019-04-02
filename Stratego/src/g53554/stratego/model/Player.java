@@ -19,7 +19,7 @@ public class Player {
      * This method initialized the attribute of the class
      *
      * @param color
-     * @param pieces
+     *
      */
     public Player(PlayerColor color) {
         if (color == null) {
@@ -44,10 +44,10 @@ public class Player {
 
     /**
      * This method also compare all the attribut
+     *
      * @param obj
      * @return boolean
      */
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

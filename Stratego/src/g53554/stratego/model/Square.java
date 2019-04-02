@@ -20,7 +20,6 @@ public class Square {
      *
      * @return
      */
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -32,7 +31,6 @@ public class Square {
      * @param obj
      * @return
      */
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -74,6 +72,38 @@ public class Square {
             throw new IllegalStateException();
         }
         this.piece = piece;
+    }
+
+    /**
+     * This method check if a sqaure is free or not
+     *
+     * @return free
+     */
+    public boolean isFree() {
+        boolean isFree = false;
+        if (this.piece == null) {
+            isFree = true;
+        }
+
+        return isFree;
+
+    }
+
+    /**
+     * This method check if the color of the piece in parameter is the same with
+     * the color in the square
+     * @param color
+     * @return checkColor
+     */
+    public boolean isMyOwn(PlayerColor color) {
+        boolean checkColor = false;
+        if (this.piece.getColor() == color) {
+            checkColor = true;
+        } else if (this.piece.getColor() != color || isFree() == true) {
+            checkColor = false;
+
+        }
+        return checkColor;
     }
 
 }

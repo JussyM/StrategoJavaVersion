@@ -1,6 +1,5 @@
 package g53554.stratego.model;
 
-
 /**
  * This class is the board of the game with an arrays of double dimension it
  * will help us to creat the board with all element include
@@ -90,6 +89,21 @@ public class Board {
             throw new IllegalArgumentException("La position est hors du tableau");
         }
         this.square[position.getRow()][position.getColumn()].put(piece);
+
+    }
+
+    /**
+     * This method check if a square at the position given in parameter is free
+     * @param position
+     * @return isFree
+     */
+
+    public boolean isFree(Position position) {
+        if (isInside(position) == false) {
+            throw new IllegalArgumentException("La position est hors du tableau");
+        }
+
+        return this.square[position.getRow()][position.getColumn()].isFree();
 
     }
 

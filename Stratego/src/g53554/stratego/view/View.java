@@ -83,7 +83,6 @@ public class View {
      * @param square
      */
     public void displayBoard(Square[][] square) {
-        Color couleur = new Color();
         Board board = new Board();
         System.out.print("  " + "Col#|| ");
         for (int i = 0; i < board.getSquare()[0].length; i++) {
@@ -115,12 +114,12 @@ public class View {
     private void displayPiece(Piece piece) {
         Color couleur = new Color();
         if (piece == null) {
-            System.out.print(" |" + "\u001b[47m" + "  " + "\u001b[0m" + "|");
+            System.out.print(" |" + "\u001b[46m" + "  " + "\u001b[0m" + "|");
         } else if (piece.getColor() == PlayerColor.BLUE) {
-            System.out.print(" |" + "\u001b[47m" + couleur.toBlue("PE") + "|");
+            System.out.print(" |" + "\u001b[46m" + couleur.toBlue("PE") + "|");
 
         } else {
-            System.out.print(" |" + "\u001b[47m" + couleur.toRed("PE") + "|");
+            System.out.print(" |" + "\u001b[46m" + couleur.toRed("PE") + "|");
 
         }
 
