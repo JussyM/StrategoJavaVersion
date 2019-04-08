@@ -15,15 +15,13 @@ import g53554.stratego.model.PlayerColor;
  */
 public class View {
 
-    Scanner in;
+    private Scanner in;
 
     /**
      * This method build the the class view and his attribut
-     *
-     * @param in
      */
-    public View(Scanner in) {
-        this.in = in;
+    public View() {
+        in = new Scanner(System.in);
     }
 
     /**
@@ -60,6 +58,9 @@ public class View {
     public void displayHelp() {
         Color couleur = new Color();
         System.out.println(couleur.toYellow("Usage :"));
+        System.out.println("     " + couleur.toYellow("Taper ") + couleur.toRed("select <row,column>") + couleur.toYellow(" pour selectionner la pièce de la case mentionnée"));
+        System.out.println("     " + couleur.toYellow("Taper ") + couleur.toRed("moves") + couleur.toYellow(" afficher la liste des déplacements possibles de la pièce séléctionnée"));
+        System.out.println("     " + couleur.toYellow("Taper ") + couleur.toRed("apply <index> ") + couleur.toYellow("pour appliquer le déplacement d'indice donnée"));
         System.out.println(couleur.toYellow("     " + "Taper " + couleur.toRed("quit") + couleur.toYellow(" pour arrêter le jeu")));
 
     }
@@ -70,10 +71,8 @@ public class View {
      * @return
      */
     public String askCommand() {
-        Scanner keyboard = this.in;
         System.out.println("Veuillez entrez une commande: ");
-        String cmde = keyboard.next();
-
+        String cmde = in.next();
         return cmde;
     }
 
@@ -146,6 +145,16 @@ public class View {
     public void displayOver() {
 
         System.out.println("Le jeux est terminer");
+
+    }
+
+    /**
+     * This method display the piece selected by the player
+     *
+     * @param piece
+     */
+    public void displaySelected(Piece piece) {
+        System.out.println(piece.getRank() + "selected");
 
     }
 

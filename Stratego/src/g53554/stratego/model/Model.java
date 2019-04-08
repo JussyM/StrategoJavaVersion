@@ -1,7 +1,8 @@
 package g53554.stratego.model;
 
 /**
- * This is the interface that game has to follow to build his method in his class
+ * This is the interface that game has to follow to build his method in his
+ * class
  *
  * @author jussy
  */
@@ -33,5 +34,18 @@ public interface Model {
      * @return the board.
      */
     Square[][] getBoard();
+
+    /**
+     * select the piece 
+     * @param row
+     * @param column
+     */
+    void select(int row, int column);
+
+    /**
+     * return the piece selected
+     * @return
+     */
+    Piece getSeleced();
 
 }

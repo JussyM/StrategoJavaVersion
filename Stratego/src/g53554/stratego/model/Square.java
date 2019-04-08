@@ -20,9 +20,11 @@ public class Square {
      *
      * @return
      */
+
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.piece);
         return hash;
     }
 
@@ -31,6 +33,7 @@ public class Square {
      * @param obj
      * @return
      */
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -92,6 +95,7 @@ public class Square {
     /**
      * This method check if the color of the piece in parameter is the same with
      * the color in the square
+     *
      * @param color
      * @return checkColor
      */

@@ -13,6 +13,7 @@ public class Game implements Model {
     Board board;
     Player current;
     Player opponent;
+    Position selected;
 
     /**
      * This method is the constructor of the game with no parameter and
@@ -124,12 +125,45 @@ public class Game implements Model {
 
     /**
      * This method diplays the board and the players
-     * @return bord and players 
+     *
+     * @return bord and players
      */
-
     @Override
     public String toString() {
         return "Game{" + "board=" + board + ", current=" + current + ", opponent=" + opponent + '}';
+    }
+
+    /**
+     * This method decmared a new instance for the position selected
+     *
+     * @param row
+     * @param column
+     */
+    @Override
+    public void select(int row, int column) {
+        if (this.board.isInside(new Position(row, column)) == false) {
+            throw new IllegalArgumentException("les coordonnées en paramètre sont hors du plateau");
+        } else if (this.board.isFree(new Position(row, column)) == true) {
+            throw new IllegalArgumentException("Les coordonnées en paramètre réfère à une case vide");
+        } else if (this.board.getSquare(new Position(row, column)) != null) {
+            throw new IllegalArgumentException("la case est occuper");
+
+        }
+        this.selected = new Position(row, column);
+
+    }
+
+    /**
+     * This method return the piece à the position selected
+     * @return piece
+     */
+    @Override
+    public Piece getSeleced() {
+        if (this.selected == null) {
+            throw new IllegalArgumentException("La position selectionner est hors du tableau");
+        }
+
+        return this.board.getPiece(selected);
     }
 
 }

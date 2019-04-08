@@ -8,17 +8,19 @@ package g53554.stratego.model;
  */
 public class Board {
 
-    private Square[][] square;
+    private final Square[][] squares;
+    private final static int ROW=5;
+    private final static int COLUMN=4;
 
     /**
      * This is constructor that build the board with no parameter with no
      * parameter And put the board to default setting
      */
     public Board() {
-        square = new Square[5][4];
-        for (int i = 0; i < square.length; i++) {
-            for (int j = 0; j < square[i].length; j++) {
-                square[i][j] = new Square();
+        squares = new Square[ROW][COLUMN];
+        for (int i = 0; i < squares.length; i++) {
+            for (int j = 0; j < squares[i].length; j++) {
+                squares[i][j] = new Square();
 
             }
 
@@ -31,7 +33,7 @@ public class Board {
      * @return square
      */
     public Square[][] getSquare() {
-        return square;
+        return squares;
     }
 
     /**
@@ -43,10 +45,13 @@ public class Board {
      */
     public boolean isInside(Position position) {
         boolean isinside = false;
-        if ((position.getRow() >= 0 && position.getRow() < square.length) && (position.getColumn() >= 0 && position.getColumn() < square[0].length)) {
+        if ((position.getRow() >= 0
+                && position.getRow() < squares.length)
+                && (position.getColumn() >= 0
+                && position.getColumn() < squares[0].length)) {
             isinside = true;
-        }
 
+        }
         return isinside;
     }
 
@@ -61,19 +66,8 @@ public class Board {
         if (isInside(position) == false) {
             throw new IllegalArgumentException("La position est hors du tableau");
         }
-        Square square = new Square();
 
-        for (int i = 0; i < this.square.length; i++) {
-            for (int j = 0; j < this.square[i].length; j++) {
-                if (this.square[position.getRow()][position.getColumn()] == this.square[i][j]) {
-                    square = this.square[i][j];
-
-                }
-
-            }
-
-        }
-        return square;
+        return squares[position.getRow()][position.getColumn()];
 
     }
 
@@ -88,22 +82,53 @@ public class Board {
         if (isInside(position) == false) {
             throw new IllegalArgumentException("La position est hors du tableau");
         }
-        this.square[position.getRow()][position.getColumn()].put(piece);
+        this.squares[position.getRow()][position.getColumn()].put(piece);
 
     }
 
     /**
      * This method check if a square at the position given in parameter is free
+     *
      * @param position
      * @return isFree
      */
-
     public boolean isFree(Position position) {
         if (isInside(position) == false) {
             throw new IllegalArgumentException("La position est hors du tableau");
         }
 
-        return this.square[position.getRow()][position.getColumn()].isFree();
+        return this.squares[position.getRow()][position.getColumn()].isFree();
+
+    }
+
+    /**
+     * This method check if the color given in paramater is the same with the
+     * one in the board
+     *
+     * @param position
+     * @param color
+     * @return isMyOwn
+     */
+    public boolean isMyOwn(Position position, PlayerColor color) {
+        if (isInside(position) == false) {
+            throw new IllegalArgumentException("La position est hors du tableau ");
+        }
+
+        return this.squares[position.getRow()][position.getColumn()].isMyOwn(color);
+    }
+
+    /**
+     * This method return the piece at the postion given in the parameter
+     *
+     * @param position
+     * @return piece
+     */
+    public Piece getPiece(Position position) {
+        if (isInside(position) == false) {
+            throw new IllegalArgumentException("La position est hors du tableau");
+        }
+
+        return squares[position.getRow()][position.getColumn()].getPiece();
 
     }
 

@@ -12,8 +12,8 @@ import java.util.Objects;
  */
 public class Player {
 
-    PlayerColor color;
-    List<Piece> pieces;
+    private PlayerColor color;
+    private List<Piece> pieces;
 
     /**
      * This method initialized the attribute of the class
@@ -94,6 +94,9 @@ public class Player {
      * @param piece
      */
     public void addPiece(Piece piece) {
+        if(piece==null){
+            throw new IllegalArgumentException("la piece est null");
+        }
         pieces.add(piece);
     }
 }

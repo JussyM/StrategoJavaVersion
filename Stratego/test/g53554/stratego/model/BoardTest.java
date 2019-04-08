@@ -246,7 +246,7 @@ public class BoardTest {
     @Test
     public void testIsNotFree() {
         System.out.println("TestWhenSquareIsNotFree");
-        Game game= new Game();
+        Game game = new Game();
         game.initialize();
         boolean expResult = false;
         boolean result = game.board.isFree(new Position(4, 1));
@@ -255,10 +255,37 @@ public class BoardTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testWhenPositionIsOutside() {
-        System.out.println("testPuWhenPositionIsOutside");
+        System.out.println("testWhenPositionIsOutside");
         Position position = new Position(6, 2);
         Board instance = new Board();
         instance.isFree(position);
     }
+
+    @Test
+    public void testIsMyOwn() {
+        System.out.println("testWhenIsMyOwn");
+        Board instance = new Board();
+        instance.put(new Piece(0, PlayerColor.BLUE), new Position(0, 0));
+        boolean expResult=true;
+        boolean result= instance.isMyOwn(new Position(0, 0), PlayerColor.BLUE);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testIsNotMyOwn() {
+        System.out.println("testWhenIsNotMyOwn");
+        Board instance = new Board();
+        instance.put(new Piece(0, PlayerColor.RED), new Position(0, 0));
+        boolean expResult=false;
+        boolean result= instance.isMyOwn(new Position(0, 0), PlayerColor.BLUE);
+        assertEquals(expResult, result);
+    }
+     @Test(expected = IllegalArgumentException.class)
+    public void WhenPositionIsOutside() {
+        System.out.println("WhenPositionIsOutside");
+        Position position = new Position(6, 2);
+        Board instance = new Board();
+        instance.isMyOwn(position, PlayerColor.BLUE);
+    }
+
 
 }
