@@ -32,9 +32,9 @@ public class Position {
 
     /**
      * This method is the hashcode of position
+     *
      * @return hash
      */
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -45,10 +45,10 @@ public class Position {
 
     /**
      * Compare the attribut
+     *
      * @param obj
      * @return boolean
      */
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -77,6 +77,33 @@ public class Position {
      */
     public int getRow() {
         return row;
+    }
+
+    /**
+     * This method return a position near the current position
+     *
+     * @param direction
+     * @return position
+     */
+    public Position next(Direction direction) {
+        Position nextPosition = new Position(row,column);
+        switch (direction) {
+            case UP:
+             nextPosition = new Position(row-1, column);
+                break;
+            case DOWN:
+                nextPosition = new Position(row+1, column);
+                break;
+            case LEFT:
+                nextPosition = new Position(row, column-1);
+                break;
+            case RIGHT:
+                nextPosition= new Position(row, column+1);
+                break;
+        }
+
+        return nextPosition;
+
     }
 
 }

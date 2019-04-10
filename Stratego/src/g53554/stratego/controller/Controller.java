@@ -50,7 +50,7 @@ public class Controller {
             System.out.println("");
 
         }
-        if (view.askCommand().matches("s.*") && selectValue(view.askCommand())[0] != 0 && selectValue(view.askCommand())[1] != 0) {
+        if (view.askCommand().matches("select(.*)")) {
             game.select(selectValue(view.askCommand())[0], selectValue(view.askCommand())[1]);
             game.getSeleced();
 
@@ -89,5 +89,6 @@ public class Controller {
         return result;
 
     }
+    
 
 }
