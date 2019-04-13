@@ -52,7 +52,7 @@ public class Controller {
         }
         if (view.askCommand().matches("select(.*)")) {
             game.select(selectValue(view.askCommand())[0], selectValue(view.askCommand())[1]);
-            game.getSeleced();
+            game.getSelected();
 
         }
 

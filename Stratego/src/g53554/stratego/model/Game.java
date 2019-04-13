@@ -1,5 +1,7 @@
 package g53554.stratego.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -155,15 +157,42 @@ public class Game implements Model {
 
     /**
      * This method return the piece à the position selected
+     *
      * @return piece
      */
     @Override
-    public Piece getSeleced() {
+    public Piece getSelected() {
         if (this.selected == null) {
             throw new IllegalArgumentException("La position selectionner est hors du tableau");
         }
 
         return this.board.getPiece(selected);
+    }
+
+    /**
+     * This method return a list of possibilities to move a piece
+     *
+     * @return listeMove
+     */
+    @Override
+    public List<Move> getMoves() {
+        List<Move> listeMove = new ArrayList<>();
+        for (Direction direction : Direction.values()) {
+            if (direction == null) {
+                throw new IllegalArgumentException("La direction n'est pas disponible");
+            } else if (!this.board.isInside(selected.next(direction))) {
+                throw new IllegalArgumentException("La position selectionner est hors du tableau");
+            } else if (this.selected == null) {
+                throw new IllegalArgumentException("La position selectionner est hors du tableau");
+            } else if (!this.board.isFree(selected.next(direction))) {
+                throw new IllegalArgumentException("La case n'est pas libre");
+
+            }
+            listeMove.add(new Move(getSelected(), selected, selected.next(direction)));
+
+        }
+
+        return listeMove;
     }
 
 }

@@ -1,5 +1,7 @@
 package g53554.stratego.model;
 
+import java.util.List;
+
 /**
  * This is the interface that game has to follow to build his method in his
  * class
@@ -36,7 +38,8 @@ public interface Model {
     Square[][] getBoard();
 
     /**
-     * select the piece 
+     * select the piece
+     *
      * @param row
      * @param column
      */
@@ -44,8 +47,16 @@ public interface Model {
 
     /**
      * return the piece selected
+     *
      * @return
      */
-    Piece getSeleced();
+    Piece getSelected();
+
+    /**
+     * This method return a list of all the movment available 
+     * @return list 
+     */
+
+    List<Move> getMoves();
 
 }
