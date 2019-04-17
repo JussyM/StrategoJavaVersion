@@ -74,6 +74,7 @@ public class PositionTest {
         Position position1 = new Position(2, 96);
         assertFalse(position1.equals(null));
     }
+
     @Test
     public void testNextWhenDirectionIsUp() {
         System.out.println("nextWhenDirectionIsUp");
@@ -82,9 +83,10 @@ public class PositionTest {
         Position expResult = new Position(1, 3);
         Position result = instance.next(direction);
         assertEquals(expResult, result);
-        
+
     }
-     @Test
+
+    @Test
     public void testNextWhenDirectionIsDown() {
         System.out.println("nextWhenDirectionIsDown");
         Direction direction = Direction.DOWN;
@@ -92,9 +94,10 @@ public class PositionTest {
         Position expResult = new Position(2, 3);
         Position result = instance.next(direction);
         assertEquals(expResult, result);
-        
+
     }
-     @Test
+
+    @Test
     public void testNextWhenDirectionIsLeft() {
         System.out.println("nextWhenDirectionIsLeft");
         Direction direction = Direction.LEFT;
@@ -102,9 +105,10 @@ public class PositionTest {
         Position expResult = new Position(0, 2);
         Position result = instance.next(direction);
         assertEquals(expResult, result);
-        
+
     }
-     @Test
+
+    @Test
     public void testNextWhenDirectionIsRight() {
         System.out.println("nextWhenDirectionIsRigh");
         Direction direction = Direction.RIGHT;
@@ -112,7 +116,62 @@ public class PositionTest {
         Position expResult = new Position(0, 4);
         Position result = instance.next(direction);
         assertEquals(expResult, result);
-        
+
+    }
+
+    /**
+     * Test of next method, of class Position.
+     */
+    @Test
+    public void testNextUP() {
+        System.out.println("nextUp");
+        Direction direction = Direction.UP;
+        Game game = new Game();
+        game.initialize();
+        game.selected = new Position(4, 1);
+        Position instance = game.selected;
+        Position expResult = new Position(3, 1);
+        Position result = instance.next(direction);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testNextDOWN() {
+        System.out.println("nextDown");
+        Direction direction = Direction.DOWN;
+        Game game = new Game();
+        game.initialize();
+        game.selected = new Position(0, 1);
+        Position instance = game.selected;
+        Position expResult = new Position(1, 1);
+        Position result = instance.next(direction);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testNextLEFT() {
+        System.out.println("nextLeft");
+        Direction direction = Direction.LEFT;
+        Game game = new Game();
+        game.initialize();
+        game.selected = new Position(3, 2);
+        Position instance = game.selected;
+        Position expResult = new Position(3, 1);
+        Position result = instance.next(direction);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testNextRIGHT() {
+        System.out.println("nextRight");
+        Direction direction = Direction.RIGHT;
+        Game game = new Game();
+        game.initialize();
+        game.selected = new Position(3, 2);
+        Position instance = game.selected;
+        Position expResult = new Position(3, 3);
+        Position result = instance.next(direction);
+        assertEquals(expResult, result);
     }
 
 }

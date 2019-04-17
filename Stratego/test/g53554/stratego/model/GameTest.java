@@ -2,6 +2,8 @@ package g53554.stratego.model;
 
 import static g53554.stratego.model.PlayerColor.BLUE;
 import static g53554.stratego.model.PlayerColor.RED;
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertFalse;
@@ -121,12 +123,53 @@ public class GameTest {
 
     }
 
-  @Test
+    @Test
     public void testGetMoves() {
         System.out.println("getMoves");
         Game instance = new Game();
-        List<Move> expResult = null;
+        instance.initialize();
+        instance.selected = new Position(4, 1);
+        Move dep = new Move(new Piece(0, BLUE), instance.selected, instance.selected.next(Direction.LEFT));
+        List<Move> listMove = new ArrayList<>();
+        listMove.add(dep);
+        List<Move> expResult = listMove;
         List<Move> result = instance.getMoves();
         assertEquals(expResult, result);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWhenDirectionIsNotAvailable() {
+        System.out.println("testWhenDirectionIsNotAvailable");
+        Game instance = new Game();
+        instance.getMoves();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWhenPositionSelectedIsNull() {
+        System.out.println("testWhenPositionSelectedIsNull");
+        Game instance = new Game();    
+        instance.selected = null;
+        instance.getMoves();
+
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWhenTheNextPositionIsNotAvailaible() {
+        System.out.println("testWhenTheNextPositionIsNotAvailaible");
+        Game instance = new Game();
+        instance.initialize();
+        instance.selected = new Position(5, 6);
+        instance.selected.next(Direction.DOWN);
+        instance.getMoves();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWhenTheNextPostionIsFree() {
+        System.out.println("testWhenTheNextPostionIsFree");
+        Game instance = new Game();
+        instance.initialize();
+        instance.board.isFree(instance.selected = new Position(0, 0));
+        instance.getMoves();
+    }
+
 }

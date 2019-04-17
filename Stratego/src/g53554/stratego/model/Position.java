@@ -86,19 +86,19 @@ public class Position {
      * @return position
      */
     public Position next(Direction direction) {
-        Position nextPosition = new Position(row,column);
+        Position nextPosition = new Position(row, column);
         switch (direction) {
             case UP:
-             nextPosition = new Position(row-1, column);
+                nextPosition = new Position(row - 1, column);
                 break;
             case DOWN:
-                nextPosition = new Position(row+1, column);
+                nextPosition = new Position(row + 1, column);
                 break;
             case LEFT:
-                nextPosition = new Position(row, column-1);
+                nextPosition = new Position(row, column - 1);
                 break;
             case RIGHT:
-                nextPosition= new Position(row, column+1);
+                nextPosition = new Position(row, column + 1);
                 break;
         }
 
