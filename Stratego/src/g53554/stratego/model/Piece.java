@@ -21,10 +21,10 @@ public class Piece {
     public Piece(int rank, PlayerColor color) {
         if (this.rank < 0) {
             throw new IllegalArgumentException("Le rang est négatif");
+        } else {
+            this.rank = rank;
+            this.color = color;
         }
-
-        this.rank = rank;
-        this.color = color;
 
     }
 
@@ -84,6 +84,36 @@ public class Piece {
      */
     public int getRank() {
         return rank;
+    }
+
+    /**
+     * Verifie if the rank in parameter is lower
+     *
+     * @param other
+     * @return strong
+     */
+    public boolean isStronger(Piece other) {
+        boolean strong = false;
+        if (other.rank <= 0) {
+            strong = true;
+
+        }
+        return strong;
+
+    }
+
+    /**
+     * Verifie if the rank is parameter is the same thing with the attribut
+     *
+     * @param other
+     * @return sameRank
+     */
+    public boolean hasSameRank(Piece other) {
+        boolean sameRank = false;
+        if (this.rank == other.rank) {
+            sameRank = true;
+        }
+        return sameRank;
     }
 
 }
