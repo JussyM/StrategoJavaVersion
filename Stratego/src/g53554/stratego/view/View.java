@@ -4,8 +4,10 @@ import g53554.stratego.model.Square;
 import g53554.stratego.model.Board;
 import java.util.Scanner;
 import g53554.stratego.main.Color;
+import g53554.stratego.model.Move;
 import g53554.stratego.model.Piece;
 import g53554.stratego.model.PlayerColor;
+import java.util.List;
 
 /**
  * This class interact with the player or the user by doing a display or asking
@@ -66,9 +68,18 @@ public class View {
     }
 
     /**
+     * This method display all the move possible 
+     * @param moves
+     */
+
+    public void displayMoves(List<Move> moves) {    
+
+    }
+
+    /**
      * This method ask for imput from the player and return an encode text
      *
-     * @return
+     * @return cmde
      */
     public String askCommand() {
         System.out.println("Veuillez entrez une commande: ");

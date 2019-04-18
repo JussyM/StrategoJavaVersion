@@ -180,7 +180,7 @@ public class Game implements Model {
         for (Direction direction : Direction.values()) {
             if (direction == null) {
                 throw new IllegalArgumentException("La direction n'est pas disponible");
-            } else if (this.board.isInside(selected.next(direction))) {
+            } else if (!this.board.isInside(selected.next(direction))) {
                 throw new IllegalArgumentException("La position d'arriver est hors du tableau");
             } else if (this.selected == null) {
                 throw new IllegalArgumentException("La position selectionner est hors du tableau");

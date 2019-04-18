@@ -128,8 +128,8 @@ public class GameTest {
         System.out.println("getMoves");
         Game instance = new Game();
         instance.initialize();
-        instance.selected = new Position(4, 1);
-        Move dep = new Move(new Piece(0, BLUE), instance.selected, instance.selected.next(Direction.LEFT));
+        instance.selected = new Position(3, 2);
+        Move dep = new Move(new Piece(0, BLUE), instance.selected, instance.selected.next(Direction.UP));
         List<Move> listMove = new ArrayList<>();
         listMove.add(dep);
         List<Move> expResult = listMove;
