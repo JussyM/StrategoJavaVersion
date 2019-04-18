@@ -1,5 +1,6 @@
 package g53554.stratego.controller;
 
+import g53554.stratego.model.Game;
 import g53554.stratego.model.Model;
 import g53554.stratego.view.View;
 import java.util.ArrayList;
@@ -50,19 +51,11 @@ public class Controller {
             System.out.println("");
 
         }
-        if (view.askCommand().matches("select(.*)")) {
-            game.select(selectValue(view.askCommand())[0], selectValue(view.askCommand())[1]);
-            game.getSelected();
-
-        }
-
         System.out.println("");
         while (!game.isOver() && !view.askCommand().equals("quit")) {
-            view.askCommand();
+            gameCmde(view.askCommand());
 
         }
-        view.quit();
-        //view.displayOver();
 
     }
 
@@ -87,6 +80,32 @@ public class Controller {
             result[i] = list.get(i);
         }
         return result;
+
+    }
+
+    /**
+     * This method group all the command useful for the game and it respectives
+     * roles
+     *
+     * @param cmde
+     */
+    private void gameCmde(String cmde) {
+        String endGamecmde = "quit";
+        String piecePostionCmde = "select";
+        String movePiece = "move";
+        int row;
+        int column;
+        if (cmde.matches(endGamecmde)) {
+            view.quit();
+        } else if (cmde.matches(piecePostionCmde)) {
+            row = selectValue(cmde)[0];
+            column = selectValue(cmde)[1];
+            game.select(row, column);
+            System.out.println(game.getSelected() + "selectionné");
+        } else if (cmde.matches(movePiece)) {
+            view.displayMoves(game.getMoves());
+
+        }
 
     }
     

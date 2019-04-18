@@ -72,7 +72,11 @@ public class View {
      * @param moves
      */
 
-    public void displayMoves(List<Move> moves) {    
+    public void displayMoves(List<Move> moves) { 
+        for (int i = 0; i < moves.size(); i++) {
+            System.out.println(moves.get(i).getPiece()+"peut se déplacer vers la ligne "+ moves.get(i).getEnd().getRow()+" et la colonne "+ moves.get(i).getEnd().getColumn());
+            
+        }
 
     }
 
