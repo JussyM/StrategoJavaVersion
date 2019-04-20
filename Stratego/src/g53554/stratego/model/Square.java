@@ -20,7 +20,6 @@ public class Square {
      *
      * @return
      */
-
     @Override
     public int hashCode() {
         int hash = 5;
@@ -33,7 +32,6 @@ public class Square {
      * @param obj
      * @return
      */
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -108,6 +106,16 @@ public class Square {
 
         }
         return checkColor;
+    }
+
+    /**
+     * This method remove the piece 
+     */
+    public void remove() {
+        if (piece != null) {
+            piece = null;
+        }
+
     }
 
 }

@@ -126,24 +126,35 @@ public class SquareTest {
         assertFalse(result.isEmpty());
     }
 
-    
-
     @Test
     public void testIsMyOwn() {
         System.out.println("isMyOwn");
-        Square instance= new Square();
+        Square instance = new Square();
         instance.put(new Piece(0, BLUE));
-        boolean expected=true;
-        boolean result= instance.isMyOwn(BLUE);
+        boolean expected = true;
+        boolean result = instance.isMyOwn(BLUE);
         assertEquals(expected, result);
     }
+
     @Test
     public void testIsNotMyOwn() {
         System.out.println("isNotMyOwn");
-        Square instance= new Square();
-        instance.put(new Piece(0,PlayerColor.RED));
-        boolean expected=false;
-        boolean result= instance.isMyOwn(BLUE);
+        Square instance = new Square();
+        instance.put(new Piece(0, PlayerColor.RED));
+        boolean expected = false;
+        boolean result = instance.isMyOwn(BLUE);
         assertEquals(expected, result);
+    }
+
+    @Test
+    public void testRemove() {
+        System.out.println("testRemove");
+        Square instance = new Square();
+        instance.put(new Piece(0, BLUE));
+        Piece expResult = null;
+        instance.remove();
+        Piece result = instance.getPiece();
+        assertEquals(expResult, result);
+
     }
 }

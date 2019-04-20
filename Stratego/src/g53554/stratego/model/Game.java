@@ -147,7 +147,7 @@ public class Game implements Model {
             throw new IllegalArgumentException("les coordonnées en paramètre sont hors du plateau");
         } else if (this.board.isFree(new Position(row, column)) == true) {
             throw new IllegalArgumentException("Les coordonnées en paramètre réfère à une case vide");
-        } else if (this.board.getSquare(new Position(row, column)) != null) {
+        } else if (this.board.getSquare(new Position(row, column)).isMyOwn(opponent.getColor())) {
             throw new IllegalArgumentException("la case est occuper");
 
         }

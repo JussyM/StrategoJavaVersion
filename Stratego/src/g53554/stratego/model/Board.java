@@ -9,8 +9,8 @@ package g53554.stratego.model;
 public class Board {
 
     private final Square[][] squares;
-    private final static int ROW=5;
-    private final static int COLUMN=4;
+    private final static int ROW = 5;
+    private final static int COLUMN = 4;
 
     /**
      * This is constructor that build the board with no parameter with no
@@ -124,11 +124,27 @@ public class Board {
      * @return piece
      */
     public Piece getPiece(Position position) {
-        if (isInside(position) == false) {
+        if (!isInside(position)) {
             throw new IllegalArgumentException("La position est hors du tableau");
         }
 
         return squares[position.getRow()][position.getColumn()].getPiece();
+
+    }
+
+    /**
+     * This method remove a piece from the board
+     *
+     * @param position
+     *
+     */
+    public void remove(Position position) {
+        if (!isInside(position)) {
+            throw new IllegalArgumentException("La position est hors du tableau");
+        } else if (getPiece(position) != null) {
+            this.getSquare(position).remove();
+
+        }
 
     }
 

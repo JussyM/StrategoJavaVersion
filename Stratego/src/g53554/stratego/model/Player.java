@@ -94,9 +94,22 @@ public class Player {
      * @param piece
      */
     public void addPiece(Piece piece) {
-        if(piece==null){
+        if (piece == null) {
             throw new IllegalArgumentException("la piece est null");
         }
         pieces.add(piece);
+    }
+
+    /**
+     * This method remove the piece in parameter
+     *
+     * @param piece
+     */
+    public void remove(Piece piece) {
+        if (piece != null) {
+            pieces.remove(piece);
+
+        }
+
     }
 }

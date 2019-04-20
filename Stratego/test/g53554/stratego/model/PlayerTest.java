@@ -27,7 +27,7 @@ public class PlayerTest {
     public void testGetPiecesWhenStockFill() {
         System.out.println("testGetPiecesWhenStockFill");
         Player instance = new Player(PlayerColor.BLUE);
-        instance.addPiece(new Piece(0,  PlayerColor.BLUE));
+        instance.addPiece(new Piece(0, PlayerColor.BLUE));
         instance.addPiece(new Piece(0, PlayerColor.BLUE));
         List<Piece> result = instance.getPieces();
         assertFalse(result.isEmpty());
@@ -37,7 +37,7 @@ public class PlayerTest {
     public void testAddPiece() {
         System.out.println("addPiece");
         Player instance = new Player(PlayerColor.BLUE);
-        instance.addPiece(new Piece(0,  PlayerColor.BLUE));
+        instance.addPiece(new Piece(0, PlayerColor.BLUE));
         instance.addPiece(new Piece(0, PlayerColor.BLUE));
         List<Piece> expResult = new ArrayList<>();
         expResult.add(new Piece(0, PlayerColor.BLUE));
@@ -124,5 +124,17 @@ public class PlayerTest {
     public void equalsFalseNull() {
         Player player1 = new Player(PlayerColor.BLUE);
         assertFalse(player1.equals(null));
+    }
+
+    @Test
+    public void testRemovePiece() {
+        System.out.println("testRemovePiece");
+        Player instance = new Player(PlayerColor.BLUE);
+        List<Piece> expResult = new ArrayList<>();
+        instance.addPiece(new Piece(1, PlayerColor.RED));
+        instance.remove(new Piece(1, PlayerColor.RED));
+        List<Piece> result = (List<Piece>) instance.getPieces();
+        assertEquals(expResult, result);
+
     }
 }

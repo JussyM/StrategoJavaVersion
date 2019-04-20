@@ -5,6 +5,9 @@
  */
 package g53554.stratego.controller;
 
+import g53554.stratego.model.Game;
+import g53554.stratego.model.Model;
+import g53554.stratego.view.View;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,10 +16,6 @@ import static org.junit.Assert.*;
  * @author jussy
  */
 public class ControllerTest {
-    
-    public ControllerTest() {
-    }
-
     @Test
     public void testInitialized() {
         System.out.println("initialized");
@@ -32,5 +31,7 @@ public class ControllerTest {
         instance.startGame();
         
     }
+    
+    
     
 }

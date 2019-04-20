@@ -4,6 +4,7 @@ import g53554.stratego.model.Game;
 import g53554.stratego.model.Model;
 import g53554.stratego.view.View;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * This class creat the dynamism of the game is where we put all the method
@@ -54,7 +55,6 @@ public class Controller {
         System.out.println("");
         while (!game.isOver() && !view.askCommand().equals("quit")) {
             gameCmde(view.askCommand());
-
         }
 
     }
@@ -67,7 +67,7 @@ public class Controller {
      */
     private int[] selectValue(String cmd) {
         ArrayList<Integer> list = new ArrayList<>();
-        String[] splited = cmd.split(" ");
+        String[] splited = cmd.split("-");
         for (String current : splited) {
             try {
                 int parsedInt = Integer.parseInt(current);
@@ -91,7 +91,7 @@ public class Controller {
      */
     private void gameCmde(String cmde) {
         String endGamecmde = "quit";
-        String piecePostionCmde = "select";
+        String piecePostionCmde = "select(.*)";
         String movePiece = "move";
         int row;
         int column;
@@ -102,12 +102,12 @@ public class Controller {
             column = selectValue(cmde)[1];
             game.select(row, column);
             System.out.println(game.getSelected() + "selectionné");
+
         } else if (cmde.matches(movePiece)) {
             view.displayMoves(game.getMoves());
 
         }
 
     }
-    
 
 }
