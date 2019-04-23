@@ -53,4 +53,22 @@ public class Column {
 
     }
 
+    /**
+     * This method return the disc at the postion i in parameter
+     * @param i
+     * @return disc
+     */
+    public Disc get(int i) {
+        Disc disc = null;
+        for (int j = 0; j < this.discs.size(); j++) {
+            if (i == j) {
+                disc = this.discs.get(j);
+
+            }
+
+        }
+        return disc;
+
+    }
+
 }
