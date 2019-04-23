@@ -8,8 +8,8 @@ import java.util.List;
  */
 public class Column {
 
-    private List<Disc> discs;
-    private int HEIGHT = 6;
+    List<Disc> discs;
+    int HEIGHT = 6;
 
     /**
      * The constructor of the class column
@@ -28,10 +28,8 @@ public class Column {
      */
     public boolean isFull() {
         boolean full = false;
-        for (int i = 0; i < this.discs.size(); i++) {
-            if (i == this.HEIGHT) {
-                full = true;
-            }
+        if (HEIGHT==this.discs.size()) {
+            full = true;
 
         }
 
@@ -55,6 +53,7 @@ public class Column {
 
     /**
      * This method return the disc at the postion i in parameter
+     *
      * @param i
      * @return disc
      */
@@ -68,6 +67,23 @@ public class Column {
 
         }
         return disc;
+
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isWinning() {
+        boolean win = false;
+        for (int i = 0; i < this.discs.size(); i++) {
+            if (this.discs.get(i).equals(this.discs.get(i)) && this.discs.get(i) == Disc.RED || this.discs.get(i) == Disc.YELLOW) {
+                win = true;
+
+            }
+        }
+
+        return win;
 
     }
 
