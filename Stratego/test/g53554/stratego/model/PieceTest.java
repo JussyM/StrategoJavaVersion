@@ -109,7 +109,8 @@ public class PieceTest {
     @Test 
     public void equalsTrueIsStronger(){
         Piece piece = new Piece(-1, BLUE);
-        assertTrue(piece.isStronger(piece));
+        Piece piece1 = new  Piece(0, BLUE);
+        assertTrue(piece1.isStronger(piece));
     }
     @Test
     public void equalsFalseSameRank(){

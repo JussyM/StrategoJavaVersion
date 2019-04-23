@@ -1,10 +1,8 @@
 package g53554.stratego.controller;
-
-import g53554.stratego.model.Game;
 import g53554.stratego.model.Model;
 import g53554.stratego.view.View;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 /**
  * This class creat the dynamism of the game is where we put all the method
@@ -92,7 +90,7 @@ public class Controller {
     private void gameCmde(String cmde) {
         String endGamecmde = "quit";
         String piecePostionCmde = "select(.*)";
-        String movePiece = "move";
+        String movePiece = "move(.*)";
         int row;
         int column;
         if (cmde.matches(endGamecmde)) {

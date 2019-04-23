@@ -100,7 +100,7 @@ public class View {
         Board board = new Board();
         System.out.print("  " + "Col#|| ");
         for (int i = 0; i < board.getSquare()[0].length; i++) {
-            System.out.printf(" |%02d|", i);
+            System.out.printf(" [%02d]", i);
             if (i == square[0].length - 1) {
                 System.out.println("");
                 PrintEqualSign(square);
@@ -128,12 +128,12 @@ public class View {
     private void displayPiece(Piece piece) {
         Color couleur = new Color();
         if (piece == null) {
-            System.out.print(" |" + "\u001b[46m" + "  " + "\u001b[0m" + "|");
+            System.out.print(" [" + "\u001b[46m" + "  " + "\u001b[0m" + "]");
         } else if (piece.getColor() == PlayerColor.BLUE) {
-            System.out.print(" |" + "\u001b[46m" + couleur.toBlue("PE") + "|");
+            System.out.print(" [" + "\u001b[46m" + couleur.toBlue("PE") + "]");
 
         } else {
-            System.out.print(" |" + "\u001b[46m" + couleur.toRed("PE") + "|");
+            System.out.print(" [" + "\u001b[46m" + couleur.toRed("PE") + "]");
 
         }
 

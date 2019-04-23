@@ -128,48 +128,28 @@ public class GameTest {
         System.out.println("getMoves");
         Game instance = new Game();
         instance.initialize();
-        instance.selected = new Position(3, 2);
-        Move dep = new Move(new Piece(0, BLUE), instance.selected, instance.selected.next(Direction.UP));
+        Position selectioner= new Position(3, 2);
         List<Move> listMove = new ArrayList<>();
-        listMove.add(dep);
+        Move mov = new Move(instance.getSelected(), selectioner, selectioner.next(Direction.UP)); 
+        Move mov1 = new Move(instance.getSelected(), selectioner, selectioner.next(Direction.DOWN));
+        Move mov2 = new Move(instance.getSelected(), selectioner, selectioner.next(Direction.LEFT));
+        Move mov3 = new Move(instance.getSelected(), selectioner, selectioner.next(Direction.RIGHT));
+        listMove.add(mov);
+        listMove.add(mov1);
+        listMove.add(mov2);
+        listMove.add(mov3);
         List<Move> expResult = listMove;
         List<Move> result = instance.getMoves();
         assertEquals(expResult, result);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testWhenDirectionIsNotAvailable() {
-        System.out.println("testWhenDirectionIsNotAvailable");
-        Game instance = new Game();
-        instance.getMoves();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
     public void testWhenPositionSelectedIsNull() {
         System.out.println("testWhenPositionSelectedIsNull");
-        Game instance = new Game();    
+        Game instance = new Game();
         instance.selected = null;
         instance.getMoves();
 
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testWhenTheNextPositionIsNotAvailaible() {
-        System.out.println("testWhenTheNextPositionIsNotAvailaible");
-        Game instance = new Game();
-        instance.initialize();
-        instance.selected = new Position(5, 6);
-        instance.selected.next(Direction.DOWN);
-        instance.getMoves();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testWhenTheNextPostionIsFree() {
-        System.out.println("testWhenTheNextPostionIsFree");
-        Game instance = new Game();
-        instance.initialize();
-        instance.board.isFree(instance.selected = new Position(0, 0));
-        instance.getMoves();
     }
 
 }

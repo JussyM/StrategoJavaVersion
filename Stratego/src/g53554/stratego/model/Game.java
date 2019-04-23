@@ -178,21 +178,63 @@ public class Game implements Model {
     public List<Move> getMoves() {
         List<Move> listeMove = new ArrayList<>();
         for (Direction direction : Direction.values()) {
-            if (direction == null) {
-                throw new IllegalArgumentException("La direction n'est pas disponible");
-            } else if (!this.board.isInside(selected.next(direction))) {
-                throw new IllegalArgumentException("La position d'arriver est hors du tableau");
-            } else if (this.selected == null) {
+            Move moves = new Move(getSelected(), selected, selected.next(direction));
+            if (selected == null) {
                 throw new IllegalArgumentException("La position selectionner est hors du tableau");
-            } else if (this.board.isFree(selected.next(direction))) {
-                throw new IllegalArgumentException("La case n'est pas libre");
+            } else if (direction != null && this.board.isInside(selected.next(direction)) && this.board.isFree(selected.next(direction))) {
+                listeMove.add(moves);
 
             }
-            listeMove.add(new Move(getSelected(), selected, selected.next(direction)));
+        }
+        return listeMove;
+    }
+
+    /**
+     * This method apply the moves of the player
+     *
+     * @param moves
+     */
+    @Override
+    public void apply(Move moves) {
+        for (Direction direction : Direction.values()) {
+            if (moves == null) {
+                throw new IllegalArgumentException("Le déplacement est null");
+            } else if (board.isFree(selected.next(direction))) {
+                board.remove(selected);
+                board.put(getSelected(), selected.next(direction));
+            } else if (!board.isFree(selected.next(direction))) {
+                squareBusy();
+
+            }
 
         }
 
-        return listeMove;
+    }
+
+    /**
+     * This method apply the rules of the game if the the piece selected has the
+     * same rank or is stronger
+     */
+    private void squareBusy() {
+        for (Direction direction : Direction.values()) {
+            if (getSelected().isStronger(board.getPiece(selected.next(direction)))) {
+                board.remove(selected.next(direction));
+                board.put(getSelected(), selected.next(direction));
+            } else if (getSelected().hasSameRank(board.getPiece(selected.next(direction)))) {
+                board.remove(selected);
+                board.remove(selected.next(direction));
+            }
+
+        }
+
+    }
+
+    /**
+     *
+     */
+
+    private void updatePlayerPieceList() {
+
     }
 
 }

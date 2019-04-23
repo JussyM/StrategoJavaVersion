@@ -53,10 +53,16 @@ public interface Model {
     Piece getSelected();
 
     /**
-     * This method return a list of all the movment available 
-     * @return list 
+     * This method return a list of all the movment available
+     *
+     * @return list
      */
-
     List<Move> getMoves();
+
+    /**
+     * This method apply the moves of the player
+     * @param moves
+     */
+    void apply(Move moves);
 
 }

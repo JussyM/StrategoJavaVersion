@@ -94,7 +94,7 @@ public class Piece {
      */
     public boolean isStronger(Piece other) {
         boolean strong = false;
-        if (other.rank <= 0) {
+        if (other.rank < this.rank) {
             strong = true;
 
         }
