@@ -22,13 +22,19 @@ public class Column {
     }
 
     /**
+     *
+     */
+    public Column() {
+    }
+
+    /**
      * This method return a boolean if the list is full
      *
      * @return
      */
     public boolean isFull() {
         boolean full = false;
-        if (HEIGHT==this.discs.size()) {
+        if (HEIGHT == this.discs.size()) {
             full = true;
 
         }
@@ -71,8 +77,10 @@ public class Column {
     }
 
     /**
+     * This method verifie if their is four equals piece in the same column with
+     * the same color
      *
-     * @return
+     * @return win
      */
     public boolean isWinning() {
         boolean win = false;
