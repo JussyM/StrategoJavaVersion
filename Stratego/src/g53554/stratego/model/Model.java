@@ -61,8 +61,15 @@ public interface Model {
 
     /**
      * This method apply the moves of the player
+     *
      * @param moves
      */
     void apply(Move moves);
+
+    /**
+     * This method return the current player
+     * @return current player
+     */
+    Player getcurrent();
 
 }

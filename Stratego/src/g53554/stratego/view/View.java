@@ -6,6 +6,7 @@ import java.util.Scanner;
 import g53554.stratego.main.Color;
 import g53554.stratego.model.Move;
 import g53554.stratego.model.Piece;
+import g53554.stratego.model.Player;
 import g53554.stratego.model.PlayerColor;
 import java.util.List;
 
@@ -68,14 +69,14 @@ public class View {
     }
 
     /**
-     * This method display all the move possible 
+     * This method display all the move possible
+     *
      * @param moves
      */
-
-    public void displayMoves(List<Move> moves) { 
+    public void displayMoves(List<Move> moves) {
         for (int i = 0; i < moves.size(); i++) {
-            System.out.println(moves.get(i).getPiece()+"peut se déplacer vers la ligne "+ moves.get(i).getEnd().getRow()+" et la colonne "+ moves.get(i).getEnd().getColumn());
-            
+            System.out.println(moves.get(i).getPiece() + "peut se déplacer vers la ligne " + moves.get(i).getEnd().getRow() + " et la colonne " + moves.get(i).getEnd().getColumn());
+
         }
 
     }
@@ -170,6 +171,16 @@ public class View {
      */
     public void displaySelected(Piece piece) {
         System.out.println(piece.getRank() + "selected");
+
+    }
+
+    /**
+     * Display the current player
+     *
+     * @param player
+     */
+    public void displayCurrentPlayer(Player player) {
+        System.out.println("A votre tour joueur " + player.getColor());
 
     }
 

@@ -259,4 +259,24 @@ public class Game implements Model {
 
     }
 
+    /**
+     * This method swap the value of the players
+     */
+    public void swapPlayer() {
+        Player player = this.current;
+        this.current = this.opponent;
+        this.opponent = player;
+
+    }
+
+    /**
+     * This method return thr current player
+     *
+     * @return current player
+     */
+    @Override
+    public Player getcurrent() {
+        return this.current;
+    }
+
 }

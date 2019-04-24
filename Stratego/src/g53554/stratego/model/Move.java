@@ -1,5 +1,7 @@
 package g53554.stratego.model;
 
+import java.util.Objects;
+
 /**
  *
  * @author jussy
@@ -25,6 +27,39 @@ public class Move {
         this.piece = piece;
         this.start = start;
         this.end = end;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 19 * hash + Objects.hashCode(this.piece);
+        hash = 19 * hash + Objects.hashCode(this.start);
+        hash = 19 * hash + Objects.hashCode(this.end);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Move other = (Move) obj;
+        if (!Objects.equals(this.piece, other.piece)) {
+            return false;
+        }
+        if (!Objects.equals(this.start, other.start)) {
+            return false;
+        }
+        if (!Objects.equals(this.end, other.end)) {
+            return false;
+        }
+        return true;
     }
 
     /**

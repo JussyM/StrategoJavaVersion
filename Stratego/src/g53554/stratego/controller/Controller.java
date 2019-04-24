@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author 53554
  */
 public class Controller {
-    
+
     private Model game;
     private View view;
 
@@ -35,7 +35,7 @@ public class Controller {
     public void initialized() {
         game.initialize();
         view.initialize();
-        
+
     }
 
     /**
@@ -48,13 +48,14 @@ public class Controller {
         if (game.isOver() == false) {
             view.displayBoard(game.getBoard());
             System.out.println("");
-            
+
         }
         System.out.println("");
         while (!game.isOver() && !view.askCommand().equals("quit")) {
+            view.displayCurrentPlayer(game.getcurrent());
             gameCmde(view.askCommand());
         }
-        
+
     }
 
     /**
@@ -78,7 +79,7 @@ public class Controller {
             result[i] = list.get(i);
         }
         return result;
-        
+
     }
 
     /**
@@ -101,7 +102,7 @@ public class Controller {
             column = selectValue(cmde)[1];
             game.select(row, column);
             System.out.println(game.getSelected() + "selectionné");
-            
+
         } else if (cmde.matches(movePieceCmd)) {
             if (game.getSelected() == null) {
                 try {
@@ -109,11 +110,11 @@ public class Controller {
                 } catch (IllegalArgumentException e) {
                     System.out.println("Aucune piece n'a été selectioner: ");
                     gameCmde(view.askCommand());
-                    
+
                 }
             } else {
                 view.displayMoves(game.getMoves());
-                
+
             }
         } else if (cmde.matches(applyMoveCmd)) {
             if (game.getMoves() == null) {
@@ -124,9 +125,9 @@ public class Controller {
                     gameCmde(view.askCommand());
                 }
             }
-            
+
         }
-        
+
     }
-    
+
 }
