@@ -219,10 +219,12 @@ public class Game implements Model {
         for (Direction direction : Direction.values()) {
             if (getSelected().isStronger(board.getPiece(selected.next(direction)))) {
                 board.remove(selected.next(direction));
+                updatePlayerPieceList();
                 board.put(getSelected(), selected.next(direction));
             } else if (getSelected().hasSameRank(board.getPiece(selected.next(direction)))) {
                 board.remove(selected);
                 board.remove(selected.next(direction));
+                updatPlayerPieceList2();
             }
 
         }
@@ -230,10 +232,30 @@ public class Game implements Model {
     }
 
     /**
-     *
+     * This method update the list of piece of the players if a piece is
+     * stronger
      */
-
     private void updatePlayerPieceList() {
+        for (Direction direction : Direction.values()) {
+            if (this.board.isMyOwn(selected.next(direction), PlayerColor.RED)) {
+                this.opponent.remove(board.getPiece(selected.next(direction)));
+            } else {
+                this.current.remove(board.getPiece(selected.next(direction)));
+
+            }
+        }
+
+    }
+
+    /**
+     * This method update the list if the piece has the same rank
+     */
+    private void updatPlayerPieceList2() {
+        for (Direction direction : Direction.values()) {
+            this.current.remove(board.getPiece(selected));
+            this.opponent.remove(board.getPiece(selected.next(direction)));
+
+        }
 
     }
 

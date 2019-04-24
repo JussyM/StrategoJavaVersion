@@ -101,7 +101,7 @@ public class Square {
         boolean checkColor = false;
         if (this.piece.getColor() == color) {
             checkColor = true;
-        } else if (this.piece.getColor() != color || isFree() == true) {
+        } else if (this.piece.getColor() != color || isFree()) {
             checkColor = false;
 
         }

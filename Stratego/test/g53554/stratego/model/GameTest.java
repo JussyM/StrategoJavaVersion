@@ -2,7 +2,6 @@ package g53554.stratego.model;
 
 import static g53554.stratego.model.PlayerColor.BLUE;
 import static g53554.stratego.model.PlayerColor.RED;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertArrayEquals;
