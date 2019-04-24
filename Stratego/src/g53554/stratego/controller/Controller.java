@@ -1,8 +1,8 @@
 package g53554.stratego.controller;
+
 import g53554.stratego.model.Model;
 import g53554.stratego.view.View;
 import java.util.ArrayList;
-
 
 /**
  * This class creat the dynamism of the game is where we put all the method
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author 53554
  */
 public class Controller {
-
+    
     private Model game;
     private View view;
 
@@ -35,7 +35,7 @@ public class Controller {
     public void initialized() {
         game.initialize();
         view.initialize();
-
+        
     }
 
     /**
@@ -48,13 +48,13 @@ public class Controller {
         if (game.isOver() == false) {
             view.displayBoard(game.getBoard());
             System.out.println("");
-
+            
         }
         System.out.println("");
         while (!game.isOver() && !view.askCommand().equals("quit")) {
             gameCmde(view.askCommand());
         }
-
+        
     }
 
     /**
@@ -78,7 +78,7 @@ public class Controller {
             result[i] = list.get(i);
         }
         return result;
-
+        
     }
 
     /**
@@ -90,7 +90,8 @@ public class Controller {
     private void gameCmde(String cmde) {
         String endGamecmde = "quit";
         String piecePostionCmde = "select(.*)";
-        String movePiece = "move(.*)";
+        String movePieceCmd = "move(.*)";
+        String applyMoveCmd = "apply(.*)";
         int row;
         int column;
         if (cmde.matches(endGamecmde)) {
@@ -100,12 +101,32 @@ public class Controller {
             column = selectValue(cmde)[1];
             game.select(row, column);
             System.out.println(game.getSelected() + "selectionné");
-
-        } else if (cmde.matches(movePiece)) {
-            view.displayMoves(game.getMoves());
-
+            
+        } else if (cmde.matches(movePieceCmd)) {
+            if (game.getSelected() == null) {
+                try {
+                    throw new IllegalArgumentException();
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Aucune piece n'a été selectioner: ");
+                    gameCmde(view.askCommand());
+                    
+                }
+            } else {
+                view.displayMoves(game.getMoves());
+                
+            }
+        } else if (cmde.matches(applyMoveCmd)) {
+            if (game.getMoves() == null) {
+                try {
+                    throw new NullPointerException();
+                } catch (NullPointerException e) {
+                    System.out.println("Aucun déplacement n'a été déclaré");
+                    gameCmde(view.askCommand());
+                }
+            }
+            
         }
-
+        
     }
-
+    
 }
