@@ -51,9 +51,10 @@ public class Controller {
 
         }
         System.out.println("");
-        while (!game.isOver() && !view.askCommand().equals("quit")) {
-            view.displayCurrentPlayer(game.getcurrent());
-            gameCmde(view.askCommand());
+        String cmd = view.askCommand();
+        while (!game.isOver() && cmd.equals("quit")) {
+            //view.displayCurrentPlayer(game.getcurrent());
+            gameCmde(cmd);
         }
 
     }
@@ -95,6 +96,7 @@ public class Controller {
         String applyMoveCmd = "apply(.*)";
         int row;
         int column;
+        int applyValue;
         if (cmde.matches(endGamecmde)) {
             view.quit();
         } else if (cmde.matches(piecePostionCmde)) {
@@ -125,6 +127,9 @@ public class Controller {
                     gameCmde(view.askCommand());
                 }
             }
+        } else {
+            applyValue = selectValue(cmde)[0];
+            game.apply(game.getMoves().get(applyValue));
 
         }
 

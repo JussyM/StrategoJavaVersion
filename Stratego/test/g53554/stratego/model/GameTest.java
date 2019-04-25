@@ -9,6 +9,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
+import g53554.stratego.model.pieces.Flag;
+import  g53554.stratego.model.pieces.General;
 
 public class GameTest {
 
@@ -21,10 +23,10 @@ public class GameTest {
 
     @Before
     public void setUp() throws Exception {
-        defaultBoard[0][1].put(new Piece(0, RED));
-        defaultBoard[3][2].put(new Piece(9, RED));
-        defaultBoard[4][2].put(new Piece(0, BLUE));
-        defaultBoard[4][1].put(new Piece(9, BLUE));
+        defaultBoard[0][1].put(new Flag(0, RED));
+        defaultBoard[3][2].put(new General(9, RED));
+        defaultBoard[4][2].put(new Flag(0, BLUE));
+        defaultBoard[4][1].put(new General(9, BLUE));
     }
 
     @Test

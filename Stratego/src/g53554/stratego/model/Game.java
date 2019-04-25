@@ -1,6 +1,7 @@
 package g53554.stratego.model;
 
 import g53554.stratego.model.pieces.Flag;
+import g53554.stratego.model.pieces.General;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -37,14 +38,14 @@ public class Game implements Model {
         board = new Board();
         this.current = new Player(PlayerColor.RED);
         this.opponent = new Player(PlayerColor.BLUE);
-        board.put(new Piece(0, PlayerColor.RED), new Position(0, 1));
-        board.put(new Piece(9, PlayerColor.RED), new Position(3, 2));
-        board.put(new Piece(0, PlayerColor.BLUE), new Position(4, 2));
-        board.put(new Piece(9, PlayerColor.BLUE), new Position(4, 1));
-        current.addPiece(new Piece(0, PlayerColor.RED));
-        opponent.addPiece(new Piece(0, PlayerColor.BLUE));
-        current.addPiece(new Piece(9, PlayerColor.RED));
-        opponent.addPiece(new Piece(9, PlayerColor.BLUE));
+        board.put(new Flag(0, PlayerColor.RED), new Position(0, 1));
+        board.put(new General(9, PlayerColor.RED), new Position(3, 2));
+        board.put(new Flag(0, PlayerColor.BLUE), new Position(4, 2));
+        board.put(new General(9, PlayerColor.BLUE), new Position(4, 1));
+        current.addPiece(new Flag(0, PlayerColor.RED));
+        opponent.addPiece(new General(0, PlayerColor.BLUE));
+        current.addPiece(new Flag(9, PlayerColor.RED));
+        opponent.addPiece(new General(9, PlayerColor.BLUE));
 
     }
 
@@ -221,6 +222,7 @@ public class Game implements Model {
             board.remove(moves.getEnd());
             updatePlayerPieceList(moves);
             board.put(moves.getPiece(), moves.getEnd());
+            swapPlayer();
         } else if (moves.getPiece().hasSameRank(board.getPiece(moves.getEnd()))) {
             board.remove(moves.getStart());
             board.remove(moves.getEnd());
@@ -248,11 +250,8 @@ public class Game implements Model {
      * This method update the list if the piece has the same rank
      */
     private void updatPlayerPieceList2(Move moves) {
-        for (Direction direction : Direction.values()) {
-            this.current.remove(board.getPiece(moves.getStart()));
-            this.opponent.remove(board.getPiece(moves.getEnd()));
-
-        }
+        this.current.remove(board.getPiece(moves.getStart()));
+        this.opponent.remove(board.getPiece(moves.getEnd()));
 
     }
 
