@@ -170,7 +170,13 @@ public class View {
      * @param piece
      */
     public void displaySelected(Piece piece) {
-        System.out.println(piece.getRank() + "selected");
+        String nomPiece ="";
+        if(piece.getRank()==9 && piece.getColor()==PlayerColor.RED){
+            nomPiece = "Géneral rouge";
+        }else if(piece.getRank()==0 && piece.getColor()==PlayerColor.RED){
+            nomPiece = "Drapeau rouge";
+        }
+        System.out.println(nomPiece +" sélectionné");
 
     }
 

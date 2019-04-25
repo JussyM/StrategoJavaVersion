@@ -1,6 +1,7 @@
 package g53554.stratego.controller;
 
 import g53554.stratego.model.Model;
+import g53554.stratego.model.Piece;
 import g53554.stratego.view.View;
 import java.util.ArrayList;
 
@@ -52,10 +53,9 @@ public class Controller {
         }
         System.out.println("");
         String cmd = view.askCommand();
-        while (!game.isOver() && cmd.equals("quit")) {
-            //view.displayCurrentPlayer(game.getcurrent());
+        do {
             gameCmde(cmd);
-        }
+        } while (!game.isOver()&& cmd.equals("quit"));
 
     }
 
@@ -103,7 +103,7 @@ public class Controller {
             row = selectValue(cmde)[0];
             column = selectValue(cmde)[1];
             game.select(row, column);
-            System.out.println(game.getSelected() + "selectionné");
+            view.displaySelected(game.getSelected());
 
         } else if (cmde.matches(movePieceCmd)) {
             if (game.getSelected() == null) {

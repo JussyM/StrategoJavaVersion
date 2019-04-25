@@ -1,5 +1,8 @@
 package g53554.stratego.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -295,11 +298,27 @@ public class BoardTest {
         Game instance = new Game();
         instance.initialize();
         Position position = new Position(4, 1);
-        Piece expResult=null;
+        Piece expResult = null;
         instance.board.remove(position);
         Piece result = instance.board.getPiece(position);
         assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testListPosition() {
+        System.out.println("testListPosition");
+        Game instance = new Game(); 
+        instance.initialize();
+        System.out.println(Arrays.toString(instance.getBoard()));
+        List<Position> expResult = new ArrayList<>();
+        expResult.add(new Position(0, 1));
+        expResult.add(new Position(3, 2));
+        List<Position> result = instance.board.getTakenSquare(new Player(PlayerColor.RED));
+        assertEquals(expResult, result);
         
+                
+
     }
 
 }

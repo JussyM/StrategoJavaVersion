@@ -1,5 +1,8 @@
 package g53554.stratego.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This class is the board of the game with an arrays of double dimension it
  * will help us to creat the board with all element include
@@ -145,6 +148,30 @@ public class Board {
             this.getSquare(position).remove();
 
         }
+
+    }
+
+    /**
+     * This method return a list of all the position occupied by a player
+     * @param player
+     * @return listPosition
+     */
+    public List<Position> getTakenSquare(Player player) {
+        List<Position> listPosition = new ArrayList<>();
+        Position positionPlayer;
+        for (int i = 0; i < this.squares.length; i++) {
+            for (int j = 0; j < this.squares[i].length; j++) {
+                positionPlayer = new Position(i, j);
+                if (this.isMyOwn(positionPlayer, player.getColor())) {
+
+                    listPosition.add(positionPlayer);
+                }
+
+            }
+
+        }
+
+        return listPosition;
 
     }
 

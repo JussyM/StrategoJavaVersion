@@ -69,12 +69,16 @@ public class Game implements Model {
     @Override
     public boolean isOver() {
         boolean over = false;
+        if (!hasMoves(current) && !hasMoves(opponent)
+                || !current.hasFlag() || opponent.hasFlag()) {
+            over = true;
 
+        }
         return over;
     }
 
     /**
-     * This method return th board of the game
+     * This method return the board of the game
      *
      * @return board
      */
@@ -260,8 +264,10 @@ public class Game implements Model {
      */
     public void swapPlayer() {
         Player player = this.current;
-        this.current = this.opponent;
-        this.opponent = player;
+        if (hasMoves(opponent)) {
+            this.current = this.opponent;
+            this.opponent = player;
+        }
 
     }
 
@@ -273,6 +279,24 @@ public class Game implements Model {
     @Override
     public Player getcurrent() {
         return this.current;
+    }
+
+    /**
+     * This methdo verified if the moves of the player is availaible in the list
+     * of the moves
+     *
+     * @param player
+     * @return hasMoves
+     */
+    public boolean hasMoves(Player player) {
+        boolean hasmoves = false;
+        for (int i = 0; i < getMoves().size(); i++) {
+            if (this.board.getTakenSquare(player) == getMoves().get(i).getEnd()) {
+                hasmoves = true;
+            }
+
+        }
+        return hasmoves;
     }
 
 }
