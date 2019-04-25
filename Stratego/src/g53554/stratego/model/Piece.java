@@ -93,12 +93,7 @@ public class Piece {
      * @return strong
      */
     public boolean isStronger(Piece other) {
-        boolean strong = false;
-        if (other.rank < this.rank) {
-            strong = true;
-
-        }
-        return strong;
+        return rank > other.getRank();
 
     }
 
@@ -109,11 +104,7 @@ public class Piece {
      * @return sameRank
      */
     public boolean hasSameRank(Piece other) {
-        boolean sameRank = false;
-        if (this.rank == other.rank) {
-            sameRank = true;
-        }
-        return sameRank;
+        return rank == other.getRank();
     }
 
 }

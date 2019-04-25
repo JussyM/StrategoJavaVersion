@@ -66,7 +66,7 @@ public class Controller {
      */
     private int[] selectValue(String cmd) {
         ArrayList<Integer> list = new ArrayList<>();
-        String[] splited = cmd.split("-");
+        String[] splited = cmd.split(" ");
         for (String current : splited) {
             try {
                 int parsedInt = Integer.parseInt(current);

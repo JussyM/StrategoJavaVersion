@@ -1,5 +1,6 @@
 package g53554.stratego.model;
 
+import g53554.stratego.model.pieces.Flag;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -181,7 +182,10 @@ public class Game implements Model {
             Move moves = new Move(getSelected(), selected, selected.next(direction));
             if (selected == null) {
                 throw new IllegalArgumentException("La position selectionner est hors du tableau");
-            } else if (direction != null && this.board.isInside(selected.next(direction)) && this.board.isFree(selected.next(direction))) {
+            } else if ((direction != null && this.board.isInside(selected.next(direction))
+                    && this.board.isFree(selected.next(direction)))
+                    || (!board.isFree(selected.next(direction))
+                    && !this.board.isMyOwn(selected.next(direction), current.getColor()))) {
                 listeMove.add(moves);
 
             }
@@ -196,16 +200,13 @@ public class Game implements Model {
      */
     @Override
     public void apply(Move moves) {
-        for (Direction direction : Direction.values()) {
-            if (moves == null) {
-                throw new IllegalArgumentException("Le déplacement est null");
-            } else if (board.isFree(selected.next(direction))) {
-                board.remove(selected);
-                board.put(getSelected(), selected.next(direction));
-            } else if (!board.isFree(selected.next(direction))) {
-                squareBusy();
-
-            }
+        if (moves == null) {
+            throw new IllegalArgumentException("Le déplacement est null");
+        } else if (board.isFree(moves.getEnd())) {
+            board.put(moves.getPiece(), moves.getEnd());
+            board.remove(moves.getStart());
+        } else if (!board.isFree(moves.getEnd())) {
+            squareBusy(moves);
 
         }
 
@@ -215,17 +216,15 @@ public class Game implements Model {
      * This method apply the rules of the game if the the piece selected has the
      * same rank or is stronger
      */
-    private void squareBusy() {
-        for (Direction direction : Direction.values()) {
-            if (getSelected().isStronger(board.getPiece(selected.next(direction)))) {
-                board.remove(selected.next(direction));
-                updatePlayerPieceList();
-                board.put(getSelected(), selected.next(direction));
-            } else if (getSelected().hasSameRank(board.getPiece(selected.next(direction)))) {
-                board.remove(selected);
-                board.remove(selected.next(direction));
-                updatPlayerPieceList2();
-            }
+    private void squareBusy(Move moves) {
+        if (moves.getPiece().isStronger(board.getPiece(moves.getEnd()))) {
+            board.remove(moves.getEnd());
+            updatePlayerPieceList(moves);
+            board.put(moves.getPiece(), moves.getEnd());
+        } else if (moves.getPiece().hasSameRank(board.getPiece(moves.getEnd()))) {
+            board.remove(moves.getStart());
+            board.remove(moves.getEnd());
+            updatPlayerPieceList2(moves);
 
         }
 
@@ -235,14 +234,12 @@ public class Game implements Model {
      * This method update the list of piece of the players if a piece is
      * stronger
      */
-    private void updatePlayerPieceList() {
-        for (Direction direction : Direction.values()) {
-            if (this.board.isMyOwn(selected.next(direction), PlayerColor.RED)) {
-                this.opponent.remove(board.getPiece(selected.next(direction)));
-            } else {
-                this.current.remove(board.getPiece(selected.next(direction)));
+    private void updatePlayerPieceList(Move moves) {
+        if (this.board.isMyOwn(moves.getEnd(), PlayerColor.RED)) {
+            this.opponent.remove(board.getPiece(moves.getEnd()));
+        } else {
+            this.current.remove(board.getPiece(moves.getEnd()));
 
-            }
         }
 
     }
@@ -250,10 +247,10 @@ public class Game implements Model {
     /**
      * This method update the list if the piece has the same rank
      */
-    private void updatPlayerPieceList2() {
+    private void updatPlayerPieceList2(Move moves) {
         for (Direction direction : Direction.values()) {
-            this.current.remove(board.getPiece(selected));
-            this.opponent.remove(board.getPiece(selected.next(direction)));
+            this.current.remove(board.getPiece(moves.getStart()));
+            this.opponent.remove(board.getPiece(moves.getEnd()));
 
         }
 

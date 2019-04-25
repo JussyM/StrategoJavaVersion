@@ -122,19 +122,27 @@ public class GameTest {
 
     }
 
-//    @Test
-//    public void testGetMoves() {
-//        System.out.println("getMoves");
-//        Game instance = new Game();
-//        instance.initialize();
-//        instance.selected = new Position(3, 2);
-//        List<Move> listMove = new ArrayList<>();
-//        Move mov = new Move(instance.getSelected(), instance.selected, instance.selected.next(Direction.UP));
-//        listMove.add(mov);
-//        List<Move> expResult = listMove;
-//        List<Move> result = instance.getMoves();
-//        assertEquals(expResult, result);
-//    }
+    @Test
+    public void testGetMoves() {
+        System.out.println("getMoves");
+        Game instance = new Game();
+        instance.initialize();
+        instance.selected = new Position(3, 2);
+        List<Move> listMove = new ArrayList<>();
+        Move mov = new Move(instance.getSelected(), instance.selected, instance.selected.next(Direction.UP));
+        Move mov0 = new Move(instance.getSelected(), instance.selected, instance.selected.next(Direction.DOWN));
+        Move mov2 = new Move(instance.getSelected(), instance.selected, instance.selected.next(Direction.LEFT));
+        Move mov3 = new Move(instance.getSelected(), instance.selected, instance.selected.next(Direction.RIGHT));
+        listMove.add(mov0);
+        listMove.add(mov);
+        listMove.add(mov2);
+        listMove.add(mov3);
+        List<Move> expResult = listMove;
+        List<Move> result = instance.getMoves();
+        assertEquals(expResult.size(), result.size());
+
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testWhenPositionSelectedIsNull() {
         System.out.println("testWhenPositionSelectedIsNull");
@@ -155,16 +163,42 @@ public class GameTest {
     }
 
     @Test
-    public void testWhenTheSquareIsFree() {
-        System.out.println("testWhenTheSquareIsFree");
+    public void testWhenApplyTheSquareIsFree() {
+        System.out.println("testWhenApplyTheSquareIsFree");
         Game instance = new Game();
         instance.initialize();
         instance.selected = new Position(4, 1);
-        Move move = new Move(instance.getSelected(), instance.selected, instance.selected.next(Direction.UP));
-        Piece expResult = instance.board.getPiece(instance.selected.next(Direction.UP));
+        Move move = new Move(instance.getSelected(), instance.selected,
+                instance.selected.next(Direction.UP));
         instance.apply(move);
-        Piece result = instance.board.getPiece(instance.selected.next(Direction.UP));
-        assertEquals(expResult, result);
+        Piece result = new Piece(9, PlayerColor.BLUE);
+        assertEquals(instance.board.getPiece(new Position(3, 1)), result);
 
+    }
+
+    @Test
+    public void testWhenAppltSquareIsNotFreeAndStronger() {
+        System.out.println("testWhenApplyTheSquareIsNotFreeAndStronger");
+        Game instance = new Game();
+        instance.initialize();
+        instance.selected = new Position(3, 2);
+        Move move = new Move(instance.getSelected(), instance.selected,
+                instance.selected.next(Direction.DOWN));
+        instance.apply(move);
+        Piece result = new Piece(9, PlayerColor.RED);
+        assertEquals(instance.board.getPiece(new Position(4, 2)), result);
+
+    }
+
+    @Test
+    public void testWhenAppltSquareIsNotFreeAndHaveSameRank() {
+        System.out.println("testWhenAppltSquareIsNotFreeAndHaveSameRank");
+        Game instance = new Game();
+        instance.initialize();
+        instance.selected = new Position(0, 1);
+        Move move = new Move(instance.getSelected(), instance.selected,
+                instance.selected.next(Direction.DOWN));
+        instance.apply(move);
+       
     }
 }

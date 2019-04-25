@@ -88,7 +88,7 @@ public class View {
      */
     public String askCommand() {
         System.out.println("Veuillez entrez une commande: ");
-        String cmde = in.next();
+        String cmde = in.nextLine();
         return cmde;
     }
 
