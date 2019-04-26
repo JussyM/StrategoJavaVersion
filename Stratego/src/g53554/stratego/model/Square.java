@@ -16,6 +16,10 @@ public class Square {
     public Square() {
     }
 
+    public Square(Piece piece) {
+        this.piece = piece;
+    }
+
     /**
      *
      * @return
@@ -109,7 +113,7 @@ public class Square {
     }
 
     /**
-     * This method remove the piece 
+     * This method remove the piece
      */
     public void remove() {
         if (piece != null) {

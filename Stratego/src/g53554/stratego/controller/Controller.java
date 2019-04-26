@@ -1,7 +1,6 @@
 package g53554.stratego.controller;
 
 import g53554.stratego.model.Model;
-import g53554.stratego.model.Piece;
 import g53554.stratego.view.View;
 import java.util.ArrayList;
 
@@ -45,17 +44,15 @@ public class Controller {
     public void startGame() {
         game.start();
         view.displayHelp();
-        System.out.println("");
-        if (game.isOver() == false) {
+        boolean sentinelle = false;
+        while (!game.isOver() && !sentinelle) {
             view.displayBoard(game.getBoard());
             System.out.println("");
+            view.displayCurrentPlayer(game.getcurrent());
+            gameCmde();
+            sentinelle = true;
 
         }
-        System.out.println("");
-        String cmd = view.askCommand();
-        do {
-            gameCmde(cmd);
-        } while (!game.isOver()&& cmd.equals("quit"));
 
     }
 
@@ -89,7 +86,8 @@ public class Controller {
      *
      * @param cmde
      */
-    private void gameCmde(String cmde) {
+    private void gameCmde() {
+        String cmde = view.askCommand();
         String endGamecmde = "quit";
         String piecePostionCmde = "select(.*)";
         String movePieceCmd = "move(.*)";
@@ -99,11 +97,15 @@ public class Controller {
         int applyValue;
         if (cmde.matches(endGamecmde)) {
             view.quit();
+
         } else if (cmde.matches(piecePostionCmde)) {
             row = selectValue(cmde)[0];
             column = selectValue(cmde)[1];
             game.select(row, column);
             view.displaySelected(game.getSelected());
+            view.displayBoard(game.getBoard());
+            System.out.println("");
+            gameCmde();
 
         } else if (cmde.matches(movePieceCmd)) {
             if (game.getSelected() == null) {
@@ -111,28 +113,24 @@ public class Controller {
                     throw new IllegalArgumentException();
                 } catch (IllegalArgumentException e) {
                     System.out.println("Aucune piece n'a été selectioner: ");
-                    gameCmde(view.askCommand());
 
                 }
             } else {
                 view.displayMoves(game.getMoves());
+                gameCmde();
 
             }
         } else if (cmde.matches(applyMoveCmd)) {
-            if (game.getMoves() == null) {
-                try {
-                    throw new NullPointerException();
-                } catch (NullPointerException e) {
-                    System.out.println("Aucun déplacement n'a été déclaré");
-                    gameCmde(view.askCommand());
-                }
+            if (game.getMoves() != null) {
+                applyValue = selectValue(cmde)[0];
+                game.apply(game.getMoves().get(applyValue));
+                view.displayBoard(game.getBoard());
+                System.out.println("");
+                view.displayCurrentPlayer(game.getcurrent());
+                gameCmde();
+
             }
-        } else {
-            applyValue = selectValue(cmde)[0];
-            game.apply(game.getMoves().get(applyValue));
-
         }
-
     }
 
 }

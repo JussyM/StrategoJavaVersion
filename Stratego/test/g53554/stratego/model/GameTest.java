@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 import g53554.stratego.model.pieces.Flag;
 import  g53554.stratego.model.pieces.General;
+import org.junit.Assert;
+import static org.junit.Assert.assertTrue;
 
 public class GameTest {
 
@@ -54,12 +56,12 @@ public class GameTest {
         assertFalse(instance.isOver());
     }
 
-    @Test
-    public void testIsOverWhenGameBegin() {
-        System.out.println("testIsOverWhenGameBegin");
-        Game instance = new Game();
-        assertFalse(instance.isOver());
-    }
+//    @Test
+//    public void testIsOverWhenGameBegin() {
+//        System.out.println("testIsOverWhenGameBegin");
+//        Game instance = new Game();
+//        assertTrue(instance.isOver());
+//    }
 
     @Test
     public void testGetBoardWhenGameBegin() {
@@ -173,13 +175,13 @@ public class GameTest {
         Move move = new Move(instance.getSelected(), instance.selected,
                 instance.selected.next(Direction.UP));
         instance.apply(move);
-        Piece result = new Piece(9, PlayerColor.BLUE);
+        Piece result = new General(9, PlayerColor.BLUE);
         assertEquals(instance.board.getPiece(new Position(3, 1)), result);
 
     }
 
     @Test
-    public void testWhenAppltSquareIsNotFreeAndStronger() {
+    public void testWhenApplySquareIsNotFreeAndStronger() {
         System.out.println("testWhenApplyTheSquareIsNotFreeAndStronger");
         Game instance = new Game();
         instance.initialize();
@@ -187,7 +189,7 @@ public class GameTest {
         Move move = new Move(instance.getSelected(), instance.selected,
                 instance.selected.next(Direction.DOWN));
         instance.apply(move);
-        Piece result = new Piece(9, PlayerColor.RED);
+        Piece result = new General(9, PlayerColor.RED);
         assertEquals(instance.board.getPiece(new Position(4, 2)), result);
 
     }
@@ -202,5 +204,9 @@ public class GameTest {
                 instance.selected.next(Direction.DOWN));
         instance.apply(move);
        
+    }
+    @Test
+    public void testHasMove(){
+        System.out.println("testHasMove");
     }
 }

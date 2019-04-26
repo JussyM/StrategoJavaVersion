@@ -55,7 +55,7 @@ public class Game implements Model {
     @Override
     public void start() {
         if (board == null || isOver() == true) {
-            throw new IllegalStateException(" ");
+            throw new IllegalStateException("board est null ou le jeux est faux ");
 
         }
 
@@ -70,7 +70,7 @@ public class Game implements Model {
     public boolean isOver() {
         boolean over = false;
         if (!hasMoves(current) && !hasMoves(opponent)
-                || !current.hasFlag() || opponent.hasFlag()) {
+                || !current.hasFlag() || !opponent.hasFlag()) {
             over = true;
 
         }
@@ -154,7 +154,7 @@ public class Game implements Model {
         } else if (this.board.isFree(new Position(row, column)) == true) {
             throw new IllegalArgumentException("Les coordonnées en paramètre réfère à une case vide");
         } else if (this.board.getSquare(new Position(row, column)).isMyOwn(opponent.getColor())) {
-            throw new IllegalArgumentException("la case est occuper");
+            throw new IllegalArgumentException("la case est occuper par le joueur adverse");
 
         }
         this.selected = new Position(row, column);
@@ -184,14 +184,16 @@ public class Game implements Model {
     public List<Move> getMoves() {
         List<Move> listeMove = new ArrayList<>();
         for (Direction direction : Direction.values()) {
-            Move moves = new Move(getSelected(), selected, selected.next(direction));
+            Move endMove = new Move(getSelected(), selected, selected.next(direction));
             if (selected == null) {
                 throw new IllegalArgumentException("La position selectionner est hors du tableau");
-            } else if ((direction != null && this.board.isInside(selected.next(direction))
+            } else if (!this.board.isInside(selected.next(direction))) {
+                listeMove.remove(endMove);
+            } else if ((this.board.isInside(selected.next(direction))
                     && this.board.isFree(selected.next(direction)))
                     || (!board.isFree(selected.next(direction))
                     && !this.board.isMyOwn(selected.next(direction), current.getColor()))) {
-                listeMove.add(moves);
+                listeMove.add(endMove);
 
             }
         }
@@ -208,12 +210,14 @@ public class Game implements Model {
         if (moves == null) {
             throw new IllegalArgumentException("Le déplacement est null");
         } else if (board.isFree(moves.getEnd())) {
-            board.put(moves.getPiece(), moves.getEnd());
             board.remove(moves.getStart());
+            board.put(moves.getPiece(), moves.getEnd());
+
         } else if (!board.isFree(moves.getEnd())) {
             squareBusy(moves);
 
         }
+        swapPlayer();
 
     }
 
@@ -224,13 +228,11 @@ public class Game implements Model {
     private void squareBusy(Move moves) {
         if (moves.getPiece().isStronger(board.getPiece(moves.getEnd()))) {
             board.remove(moves.getEnd());
-            updatePlayerPieceList(moves);
             board.put(moves.getPiece(), moves.getEnd());
-            swapPlayer();
         } else if (moves.getPiece().hasSameRank(board.getPiece(moves.getEnd()))) {
             board.remove(moves.getStart());
             board.remove(moves.getEnd());
-            updatPlayerPieceList2(moves);
+            //updatPlayerPieceList2(moves);
 
         }
 
@@ -263,8 +265,8 @@ public class Game implements Model {
      * This method swap the value of the players
      */
     public void swapPlayer() {
-        Player player = this.current;
         if (hasMoves(opponent)) {
+            Player player = this.current;
             this.current = this.opponent;
             this.opponent = player;
         }
@@ -282,21 +284,30 @@ public class Game implements Model {
     }
 
     /**
-     * This methdo verified if the moves of the player is availaible in the list
+     * This method verified if the moves of the player is availaible in the list
      * of the moves
      *
      * @param player
      * @return hasMoves
      */
     public boolean hasMoves(Player player) {
-        boolean hasmoves = false;
-        for (int i = 0; i < getMoves().size(); i++) {
-            if (this.board.getTakenSquare(player) == getMoves().get(i).getEnd()) {
-                hasmoves = true;
-            }
+//        List<Position> listPosition = board.getTakenSquare(player);
+//        boolean hasmoves = false;
+//        if (!listPosition.isEmpty()) {
+//            hasmoves = true;
+//        }
+        return (!board.getTakenSquare(player).isEmpty());
+    }
 
-        }
-        return hasmoves;
+    /**
+     *
+     * @return
+     */
+    @Override
+    public List<Player> getWinner() {
+        List<Player> listWinner = new ArrayList<>();
+
+        return listWinner;
     }
 
 }

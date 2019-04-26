@@ -68,8 +68,15 @@ public interface Model {
 
     /**
      * This method return the current player
+     *
      * @return current player
      */
     Player getcurrent();
+
+    /**
+     * This methos return a list of the winner
+     * @return listWinner
+     */
+    List<Player> getWinner();
 
 }

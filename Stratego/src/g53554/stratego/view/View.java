@@ -74,8 +74,22 @@ public class View {
      * @param moves
      */
     public void displayMoves(List<Move> moves) {
+        Color couleur = new Color();
+        String namePiece = "";
+        System.out.println(" " + moves.size() + couleur.toYellow(" Déplacement possible"));
         for (int i = 0; i < moves.size(); i++) {
-            System.out.println(moves.get(i).getPiece() + "peut se déplacer vers la ligne " + moves.get(i).getEnd().getRow() + " et la colonne " + moves.get(i).getEnd().getColumn());
+            if (moves.get(i).getPiece().getRank() == 9
+                    && moves.get(i).getPiece().getColor() == PlayerColor.RED) {
+                namePiece = "Géneral rouge";
+            } else if (moves.get(i).getPiece().getRank() == 0
+                    && moves.get(i).getPiece().getColor() == PlayerColor.RED) {
+                namePiece = "Drapeau Rouge";
+
+            }
+
+            System.out.println(i + " -" + namePiece + " peut se déplacer vers la ligne "
+                    + moves.get(i).getEnd().getRow()
+                    + " et la colonne " + moves.get(i).getEnd().getColumn());
 
         }
 
@@ -130,11 +144,16 @@ public class View {
         Color couleur = new Color();
         if (piece == null) {
             System.out.print(" [" + "\u001b[46m" + "  " + "\u001b[0m" + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE) {
-            System.out.print(" [" + "\u001b[46m" + couleur.toBlue("PE") + "]");
+        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank()==9) {
+            System.out.print(" [" + "\u001b[46m" + couleur.toBlue("GE") + "]");
+        }else if(piece.getColor() == PlayerColor.BLUE && piece.getRank()==0){
+            System.out.print(" [" + "\u001b[46m" + couleur.toBlue("DR") + "]");
+            
 
-        } else {
-            System.out.print(" [" + "\u001b[46m" + couleur.toRed("PE") + "]");
+        } else if(piece.getColor() == PlayerColor.RED && piece.getRank()==9) {
+            System.out.print(" [" + "\u001b[46m" + couleur.toRed("GE") + "]");
+        }else if(piece.getColor() == PlayerColor.RED && piece.getRank()==0){
+            System.out.print(" [" + "\u001b[46m" + couleur.toRed("DR") + "]");
 
         }
 
@@ -170,13 +189,17 @@ public class View {
      * @param piece
      */
     public void displaySelected(Piece piece) {
-        String nomPiece ="";
-        if(piece.getRank()==9 && piece.getColor()==PlayerColor.RED){
+        String nomPiece = "";
+        if (piece.getRank() == 9 && piece.getColor() == PlayerColor.RED) {
             nomPiece = "Géneral rouge";
-        }else if(piece.getRank()==0 && piece.getColor()==PlayerColor.RED){
+        } else if (piece.getRank() == 0 && piece.getColor() == PlayerColor.RED) {
             nomPiece = "Drapeau rouge";
+        } else if (piece.getRank() == 0 && piece.getColor() == PlayerColor.BLUE) {
+            nomPiece = "Drapeau bleu";
+        } else if (piece.getRank() == 9 && piece.getColor() == PlayerColor.BLUE) {
+            nomPiece = "Géneral bleu";
         }
-        System.out.println(nomPiece +" sélectionné");
+        System.out.println(nomPiece + " sélectionné");
 
     }
 
