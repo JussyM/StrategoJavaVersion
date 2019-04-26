@@ -209,4 +209,24 @@ public class GameTest {
     public void testHasMove(){
         System.out.println("testHasMove");
     }
+    @Test 
+    public void testListWinner(){
+        System.out.println("testListWinner");
+        Game instance = new Game();
+        instance.initialize();
+        Player current = instance.current;
+        Player oppenet = instance.opponent;
+        boolean currentFlag = instance.current.hasFlag();
+        boolean oppnentFlag = instance.opponent.hasFlag();
+        currentFlag=false;
+        oppnentFlag=false;
+        List<Player> expResult = new ArrayList<>();
+        expResult.add(oppenet);
+        expResult.add(current);
+        List<Player> result = instance.getWinner();
+        result.add(oppenet);
+        result.add(oppenet);
+        
+        assertEquals(expResult, result);
+    }
 }

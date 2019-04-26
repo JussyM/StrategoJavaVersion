@@ -70,7 +70,7 @@ public class Game implements Model {
     public boolean isOver() {
         boolean over = false;
         if (!hasMoves(current) && !hasMoves(opponent)
-                || !current.hasFlag() || !opponent.hasFlag()) {
+                || (!current.hasFlag() || !opponent.hasFlag())) {
             over = true;
 
         }
@@ -228,11 +228,13 @@ public class Game implements Model {
     private void squareBusy(Move moves) {
         if (moves.getPiece().isStronger(board.getPiece(moves.getEnd()))) {
             board.remove(moves.getEnd());
+            board.remove(moves.getStart());
             board.put(moves.getPiece(), moves.getEnd());
+            updatePlayerPieceList(moves);
         } else if (moves.getPiece().hasSameRank(board.getPiece(moves.getEnd()))) {
             board.remove(moves.getStart());
             board.remove(moves.getEnd());
-            //updatPlayerPieceList2(moves);
+            updatPlayerPieceList2(moves);
 
         }
 
@@ -245,9 +247,10 @@ public class Game implements Model {
     private void updatePlayerPieceList(Move moves) {
         if (this.board.isMyOwn(moves.getEnd(), PlayerColor.RED)) {
             this.opponent.remove(board.getPiece(moves.getEnd()));
+            //System.out.println("oppnent piece"+opponent.getPieces());
         } else {
             this.current.remove(board.getPiece(moves.getEnd()));
-
+            //System.out.println("current piece"+current.getPieces());
         }
 
     }
@@ -257,7 +260,9 @@ public class Game implements Model {
      */
     private void updatPlayerPieceList2(Move moves) {
         this.current.remove(board.getPiece(moves.getStart()));
+        //System.out.println("oppnent piece"+opponent.getPieces());
         this.opponent.remove(board.getPiece(moves.getEnd()));
+        //System.out.println("current piece"+current.getPieces());
 
     }
 
@@ -291,21 +296,24 @@ public class Game implements Model {
      * @return hasMoves
      */
     public boolean hasMoves(Player player) {
-//        List<Position> listPosition = board.getTakenSquare(player);
-//        boolean hasmoves = false;
-//        if (!listPosition.isEmpty()) {
-//            hasmoves = true;
-//        }
         return (!board.getTakenSquare(player).isEmpty());
     }
 
     /**
-     *
-     * @return
+     * THis method return the list of the winner 
+     * @return listWinner
      */
     @Override
     public List<Player> getWinner() {
         List<Player> listWinner = new ArrayList<>();
+        if(opponent.hasFlag()){
+            listWinner.add(opponent);
+        }else if(current.hasFlag()){
+            listWinner.add(current);
+        }else if(current.hasFlag()&& opponent.hasFlag()){
+            listWinner.add(current);
+            listWinner.add(opponent);
+        }
 
         return listWinner;
     }

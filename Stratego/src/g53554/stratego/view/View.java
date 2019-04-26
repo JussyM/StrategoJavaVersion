@@ -62,7 +62,7 @@ public class View {
         Color couleur = new Color();
         System.out.println(couleur.toYellow("Usage :"));
         System.out.println("     " + couleur.toYellow("Taper ") + couleur.toRed("select <row,column>") + couleur.toYellow(" pour selectionner la pièce de la case mentionnée"));
-        System.out.println("     " + couleur.toYellow("Taper ") + couleur.toRed("moves") + couleur.toYellow(" afficher la liste des déplacements possibles de la pièce séléctionnée"));
+        System.out.println("     " + couleur.toYellow("Taper ") + couleur.toRed("moves") + couleur.toYellow(" pour afficher la liste des déplacements possibles de la pièce séléctionnée"));
         System.out.println("     " + couleur.toYellow("Taper ") + couleur.toRed("apply <index> ") + couleur.toYellow("pour appliquer le déplacement d'indice donnée"));
         System.out.println(couleur.toYellow("     " + "Taper " + couleur.toRed("quit") + couleur.toYellow(" pour arrêter le jeu")));
 
@@ -144,15 +144,14 @@ public class View {
         Color couleur = new Color();
         if (piece == null) {
             System.out.print(" [" + "\u001b[46m" + "  " + "\u001b[0m" + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank()==9) {
+        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 9) {
             System.out.print(" [" + "\u001b[46m" + couleur.toBlue("GE") + "]");
-        }else if(piece.getColor() == PlayerColor.BLUE && piece.getRank()==0){
+        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 0) {
             System.out.print(" [" + "\u001b[46m" + couleur.toBlue("DR") + "]");
-            
 
-        } else if(piece.getColor() == PlayerColor.RED && piece.getRank()==9) {
+        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 9) {
             System.out.print(" [" + "\u001b[46m" + couleur.toRed("GE") + "]");
-        }else if(piece.getColor() == PlayerColor.RED && piece.getRank()==0){
+        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 0) {
             System.out.print(" [" + "\u001b[46m" + couleur.toRed("DR") + "]");
 
         }
@@ -176,10 +175,22 @@ public class View {
 
     /**
      * This method diplay to the user that the game is over
+     *
+     * @param Winner
      */
-    public void displayOver() {
+    public void displayOver(List<Player> Winner) {
+        for (int i = 0; i < Winner.size(); i++) {
+            if (Winner.get(i).getColor() == PlayerColor.RED) {
+            System.out.println("Félicitation joueur rouge ");
+        } else if (Winner.get(i).getColor() == PlayerColor.BLUE) {
+            System.out.println("Félicitation joueur bleu " );
+        } else {
+            System.out.println("Félicitation joueur bleu et rouge " );
+            
+        }
+        
 
-        System.out.println("Le jeux est terminer");
+        }
 
     }
 

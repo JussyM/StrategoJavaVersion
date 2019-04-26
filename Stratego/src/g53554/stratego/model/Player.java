@@ -121,8 +121,6 @@ public class Player {
      */
     public boolean hasFlag() {
         boolean contain = false;
-//        Flag flag = new Flag(0, color);
-//        if (this.pieces.contains(flag)) {
            if( getPieces().get(0).getRank()==0){
             contain = true;
         }

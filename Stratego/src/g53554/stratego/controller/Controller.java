@@ -53,7 +53,9 @@ public class Controller {
             sentinelle = true;
 
         }
-
+        System.out.println("");
+        view.displayOver(game.getWinner());
+        view.quit();
     }
 
     /**
@@ -121,7 +123,7 @@ public class Controller {
 
             }
         } else if (cmde.matches(applyMoveCmd)) {
-            if (game.getMoves() != null) {
+            if (game.getcurrent().hasFlag()) {
                 applyValue = selectValue(cmde)[0];
                 game.apply(game.getMoves().get(applyValue));
                 view.displayBoard(game.getBoard());
@@ -130,7 +132,8 @@ public class Controller {
                 gameCmde();
 
             }
-        }
-    }
 
+        }
+
+    }
 }
