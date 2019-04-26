@@ -300,17 +300,18 @@ public class Game implements Model {
     }
 
     /**
-     * THis method return the list of the winner 
+     * THis method return the list of the winner
+     *
      * @return listWinner
      */
     @Override
     public List<Player> getWinner() {
         List<Player> listWinner = new ArrayList<>();
-        if(opponent.hasFlag()){
+        if (opponent.hasFlag() && !current.hasFlag()) {
             listWinner.add(opponent);
-        }else if(current.hasFlag()){
+        } else if (current.hasFlag() && !opponent.hasFlag()) {
             listWinner.add(current);
-        }else if(current.hasFlag()&& opponent.hasFlag()){
+        } else if (current.hasFlag() && opponent.hasFlag()) {
             listWinner.add(current);
             listWinner.add(opponent);
         }

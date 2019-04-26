@@ -1,8 +1,10 @@
 package g53554.stratego.controller;
 
 import g53554.stratego.model.Model;
+import g53554.stratego.model.PlayerColor;
 import g53554.stratego.view.View;
 import java.util.ArrayList;
+import g53554.stratego.model.pieces.Flag;
 
 /**
  * This class creat the dynamism of the game is where we put all the method
@@ -123,7 +125,11 @@ public class Controller {
 
             }
         } else if (cmde.matches(applyMoveCmd)) {
-            if (game.getcurrent().hasFlag()) {
+            while(!game.getcurrent().hasFlag()) {
+              applyValue = selectValue(cmde)[0];
+                game.apply(game.getMoves().get(applyValue));
+                view.displayBoard(game.getBoard());
+            }
                 applyValue = selectValue(cmde)[0];
                 game.apply(game.getMoves().get(applyValue));
                 view.displayBoard(game.getBoard());
@@ -136,4 +142,4 @@ public class Controller {
         }
 
     }
-}
+
