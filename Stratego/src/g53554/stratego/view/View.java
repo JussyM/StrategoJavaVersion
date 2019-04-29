@@ -84,6 +84,13 @@ public class View {
             } else if (moves.get(i).getPiece().getRank() == 0
                     && moves.get(i).getPiece().getColor() == PlayerColor.RED) {
                 namePiece = "Drapeau Rouge";
+            }else if(moves.get(i).getPiece().getRank() == 0
+                    && moves.get(i).getPiece().getColor() == PlayerColor.BLUE){
+                namePiece="Drapeau bleu";
+            }else if(moves.get(i).getPiece().getRank() == 9
+                    && moves.get(i).getPiece().getColor() == PlayerColor.BLUE){
+                namePiece= "Géneral bleu";
+                        
 
             }
 
