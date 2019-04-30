@@ -46,13 +46,11 @@ public class Controller {
     public void startGame() {
         game.start();
         view.displayHelp();
-        boolean sentinelle = false;
-        while (!game.isOver() && !sentinelle) {
+        while (!game.isOver()) {
             view.displayBoard(game.getBoard());
             System.out.println("");
             view.displayCurrentPlayer(game.getcurrent());
             gameCmde();
-            sentinelle = true;
 
         }
         System.out.println("");
@@ -99,7 +97,6 @@ public class Controller {
         int row;
         int column;
         int applyValue;
-        //cmdVerification(cmde);
         if (cmde.matches(endGamecmde)) {
             view.quit();
 
@@ -126,64 +123,11 @@ public class Controller {
 
             }
         } else if (cmde.matches(applyMoveCmd)) {
-            while (!game.getcurrent().hasFlag()) {
-                applyValue = selectValue(cmde)[0];
-                game.apply(game.getMoves().get(applyValue));
-                view.displayBoard(game.getBoard());
-            }
             applyValue = selectValue(cmde)[0];
             game.apply(game.getMoves().get(applyValue));
-            view.displayBoard(game.getBoard());
-            System.out.println("");
-            view.displayCurrentPlayer(game.getcurrent());
-            gameCmde();
 
         }
 
     }
 
-    /**
-     * This method verified if the command are correct 
-     * @param cmd
-     */
-
-    private void cmdVerification(String cmd) {
-        String endGamecmde = "quit";
-        String piecePostionCmde = "select(.*)";
-        String movePieceCmd = "move(.*)";
-        String applyMoveCmd = "apply(.*)";
-        if (!cmd.matches(endGamecmde)) {
-            try {
-                throw new IllegalArgumentException();
-            } catch (IllegalArgumentException e) {
-                System.out.println("La commande n'est pas valable veuillez ressayer");
-
-            }
-        } else if (!cmd.matches(piecePostionCmde)) {
-            try {
-                throw new ArrayIndexOutOfBoundsException();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("La commande n'est pas valable veuillez ressayer");
-
-            }
-
-        } else if (!cmd.matches(movePieceCmd)) {
-            try {
-                throw new IllegalArgumentException();
-            } catch (IllegalArgumentException e) {
-                System.out.println("La commande n'est pas valable veuillez ressayer");
-
-            }
-        } else if (!cmd.matches(applyMoveCmd)) {
-            try {
-                throw new ArrayIndexOutOfBoundsException();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("La commande n'est pas valable veuillez ressayer");
-
-            }
-
-        }
-        gameCmde();
-
-    }
 }
