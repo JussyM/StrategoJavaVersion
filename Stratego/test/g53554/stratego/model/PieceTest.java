@@ -109,9 +109,9 @@ public class PieceTest {
 
     @Test
     public void equalsTrueIsStronger() {
-        Piece piece = new Piece(-1, BLUE);
+        Piece piece = new Piece(2, BLUE);
         Piece piece1 = new Piece(0, BLUE);
-        assertTrue(piece1.isStronger(piece));
+        assertTrue(piece.isStronger(piece1));
     }
 
     @Test
