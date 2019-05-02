@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Square {
 
     private Piece piece;
+    private SquareType type;
 
     /**
      * This method initialized the class square with default value
@@ -16,8 +17,13 @@ public class Square {
     public Square() {
     }
 
-    public Square(Piece piece) {
-        this.piece = piece;
+    /**
+     * This method is the new constructor of square
+     *
+     * @param type
+     */
+    public Square(SquareType type) {
+        this.type = type;
     }
 
     /**
@@ -119,6 +125,15 @@ public class Square {
         if (piece != null) {
             piece = null;
         }
+
+    }
+
+    /**
+     * This method return true if the type is on the land
+     * @return boolean 
+     */
+    public boolean isLand() {
+        return this.type==SquareType.LAND;
 
     }
 

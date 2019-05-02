@@ -1,9 +1,9 @@
 package g53554.stratego.model;
-
 import g53554.stratego.model.pieces.Flag;
 import g53554.stratego.model.pieces.General;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Assert;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -11,11 +11,27 @@ import org.junit.Test;
 public class BoardTest {
 
     private final Square[][] defaultBoard = {
-        {new Square(), new Square(), new Square(), new Square()},
-        {new Square(), new Square(), new Square(), new Square()},
-        {new Square(), new Square(), new Square(), new Square()},
-        {new Square(), new Square(), new Square(), new Square()},
-        {new Square(), new Square(), new Square(), new Square()}};
+        {new Square(), new Square(), new Square(), new Square(), new Square()},
+        {new Square(), new Square(), new Square(), new Square(), new Square()},
+        {new Square(), new Square(), new Square(), new Square(), new Square()},
+        {new Square(), new Square(), new Square(), new Square(), new Square()},
+        {new Square(), new Square(), new Square(), new Square(), new Square()},
+        {new Square(), new Square(), new Square(), new Square(), new Square()}};
+    private final Square[][] newDefaultBoard = {
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)},
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)},
+        {new Square(SquareType.WATER), new Square(SquareType.WATER), new Square(SquareType.WATER),
+            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)},
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)},
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)},
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)},
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)}};
 
     @Test
     public void testGetSquareWhenSquareIsFill() {
@@ -193,7 +209,7 @@ public class BoardTest {
     @Test
     public void testIsInsideWhenOutsideBoundaryDown() {
         System.out.println("testIsInsideWhenOutsideBoundaryDown");
-        Position position = new Position(5, 2);
+        Position position = new Position(6, 2);
         Board instance = new Board();
         boolean expResult = false;
         boolean result = instance.isInside(position);
@@ -213,7 +229,7 @@ public class BoardTest {
     @Test
     public void testIsInsideWhenOutsideBoundaryRight() {
         System.out.println("testIsInsideWhenOutsideBoundaryRight");
-        Position position = new Position(3, 4);
+        Position position = new Position(4, 5);
         Board instance = new Board();
         boolean expResult = false;
         boolean result = instance.isInside(position);
@@ -313,7 +329,7 @@ public class BoardTest {
         board.put(new General(9, PlayerColor.RED), new Position(0, 1));
         board.put(new Flag(0, PlayerColor.RED), new Position(3, 2));
         defaultBoard[0][1].put(new Piece(0, PlayerColor.RED));
-        defaultBoard[3][2].put(new Piece(0, PlayerColor.RED));            
+        defaultBoard[3][2].put(new Piece(0, PlayerColor.RED));
         List<Position> expResult = new ArrayList<>();
         expResult.add(new Position(0, 1));
         expResult.add(new Position(3, 2));
@@ -321,6 +337,14 @@ public class BoardTest {
         List<Position> result = board.getTakenSquare(player);
         assertEquals(expResult.size(), result.size());
 
+    }
+    @Test 
+    public void testNewDefaultBoard(){
+        System.out.println("testNewDefaultBoard");
+        Board board = new Board(newDefaultBoard);
+        Square[][] expResult = newDefaultBoard;
+        Square[][] result = board.getSquare();
+        Assert.assertArrayEquals(expResult, result);
     }
 
 }

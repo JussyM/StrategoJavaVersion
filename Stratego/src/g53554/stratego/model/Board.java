@@ -1,6 +1,5 @@
 package g53554.stratego.model;
 
-import g53554.stratego.model.pieces.Flag;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +12,8 @@ import java.util.List;
 public class Board {
 
     private final Square[][] squares;
-    private final static int ROW = 5;
-    private final static int COLUMN = 4;
+    private final static int ROW = 6;
+    private final static int COLUMN = 5;
 
     /**
      * This is constructor that build the board with no parameter with no
@@ -29,6 +28,28 @@ public class Board {
             }
 
         }
+    }
+
+    /**
+     * New constructor of board
+     *
+     * @param squares
+     */
+    public Board(Square[][] squares) {
+        this.squares = squares;
+        squares = new Square[ROW][COLUMN];
+        for (int i = 0; i < squares.length; i++) {
+            for (int j = 0; j < squares[i].length; j++) {
+                if (i == 2 && j == 1 || i == 2 && j == 2 || i == 2 && j == 3) {
+                    squares[i][j] = new Square(SquareType.WATER);
+                } else {
+                    squares[i][j] = new Square(SquareType.LAND);
+                }
+
+            }
+
+        }
+
     }
 
     /**
@@ -154,6 +175,7 @@ public class Board {
 
     /**
      * This method return a list of all the position occupied by a player
+     *
      * @param player
      * @return listPosition
      */
@@ -163,7 +185,7 @@ public class Board {
         for (int i = 0; i < this.squares.length; i++) {
             for (int j = 0; j < this.squares[i].length; j++) {
                 positionPlayer = new Position(i, j);
-                if (this.squares[i][j].getPiece()!=null &&this.isMyOwn(positionPlayer, player.getColor())) {
+                if (this.squares[i][j].getPiece() != null && this.isMyOwn(positionPlayer, player.getColor())) {
 
                     listPosition.add(positionPlayer);
                 }

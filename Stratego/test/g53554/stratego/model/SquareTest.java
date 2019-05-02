@@ -157,4 +157,12 @@ public class SquareTest {
         assertEquals(expResult, result);
 
     }
+    @Test
+    public void testIsLand(){
+        System.out.println("testIsLand");
+        Square instance = new Square(SquareType.LAND);
+        boolean expResult = true;
+        boolean resutl = instance.isLand();
+        assertEquals(expResult, resutl);
+    }
 }

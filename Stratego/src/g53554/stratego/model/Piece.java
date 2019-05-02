@@ -107,4 +107,15 @@ public class Piece {
         return rank == other.getRank();
     }
 
+    /**
+     * this method check if a piece can cross a square
+     *
+     * @param square
+     * @return boolean
+     */
+    public boolean canCross(Square square) {
+        return square.isLand();
+
+    }
+
 }
