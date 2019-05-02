@@ -1,10 +1,8 @@
 package g53554.stratego.controller;
-
 import g53554.stratego.model.Model;
-import g53554.stratego.model.PlayerColor;
 import g53554.stratego.view.View;
 import java.util.ArrayList;
-import g53554.stratego.model.pieces.Flag;
+
 
 /**
  * This class creat the dynamism of the game is where we put all the method

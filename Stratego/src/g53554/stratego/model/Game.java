@@ -13,7 +13,7 @@ import java.util.Objects;
  * @author g53554
  */
 public class Game implements Model {
-
+    
     Board board;
     Player current;
     Player opponent;
@@ -26,7 +26,7 @@ public class Game implements Model {
     public Game() {
         this.current = new Player(PlayerColor.RED);
         this.opponent = new Player(PlayerColor.BLUE);
-
+        
     }
 
     /**
@@ -46,7 +46,7 @@ public class Game implements Model {
         opponent.addPiece(new General(0, PlayerColor.BLUE));
         current.addPiece(new Flag(9, PlayerColor.RED));
         opponent.addPiece(new General(9, PlayerColor.BLUE));
-
+        
     }
 
     /**
@@ -56,9 +56,9 @@ public class Game implements Model {
     public void start() {
         if (board == null || isOver() == true) {
             throw new IllegalStateException("board est null ou le jeux est faux ");
-
+            
         }
-
+        
     }
 
     /**
@@ -72,7 +72,7 @@ public class Game implements Model {
         if (!hasMoves(current) && !hasMoves(opponent)
                 || (!current.hasFlag() || !opponent.hasFlag())) {
             over = true;
-
+            
         }
         return over;
     }
@@ -155,10 +155,10 @@ public class Game implements Model {
             throw new IllegalArgumentException("Les coordonnées en paramètre réfère à une case vide");
         } else if (this.board.getSquare(new Position(row, column)).isMyOwn(opponent.getColor())) {
             throw new IllegalArgumentException("la case est occuper par le joueur adverse");
-
+            
         }
         this.selected = new Position(row, column);
-
+        
     }
 
     /**
@@ -171,7 +171,7 @@ public class Game implements Model {
         if (this.selected == null) {
             throw new IllegalArgumentException("La position selectionner est hors du tableau");
         }
-
+        
         return this.board.getPiece(selected);
     }
 
@@ -194,7 +194,7 @@ public class Game implements Model {
                     || (!board.isFree(selected.next(direction))
                     && !this.board.isMyOwn(selected.next(direction), current.getColor()))) {
                 listeMove.add(endMove);
-
+                
             }
         }
         return listeMove;
@@ -212,13 +212,13 @@ public class Game implements Model {
         } else if (board.isFree(moves.getEnd())) {
             board.remove(moves.getStart());
             board.put(moves.getPiece(), moves.getEnd());
-
+            
         } else if (!board.isFree(moves.getEnd())) {
             squareBusy(moves);
-
+            
         }
         swapPlayer();
-
+        
     }
 
     /**
@@ -230,40 +230,15 @@ public class Game implements Model {
             board.remove(moves.getEnd());
             board.remove(moves.getStart());
             board.put(moves.getPiece(), moves.getEnd());
-            updatePlayerPieceList(moves);
+            opponent.remove(board.getPiece(moves.getEnd()));
         } else if (moves.getPiece().hasSameRank(board.getPiece(moves.getEnd()))) {
             board.remove(moves.getStart());
             board.remove(moves.getEnd());
-            updatPlayerPieceList2(moves);
-
+            current.remove(board.getPiece(moves.getStart()));
+            opponent.remove(board.getPiece(moves.getEnd()));
+            
         }
-
-    }
-
-    /**
-     * This method update the list of piece of the players if a piece is
-     * stronger
-     */
-    private void updatePlayerPieceList(Move moves) {
-        if (this.board.isMyOwn(moves.getEnd(), PlayerColor.RED)) {
-            this.opponent.remove(board.getPiece(moves.getEnd()));
-            //System.out.println("oppnent piece"+opponent.getPieces());
-        } else {
-            this.current.remove(board.getPiece(moves.getEnd()));
-            //System.out.println("current piece"+current.getPieces());
-        }
-
-    }
-
-    /**
-     * This method update the list if the piece has the same rank
-     */
-    private void updatPlayerPieceList2(Move moves) {
-        this.current.remove(board.getPiece(moves.getStart()));
-        //System.out.println("oppnent piece"+opponent.getPieces());
-        this.opponent.remove(board.getPiece(moves.getEnd()));
-        //System.out.println("current piece"+current.getPieces());
-
+        
     }
 
     /**
@@ -275,7 +250,7 @@ public class Game implements Model {
             this.current = this.opponent;
             this.opponent = player;
         }
-
+        
     }
 
     /**
@@ -315,8 +290,8 @@ public class Game implements Model {
             listWinner.add(current);
             listWinner.add(opponent);
         }
-
+        
         return listWinner;
     }
-
+    
 }
