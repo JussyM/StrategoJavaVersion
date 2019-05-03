@@ -19,5 +19,7 @@ public class Flag extends Piece {
     public Flag(int rank, PlayerColor color) {
         super(rank, color);
     }
+    
+    
 
 }

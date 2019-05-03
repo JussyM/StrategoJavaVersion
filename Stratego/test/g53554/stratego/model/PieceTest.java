@@ -2,6 +2,7 @@ package g53554.stratego.model;
 
 import static g53554.stratego.model.PlayerColor.BLUE;
 import static g53554.stratego.model.PlayerColor.RED;
+import g53554.stratego.model.pieces.Flag;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -132,6 +133,12 @@ public class PieceTest {
 
     @Test
     public void testCanCross() {
+        System.out.println("testCanCross");
+        Game instance = new Game();
+        instance.initialize();
+//        Square square = instance.board.getSquare(position);
+//        Piece expResult= instance.board.getPiece(position);
+        
 
     }
 

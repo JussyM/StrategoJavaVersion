@@ -1,7 +1,11 @@
 package g53554.stratego.model;
 
+import g53554.stratego.model.pieces.Bomb;
+import g53554.stratego.model.pieces.Espion;
 import g53554.stratego.model.pieces.Flag;
 import g53554.stratego.model.pieces.General;
+import g53554.stratego.model.pieces.Maréchal;
+import g53554.stratego.model.pieces.Miner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -42,10 +46,26 @@ public class Game implements Model {
         board.put(new General(9, PlayerColor.RED), new Position(3, 2));
         board.put(new Flag(0, PlayerColor.BLUE), new Position(4, 2));
         board.put(new General(9, PlayerColor.BLUE), new Position(4, 1));
+        board.put(new Bomb(11, PlayerColor.RED), new Position(1, 0));
+        board.put(new Espion(1, PlayerColor.RED), new Position(0, 0));
+        board.put(new Maréchal(10, PlayerColor.RED), new Position(5, 1));
+        board.put(new Miner(3, PlayerColor.RED), new Position(1, 2));
+        board.put(new Bomb(11, PlayerColor.BLUE), new Position(3, 1));
+        board.put(new Espion(1, PlayerColor.BLUE), new Position(0, 3));
+        board.put(new Maréchal(10, PlayerColor.BLUE), new Position(2, 4));
+        board.put(new Miner(3, PlayerColor.BLUE), new Position(2, 0));
         current.addPiece(new Flag(0, PlayerColor.RED));
         opponent.addPiece(new General(0, PlayerColor.BLUE));
         current.addPiece(new Flag(9, PlayerColor.RED));
         opponent.addPiece(new General(9, PlayerColor.BLUE));
+        current.addPiece(new Bomb(11, PlayerColor.RED));
+        current.addPiece(new Espion(1, PlayerColor.RED));
+        current.addPiece(new Maréchal(10, PlayerColor.RED));
+        current.addPiece(new Miner(3, PlayerColor.RED));
+        opponent.addPiece(new Bomb(11, PlayerColor.BLUE));
+        opponent.addPiece(new Espion(1, PlayerColor.BLUE));
+        opponent.addPiece(new Maréchal(10, PlayerColor.BLUE));
+        opponent.addPiece(new Miner(3, PlayerColor.BLUE));
         
     }
 
@@ -187,12 +207,17 @@ public class Game implements Model {
             Move endMove = new Move(getSelected(), selected, selected.next(direction));
             if (selected == null) {
                 throw new IllegalArgumentException("La position selectionner est hors du tableau");
-            } else if (!this.board.isInside(selected.next(direction))) {
+            } else if (!this.board.isInside(selected.next(direction))
+                    && board.getPiece(selected.next(direction))
+                            .getNbSteps() == 0) {
                 listeMove.remove(endMove);
             } else if ((this.board.isInside(selected.next(direction))
                     && this.board.isFree(selected.next(direction)))
                     || (!board.isFree(selected.next(direction))
-                    && !this.board.isMyOwn(selected.next(direction), current.getColor()))) {
+                    && !this.board.isMyOwn(selected.next(direction),
+                            current.getColor()))
+                    && this.board.getPiece(selected.next(direction))
+                            .canCross(this.board.getSquare(selected.next(direction)))) {
                 listeMove.add(endMove);
                 
             }
@@ -271,7 +296,16 @@ public class Game implements Model {
      * @return hasMoves
      */
     public boolean hasMoves(Player player) {
-        return (!board.getTakenSquare(player).isEmpty());
+        boolean hasMove = false;
+        for (Direction direction : Direction.values()) {
+            if (!board.getTakenSquare(player).isEmpty()
+                    && this.board.getPiece(selected.next(direction)).canCross(this.board.getSquare(selected.next(direction)))) {
+                hasMove = true;
+                
+            }
+            
+        }
+        return hasMove;
     }
 
     /**

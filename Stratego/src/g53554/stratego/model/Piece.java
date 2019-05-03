@@ -11,6 +11,7 @@ public class Piece {
 
     private int rank;
     private PlayerColor color;
+    private int nbSteps;
 
     /**
      * This method initialized the attribut of the class Piece
@@ -25,6 +26,22 @@ public class Piece {
             this.rank = rank;
             this.color = color;
         }
+    }
+
+    /**
+     * New constructor of piece
+     *
+     * @param rank
+     * @param color
+     * @param nbSteps
+     */
+    public Piece(int rank, PlayerColor color, int nbSteps) {
+        if (nbSteps < 0) {
+            throw new IllegalArgumentException("la case est négatif");
+        }
+        this.rank = rank;
+        this.color = color;
+        this.nbSteps = 1;
 
     }
 
@@ -78,12 +95,21 @@ public class Piece {
     }
 
     /**
-     * This metho also get the value of rank
+     * This method also get the value of rank
      *
      * @return rank
      */
     public int getRank() {
         return rank;
+    }
+
+    /**
+     * getter for nbrSteps
+     * @return nbSteps
+     */
+
+    public int getNbSteps() {
+        return nbSteps;
     }
 
     /**

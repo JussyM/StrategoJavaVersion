@@ -10,18 +10,19 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import g53554.stratego.model.pieces.Flag;
-import  g53554.stratego.model.pieces.General;
+import g53554.stratego.model.pieces.General;
 import org.junit.Assert;
 import static org.junit.Assert.assertTrue;
 
 public class GameTest {
 
     private final Square[][] defaultBoard = {
-        {new Square(), new Square(), new Square(), new Square()},
-        {new Square(), new Square(), new Square(), new Square()},
-        {new Square(), new Square(), new Square(), new Square()},
-        {new Square(), new Square(), new Square(), new Square()},
-        {new Square(), new Square(), new Square(), new Square()}};
+        {new Square(), new Square(), new Square(), new Square(), new Square()},
+        {new Square(), new Square(), new Square(), new Square(), new Square()},
+        {new Square(), new Square(), new Square(), new Square(), new Square()},
+        {new Square(), new Square(), new Square(), new Square(), new Square()},
+        {new Square(), new Square(), new Square(), new Square(), new Square()},
+        {new Square(), new Square(), new Square(), new Square(), new Square()}};
 
     @Before
     public void setUp() throws Exception {
@@ -62,7 +63,6 @@ public class GameTest {
 //        Game instance = new Game();
 //        assertTrue(instance.isOver());
 //    }
-
     @Test
     public void testGetBoardWhenGameBegin() {
         System.out.println("testGetBoardWhenGameBegin");
@@ -203,14 +203,16 @@ public class GameTest {
         Move move = new Move(instance.getSelected(), instance.selected,
                 instance.selected.next(Direction.DOWN));
         instance.apply(move);
-       
+
     }
+
     @Test
-    public void testHasMove(){
+    public void testHasMove() {
         System.out.println("testHasMove");
     }
-    @Test 
-    public void testListWinner(){
+
+    @Test
+    public void testListWinner() {
         System.out.println("testListWinner");
         Game instance = new Game();
         instance.initialize();
@@ -218,15 +220,15 @@ public class GameTest {
         Player oppenet = instance.opponent;
         boolean currentFlag = instance.current.hasFlag();
         boolean oppnentFlag = instance.opponent.hasFlag();
-        currentFlag=false;
-        oppnentFlag=false;
+        currentFlag = false;
+        oppnentFlag = false;
         List<Player> expResult = new ArrayList<>();
         expResult.add(oppenet);
         expResult.add(current);
         List<Player> result = instance.getWinner();
         result.add(oppenet);
         result.add(oppenet);
-        
+
         assertEquals(expResult, result);
     }
 }

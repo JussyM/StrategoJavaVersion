@@ -84,17 +84,41 @@ public class View {
             } else if (moves.get(i).getPiece().getRank() == 0
                     && moves.get(i).getPiece().getColor() == PlayerColor.RED) {
                 namePiece = "Drapeau Rouge";
-            }else if(moves.get(i).getPiece().getRank() == 0
-                    && moves.get(i).getPiece().getColor() == PlayerColor.BLUE){
-                namePiece="Drapeau bleu";
-            }else if(moves.get(i).getPiece().getRank() == 9
-                    && moves.get(i).getPiece().getColor() == PlayerColor.BLUE){
-                namePiece= "Géneral bleu";
-                        
+            } else if (moves.get(i).getPiece().getRank() == 0
+                    && moves.get(i).getPiece().getColor() == PlayerColor.BLUE) {
+                namePiece = "Drapeau bleu";
+            } else if (moves.get(i).getPiece().getRank() == 9
+                    && moves.get(i).getPiece().getColor() == PlayerColor.BLUE) {
+                namePiece = "Géneral bleu";
+            } else if (moves.get(i).getPiece().getRank() == 11
+                    && moves.get(i).getPiece().getColor() == PlayerColor.BLUE) {
+                namePiece = "Bombe bleu";
+            } else if (moves.get(i).getPiece().getRank() == 11
+                    && moves.get(i).getPiece().getColor() == PlayerColor.RED) {
+                namePiece = "Bombe rouge";
+            } else if (moves.get(i).getPiece().getRank() == 3
+                    && moves.get(i).getPiece().getColor() == PlayerColor.BLUE) {
+                namePiece = "Démineur bleu";
+            } else if (moves.get(i).getPiece().getRank() == 3
+                    && moves.get(i).getPiece().getColor() == PlayerColor.RED) {
+                namePiece = "Démineur rouge";
+            } else if (moves.get(i).getPiece().getRank() == 1
+                    && moves.get(i).getPiece().getColor() == PlayerColor.RED) {
+                namePiece = "Espin rouge";
+            } else if (moves.get(i).getPiece().getRank() == 10
+                    && moves.get(i).getPiece().getColor() == PlayerColor.RED) {
+                namePiece = "Maréchal rouge";
+            } else if (moves.get(i).getPiece().getRank() == 1
+                    && moves.get(i).getPiece().getColor() == PlayerColor.BLUE) {
+                namePiece = "Espion bleu";
+            } else if (moves.get(i).getPiece().getRank() == 10
+                    && moves.get(i).getPiece().getColor() == PlayerColor.BLUE) {
+                namePiece = "Maréchal bleu";
 
             }
 
-            System.out.println(i + " -" + namePiece + " peut se déplacer vers la ligne "
+            System.out.println(i + " -" + namePiece + " peut se déplacer"
+                    + " vers la ligne "
                     + moves.get(i).getEnd().getRow()
                     + " et la colonne " + moves.get(i).getEnd().getColumn());
 
@@ -131,6 +155,7 @@ public class View {
                     for (int k = 0; k < square[j].length; k++) {
                         Piece piece = square[j][k].getPiece();
                         displayPiece(piece);
+                        displaySquarebakground(square[j][k]);
 
                     }
 
@@ -150,16 +175,31 @@ public class View {
     private void displayPiece(Piece piece) {
         Color couleur = new Color();
         if (piece == null) {
-            System.out.print(" [" + "\u001b[46m" + "  " + "\u001b[0m" + "]");
+            System.out.print(" [" + "\u001b[45m" + "  " + "\u001b[0m" + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 9) {
-            System.out.print(" [" + "\u001b[46m" + couleur.toBlue("GE") + "]");
+            System.out.print(" [" + "\u001b[42m" + couleur.toBlue("GE") + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 0) {
-            System.out.print(" [" + "\u001b[46m" + couleur.toBlue("DR") + "]");
-
+            System.out.print(" [" + "\u001b[42m" + couleur.toBlue("DR") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 9) {
-            System.out.print(" [" + "\u001b[46m" + couleur.toRed("GE") + "]");
+            System.out.print(" [" + "\u001b[42m" + couleur.toRed("GE") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 0) {
-            System.out.print(" [" + "\u001b[46m" + couleur.toRed("DR") + "]");
+            System.out.print(" [" + "\u001b[42m" + couleur.toRed("DR") + "]");
+        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 11) {
+            System.out.print(" [" + "\u001b[42m" + couleur.toRed("BO") + "]");
+        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 3) {
+            System.out.print(" [" + "\u001b[42m" + couleur.toRed("DM") + "]");
+        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 11) {
+            System.out.print(" [" + "\u001b[42m" + couleur.toBlue("BO") + "]");
+        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 3) {
+            System.out.print(" [" + "\u001b[42m" + couleur.toBlue("DM") + "]");
+        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 1) {
+            System.out.print(" [" + "\u001b[42m" + couleur.toBlue("ES") + "]");
+        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 10) {
+            System.out.print(" [" + "\u001b[42m" + couleur.toBlue("MA") + "]");
+        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 10) {
+            System.out.print(" [" + "\u001b[42m" + couleur.toRed("MA") + "]");
+        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 1) {
+            System.out.print(" [" + "\u001b[42m" + couleur.toRed("ES") + "]");
 
         }
 
@@ -181,6 +221,19 @@ public class View {
     }
 
     /**
+     *
+     * @param square
+     */
+    private void displaySquarebakground(Square square) {
+        if (square.isLand()) {
+            System.out.print("\u001b[40m" + "\u001b[0m");
+        } else {
+            System.out.print("\u001b[46m" + "\u001b[0m");
+        }
+
+    }
+
+    /**
      * This method diplay to the user that the game is over
      *
      * @param Winner
@@ -188,14 +241,13 @@ public class View {
     public void displayOver(List<Player> Winner) {
         for (int i = 0; i < Winner.size(); i++) {
             if (Winner.get(i).getColor() == PlayerColor.RED) {
-            System.out.println("Félicitation joueur rouge ");
-        } else if (Winner.get(i).getColor() == PlayerColor.BLUE) {
-            System.out.println("Félicitation joueur bleu " );
-        } else {
-            System.out.println("Félicitation joueur bleu et rouge " );
-            
-        }
-        
+                System.out.println("Félicitation joueur rouge ");
+            } else if (Winner.get(i).getColor() == PlayerColor.BLUE) {
+                System.out.println("Félicitation joueur bleu ");
+            } else {
+                System.out.println("Félicitation joueur bleu et rouge ");
+
+            }
 
         }
 
@@ -216,6 +268,22 @@ public class View {
             nomPiece = "Drapeau bleu";
         } else if (piece.getRank() == 9 && piece.getColor() == PlayerColor.BLUE) {
             nomPiece = "Géneral bleu";
+        } else if (piece.getRank() == 1 && piece.getColor() == PlayerColor.BLUE) {
+            nomPiece = "Espion bleu";
+        } else if (piece.getRank() == 10 && piece.getColor() == PlayerColor.BLUE) {
+            nomPiece = "Maréchal bleu";
+        } else if (piece.getRank() == 11 && piece.getColor() == PlayerColor.BLUE) {
+            nomPiece = "Démineur bleu";
+        } else if (piece.getRank() == 3 && piece.getColor() == PlayerColor.BLUE) {
+            nomPiece = "Bombe bleu";
+        } else if (piece.getRank() == 1 && piece.getColor() == PlayerColor.RED) {
+            nomPiece = "Espion rouge";
+        } else if (piece.getRank() == 10 && piece.getColor() == PlayerColor.RED) {
+            nomPiece = "Maréchal rouge";
+        } else if (piece.getRank() == 11 && piece.getColor() == PlayerColor.RED) {
+            nomPiece = "Démineur rouge";
+        } else if (piece.getRank() == 3 && piece.getColor() == PlayerColor.RED) {
+            nomPiece = "Bombe rouge";
         }
         System.out.println(nomPiece + " sélectionné");
 
