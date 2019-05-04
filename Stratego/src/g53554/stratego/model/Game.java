@@ -1,6 +1,6 @@
 package g53554.stratego.model;
-
 import g53554.stratego.model.pieces.Bomb;
+import g53554.stratego.model.pieces.Eclaireur;
 import g53554.stratego.model.pieces.Espion;
 import g53554.stratego.model.pieces.Flag;
 import g53554.stratego.model.pieces.General;
@@ -17,10 +17,10 @@ import java.util.Objects;
  * @author g53554
  */
 public class Game implements Model {
-    
-    Board board;
-    Player current;
-    Player opponent;
+
+    private Board board;
+    private Player current;
+    private Player opponent;
     Position selected;
 
     /**
@@ -30,7 +30,7 @@ public class Game implements Model {
     public Game() {
         this.current = new Player(PlayerColor.RED);
         this.opponent = new Player(PlayerColor.BLUE);
-        
+
     }
 
     /**
@@ -54,6 +54,8 @@ public class Game implements Model {
         board.put(new Espion(1, PlayerColor.BLUE), new Position(0, 3));
         board.put(new Maréchal(10, PlayerColor.BLUE), new Position(2, 4));
         board.put(new Miner(3, PlayerColor.BLUE), new Position(2, 0));
+        board.put(new Eclaireur(2, PlayerColor.BLUE), new Position(0, 2));
+        board.put(new Eclaireur(2, PlayerColor.RED), new Position(3, 0));
         current.addPiece(new Flag(0, PlayerColor.RED));
         opponent.addPiece(new General(0, PlayerColor.BLUE));
         current.addPiece(new Flag(9, PlayerColor.RED));
@@ -66,7 +68,9 @@ public class Game implements Model {
         opponent.addPiece(new Espion(1, PlayerColor.BLUE));
         opponent.addPiece(new Maréchal(10, PlayerColor.BLUE));
         opponent.addPiece(new Miner(3, PlayerColor.BLUE));
-        
+        current.addPiece(new Eclaireur(2, PlayerColor.RED));
+        opponent.addPiece(new Eclaireur(2, PlayerColor.BLUE));
+
     }
 
     /**
@@ -76,9 +80,9 @@ public class Game implements Model {
     public void start() {
         if (board == null || isOver() == true) {
             throw new IllegalStateException("board est null ou le jeux est faux ");
-            
+
         }
-        
+
     }
 
     /**
@@ -92,7 +96,7 @@ public class Game implements Model {
         if (!hasMoves(current) && !hasMoves(opponent)
                 || (!current.hasFlag() || !opponent.hasFlag())) {
             over = true;
-            
+
         }
         return over;
     }
@@ -175,10 +179,10 @@ public class Game implements Model {
             throw new IllegalArgumentException("Les coordonnées en paramètre réfère à une case vide");
         } else if (this.board.getSquare(new Position(row, column)).isMyOwn(opponent.getColor())) {
             throw new IllegalArgumentException("la case est occuper par le joueur adverse");
-            
+
         }
         this.selected = new Position(row, column);
-        
+
     }
 
     /**
@@ -191,7 +195,7 @@ public class Game implements Model {
         if (this.selected == null) {
             throw new IllegalArgumentException("La position selectionner est hors du tableau");
         }
-        
+
         return this.board.getPiece(selected);
     }
 
@@ -204,9 +208,11 @@ public class Game implements Model {
     public List<Move> getMoves() {
         List<Move> listeMove = new ArrayList<>();
         for (Direction direction : Direction.values()) {
-            Move endMove = new Move(getSelected(), selected, selected.next(direction));
+            Move endMove = new Move(getSelected(), selected,
+                    selected.next(direction));
             if (selected == null) {
-                throw new IllegalArgumentException("La position selectionner est hors du tableau");
+                throw new IllegalArgumentException("La position selectionner "
+                        + "est hors du tableau");
             } else if (!this.board.isInside(selected.next(direction))
                     && board.getPiece(selected.next(direction))
                             .getNbSteps() == 0) {
@@ -217,9 +223,20 @@ public class Game implements Model {
                     && !this.board.isMyOwn(selected.next(direction),
                             current.getColor()))
                     && this.board.getPiece(selected.next(direction))
-                            .canCross(this.board.getSquare(selected.next(direction)))) {
+                            .canCross(board.getSquare(selected.next(direction)))) {
                 listeMove.add(endMove);
-                
+            } else if ((this.board.isInside(selected.next(direction).next(direction))
+                    && this.board.isFree(selected.next(direction).next(direction)))
+                    || (!board.isFree(selected.next(direction).next(direction))
+                    && !this.board.isMyOwn(selected.next(direction).next(direction),
+                            current.getColor()))
+                    && this.board.getPiece(selected.next(direction).next(direction))
+                            .canCross(board.getSquare(selected.next(direction).next(direction)))
+                    && board.getPiece(selected.next(direction).next(direction)).getNbSteps() == 2) {
+                endMove = new Move(getSelected(), selected,
+                        selected.next(direction).next(direction));
+                listeMove.add(endMove);
+
             }
         }
         return listeMove;
@@ -237,13 +254,13 @@ public class Game implements Model {
         } else if (board.isFree(moves.getEnd())) {
             board.remove(moves.getStart());
             board.put(moves.getPiece(), moves.getEnd());
-            
+
         } else if (!board.isFree(moves.getEnd())) {
             squareBusy(moves);
-            
+
         }
         swapPlayer();
-        
+
     }
 
     /**
@@ -261,9 +278,9 @@ public class Game implements Model {
             board.remove(moves.getEnd());
             current.remove(board.getPiece(moves.getStart()));
             opponent.remove(board.getPiece(moves.getEnd()));
-            
+
         }
-        
+
     }
 
     /**
@@ -275,7 +292,7 @@ public class Game implements Model {
             this.current = this.opponent;
             this.opponent = player;
         }
-        
+
     }
 
     /**
@@ -299,11 +316,12 @@ public class Game implements Model {
         boolean hasMove = false;
         for (Direction direction : Direction.values()) {
             if (!board.getTakenSquare(player).isEmpty()
-                    && this.board.getPiece(selected.next(direction)).canCross(this.board.getSquare(selected.next(direction)))) {
+                    && board.getPiece(selected.next(direction)
+                    ).canCross(this.board.getSquare(selected.next(direction)))) {
                 hasMove = true;
-                
+
             }
-            
+
         }
         return hasMove;
     }
@@ -324,8 +342,8 @@ public class Game implements Model {
             listWinner.add(current);
             listWinner.add(opponent);
         }
-        
+
         return listWinner;
     }
-    
+
 }

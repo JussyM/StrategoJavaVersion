@@ -23,16 +23,6 @@ public class DirectionTest {
 
     }
 
-//    @Test
-//    public void testValueOf() {
-//        System.out.println("valueOf");
-//        String arg0 = "";
-//        Direction expResult = null;
-//        Direction result = Direction.valueOf(arg0);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-
     @Test
     public void testGetRow() {
         System.out.println("getRow");
@@ -40,7 +30,7 @@ public class DirectionTest {
         int expResult = 1;
         int result = instance.getRow();
         assertEquals(expResult, result);
-        
+
     }
 
     @Test
@@ -50,7 +40,7 @@ public class DirectionTest {
         int expResult = 0;
         int result = instance.getColumn();
         assertEquals(expResult, result);
-        
+
     }
 
 }

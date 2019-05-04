@@ -1,4 +1,5 @@
 package g53554.stratego.model;
+
 import g53554.stratego.model.pieces.Flag;
 import g53554.stratego.model.pieces.General;
 import java.util.ArrayList;
@@ -269,7 +270,8 @@ public class BoardTest {
         Game game = new Game();
         game.initialize();
         boolean expResult = false;
-        boolean result = game.board.isFree(new Position(4, 1));
+        this.defaultBoard[4][1].put(new Piece(0, PlayerColor.BLUE));
+        boolean result = this.defaultBoard[4][1].isFree();
         assertEquals(expResult, result);
     }
 
@@ -314,10 +316,9 @@ public class BoardTest {
         System.out.println("testRemovePiece");
         Game instance = new Game();
         instance.initialize();
-        Position position = new Position(4, 1);
         Piece expResult = null;
-        instance.board.remove(position);
-        Piece result = instance.board.getPiece(position);
+        this.defaultBoard[4][1].remove();
+        Piece result = this.defaultBoard[4][1].getPiece();
         assertEquals(expResult, result);
 
     }
@@ -338,8 +339,9 @@ public class BoardTest {
         assertEquals(expResult.size(), result.size());
 
     }
-    @Test 
-    public void testNewDefaultBoard(){
+
+    @Test
+    public void testNewDefaultBoard() {
         System.out.println("testNewDefaultBoard");
         Board board = new Board(newDefaultBoard);
         Square[][] expResult = newDefaultBoard;

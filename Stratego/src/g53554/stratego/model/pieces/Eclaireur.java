@@ -4,30 +4,30 @@ import g53554.stratego.model.Piece;
 import g53554.stratego.model.PlayerColor;
 
 /**
- * New piece call Bomb
+ * New Piece call Eclaireur
  * @author jussy-lili
  */
-public class Bomb extends Piece {
+public class Eclaireur extends Piece {
 
     /**
-     * constructor of Bomb
-     *
+     * Constructor without nbSteps
      * @param rank
      * @param color
      */
-    public Bomb(int rank, PlayerColor color) {
+
+    public Eclaireur(int rank, PlayerColor color) {
         super(rank, color);
     }
 
     /**
-     * New constructor of Bomb
+     * Constructor with nbSteps
      * @param rank
      * @param color
      * @param nbSteps
      */
 
-    public Bomb(int rank, PlayerColor color, int nbSteps) {
-        super(rank, color, 0);
+    public Eclaireur(int rank, PlayerColor color, int nbSteps) {
+        super(rank, color, 2);
     }
 
 }

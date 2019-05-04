@@ -11,8 +11,11 @@ import org.junit.Before;
 import org.junit.Test;
 import g53554.stratego.model.pieces.Flag;
 import g53554.stratego.model.pieces.General;
-import org.junit.Assert;
-import static org.junit.Assert.assertTrue;
+import g53554.stratego.model.pieces.Bomb;
+import g53554.stratego.model.pieces.Eclaireur;
+import g53554.stratego.model.pieces.Espion;
+import g53554.stratego.model.pieces.Maréchal;
+import g53554.stratego.model.pieces.Miner;
 
 public class GameTest {
 
@@ -30,6 +33,17 @@ public class GameTest {
         defaultBoard[3][2].put(new General(9, RED));
         defaultBoard[4][2].put(new Flag(0, BLUE));
         defaultBoard[4][1].put(new General(9, BLUE));
+        defaultBoard[1][0].put(new Bomb(11, RED));
+        defaultBoard[1][2].put(new Miner(3, RED));
+        defaultBoard[5][1].put(new Maréchal(10, RED));
+        defaultBoard[0][0].put(new Espion(1, RED));
+        defaultBoard[3][0].put(new Eclaireur(2, RED));
+        defaultBoard[3][1].put(new Bomb(11, BLUE));
+        defaultBoard[2][0].put(new Miner(3, BLUE));
+        defaultBoard[2][4].put(new Maréchal(10, BLUE));
+        defaultBoard[0][3].put(new Espion(1, BLUE));
+        defaultBoard[0][2].put(new Eclaireur(2, BLUE));
+
     }
 
     @Test
@@ -119,8 +133,8 @@ public class GameTest {
         System.out.println("testGetSelectedReturnPiece");
         Game instance = new Game();
         instance.initialize();
-        Piece expResult = instance.board.getPiece(new Position(4, 1));
-        instance.selected = new Position(4, 1);
+        Piece expResult = defaultBoard[3][2].getPiece();
+        instance.select(3, 2);
         Piece Result = instance.getSelected();
         assertEquals(expResult, Result);
 
@@ -131,13 +145,12 @@ public class GameTest {
         System.out.println("getMoves");
         Game instance = new Game();
         instance.initialize();
-        instance.selected = new Position(3, 2);
+        instance.select(3, 2);
+        Position position = new Position(3, 2);
         List<Move> listMove = new ArrayList<>();
-        Move mov = new Move(instance.getSelected(), instance.selected, instance.selected.next(Direction.UP));
-        Move mov0 = new Move(instance.getSelected(), instance.selected, instance.selected.next(Direction.DOWN));
-        Move mov2 = new Move(instance.getSelected(), instance.selected, instance.selected.next(Direction.LEFT));
-        Move mov3 = new Move(instance.getSelected(), instance.selected, instance.selected.next(Direction.RIGHT));
-        listMove.add(mov0);
+        Move mov = new Move(instance.getSelected(), new Position(3, 2), position.next(Direction.UP));
+        Move mov2 = new Move(instance.getSelected(), position, position.next(Direction.LEFT));
+        Move mov3 = new Move(instance.getSelected(), position, position.next(Direction.RIGHT));
         listMove.add(mov);
         listMove.add(mov2);
         listMove.add(mov3);
@@ -151,7 +164,7 @@ public class GameTest {
     public void testWhenPositionSelectedIsNull() {
         System.out.println("testWhenPositionSelectedIsNull");
         Game instance = new Game();
-        instance.selected = null;
+        instance.select(0, 0);
         instance.getMoves();
 
     }
@@ -171,12 +184,13 @@ public class GameTest {
         System.out.println("testWhenApplyTheSquareIsFree");
         Game instance = new Game();
         instance.initialize();
-        instance.selected = new Position(4, 1);
-        Move move = new Move(instance.getSelected(), instance.selected,
-                instance.selected.next(Direction.UP));
+        instance.select(4, 2);
+        Position position = new Position(4, 2);
+        Move move = new Move(instance.getSelected(), position,
+                position.next(Direction.UP));
         instance.apply(move);
         Piece result = new General(9, PlayerColor.BLUE);
-        assertEquals(instance.board.getPiece(new Position(3, 1)), result);
+        assertEquals(defaultBoard[3][2].getPiece(), result);
 
     }
 
@@ -185,12 +199,13 @@ public class GameTest {
         System.out.println("testWhenApplyTheSquareIsNotFreeAndStronger");
         Game instance = new Game();
         instance.initialize();
-        instance.selected = new Position(3, 2);
-        Move move = new Move(instance.getSelected(), instance.selected,
-                instance.selected.next(Direction.DOWN));
+        instance.select(3, 2);
+        Position position = new Position(3, 2);
+        Move move = new Move(instance.getSelected(), position,
+                position.next(Direction.DOWN));
         instance.apply(move);
         Piece result = new General(9, PlayerColor.RED);
-        assertEquals(instance.board.getPiece(new Position(4, 2)), result);
+        assertEquals(defaultBoard[3][2].getPiece(), result);
 
     }
 
@@ -199,9 +214,10 @@ public class GameTest {
         System.out.println("testWhenAppltSquareIsNotFreeAndHaveSameRank");
         Game instance = new Game();
         instance.initialize();
-        instance.selected = new Position(0, 1);
-        Move move = new Move(instance.getSelected(), instance.selected,
-                instance.selected.next(Direction.DOWN));
+        instance.select(0, 1);
+        Position position = new Position(0, 1);
+        Move move = new Move(instance.getSelected(), position,
+                position.next(Direction.DOWN));
         instance.apply(move);
 
     }
@@ -216,18 +232,14 @@ public class GameTest {
         System.out.println("testListWinner");
         Game instance = new Game();
         instance.initialize();
-        Player current = instance.current;
-        Player oppenet = instance.opponent;
-        boolean currentFlag = instance.current.hasFlag();
-        boolean oppnentFlag = instance.opponent.hasFlag();
-        currentFlag = false;
-        oppnentFlag = false;
+        Player current = new Player(RED);
+        Player opponet = new Player(BLUE);
         List<Player> expResult = new ArrayList<>();
-        expResult.add(oppenet);
+        expResult.add(opponet);
         expResult.add(current);
         List<Player> result = instance.getWinner();
-        result.add(oppenet);
-        result.add(oppenet);
+        result.add(opponet);
+        result.add(opponet);
 
         assertEquals(expResult, result);
     }
