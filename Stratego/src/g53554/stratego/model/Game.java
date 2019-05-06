@@ -207,39 +207,7 @@ public class Game implements Model {
      */
     @Override
     public List<Move> getMoves() {
-        List<Move> listeMove = new ArrayList<>();
-        for (Direction direction : Direction.values()) {
-            Move endMove = new Move(getSelected(), selected,
-                    selected.next(direction));
-            if (selected == null) {
-                throw new IllegalArgumentException("La position selectionner "
-                        + "est hors du tableau");
-            } else if (!this.board.isInside(selected.next(direction))
-                    && board.getPiece(selected.next(direction))
-                            .getNbSteps() == 0) {
-                listeMove.remove(endMove);
-            } else if ((this.board.isInside(selected.next(direction))
-                    && this.board.isFree(selected.next(direction)))
-                    || (!board.isFree(selected.next(direction))
-                    && !this.board.isMyOwn(selected.next(direction),
-                            current.getColor()))
-                    && getSelected().canCross(board.getSquare(selected.next(direction)))) {
-                listeMove.add(endMove);
-            } else if ((this.board.isInside(selected.next(direction).next(direction))
-                    && this.board.isFree(selected.next(direction).next(direction)))
-                    || (!board.isFree(selected.next(direction).next(direction))
-                    && !this.board.isMyOwn(selected.next(direction).next(direction),
-                            current.getColor()))
-                    && getSelected()
-                            .canCross(board.getSquare(selected.next(direction).next(direction)))
-                    && board.getPiece(selected.next(direction).next(direction)).getNbSteps() == 2) {
-                endMove = new Move(getSelected(), selected,
-                        selected.next(direction).next(direction));
-                listeMove.add(endMove);
-
-            }
-        }
-        return listeMove;
+        return moveCondition();
     }
 
     /**
@@ -259,7 +227,7 @@ public class Game implements Model {
             squareBusy(moves);
 
         }
-          swapPlayer();
+        swapPlayer();
 
     }
 
@@ -346,4 +314,102 @@ public class Game implements Model {
         return listWinner;
     }
 
+    /**
+     * This method return the list of all the move available
+     *
+     * @return list move
+     */
+    private List<Move> moveCondition() {
+        List<Move> listeMove = new ArrayList<>();
+        for (Direction direction : Direction.values()) {
+            Move endMove = new Move(getSelected(), selected,
+                    selected.next(direction));
+            if (selected == null) {
+                throw new IllegalArgumentException("La position selectionner "
+                        + "est hors du tableau");
+            }else{
+                noMove(endMove);
+
+            }
+        }
+        return listeMove;
+
+    }
+
+    /**
+     *
+     * @param listMove
+     * @return
+     */
+    private void noMove(Move move) {
+        List<Move> listeMove = new ArrayList<>();
+        for (Direction direction : Direction.values()) {
+            if (!this.board.isInside(selected.next(direction))
+                    && board.getPiece(selected.next(direction))
+                            .getNbSteps() == 0
+                    && !getSelected().canCross(board.getSquare(selected.next(direction)))) {
+                listeMove.remove(move);
+            }else{
+                moveWithOneStep(move);
+
+            }
+
+        }
+        
+    }
+
+    /**
+     *
+     * @param listMove
+     * @return
+     */
+    private void moveWithOneStep(Move move) {
+        List<Move> listeMove = new ArrayList<>();
+        for (Direction direction : Direction.values()) {
+            if ((this.board.isInside(selected.next(direction))
+                    && this.board.isFree(selected.next(direction)))
+                    || (!board.isFree(selected.next(direction))
+                    && !this.board.isMyOwn(selected.next(direction),
+                            current.getColor()))
+                    && getSelected().canCross(board.getSquare(selected.next(direction)))
+                    && board.getPiece(selected.next(direction))
+                            .getNbSteps() == 1 || board.getPiece(selected.next(direction)).getNbSteps() == 2) {
+                listeMove.add(move);
+            }else{
+                moveWithTwoStep(move);
+                
+
+            }
+
+        }
+       
+    }
+
+    /**
+     *
+     * @param listMove
+     * @return
+     */
+    private List<Move> moveWithTwoStep(Move move) {
+        List<Move> listeMove = new ArrayList<>();
+        for (Direction direction : Direction.values()) {
+            if ((this.board.isInside(selected.next(direction).next(direction))
+                    && this.board.isFree(selected.next(direction).next(direction)))
+                    || (!board.isFree(selected.next(direction).next(direction))
+                    && !this.board.isMyOwn(selected.next(direction).next(direction),
+                            current.getColor()))
+                    && getSelected()
+                            .canCross(board.getSquare(selected.next(direction).next(direction)))
+                    && board.getPiece(selected.next(direction).next(direction)).getNbSteps() == 2) {
+                move = new Move(getSelected(), selected,
+                        selected.next(direction).next(direction));
+                listeMove.add(move);
+
+            }
+
+        }
+        return listeMove;
+        
+
+    }
 }

@@ -23,15 +23,15 @@ public class Board {
         squares = new Square[ROW][COLUMN];
         for (int i = 0; i < squares.length; i++) {
             for (int j = 0; j < squares[i].length; j++) {
-                if (i == 2 && j == 1 && i == 2 && j == 2 && i == 2 && j == 3) {
-                    squares[i][j] = new Square(SquareType.WATER);
-                } else {
-                    squares[i][j] = new Square(SquareType.LAND);
-                }
+                squares[i][j] = new Square(SquareType.LAND);
 
             }
 
         }
+        squares[2][1] = new Square(SquareType.WATER);
+        squares[2][2] = new Square(SquareType.WATER);
+        squares[2][3] = new Square(SquareType.WATER);
+
     }
 
     /**

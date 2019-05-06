@@ -1,8 +1,8 @@
 package g53554.stratego.controller;
+
 import g53554.stratego.model.Model;
 import g53554.stratego.view.View;
 import java.util.ArrayList;
-
 
 /**
  * This class creat the dynamism of the game is where we put all the method
@@ -45,12 +45,13 @@ public class Controller {
         game.start();
         view.displayHelp();
         while (!game.isOver()) {
-            view.displayBoard(game.getBoard());
+            view.displayBoard(game.getBoard(),game.getcurrent());
             System.out.println("");
             view.displayCurrentPlayer(game.getcurrent());
             gameCmde();
 
         }
+
         System.out.println("");
         view.displayOver(game.getWinner());
         view.quit();
@@ -103,7 +104,7 @@ public class Controller {
             column = selectValue(cmde)[1];
             game.select(row, column);
             view.displaySelected(game.getSelected());
-            view.displayBoard(game.getBoard());
+            view.displayBoard(game.getBoard(), game.getcurrent());
             System.out.println("");
             gameCmde();
 

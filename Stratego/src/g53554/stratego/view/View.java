@@ -147,8 +147,9 @@ public class View {
      * This method display the game board for the user or player
      *
      * @param square
+     * @param player
      */
-    public void displayBoard(Square[][] square) {
+    public void displayBoard(Square[][] square, Player player) {
         Board board = new Board();
         System.out.print("  " + "Col#|| ");
         for (int i = 0; i < board.getSquare()[0].length; i++) {
@@ -160,8 +161,8 @@ public class View {
                     System.out.printf("  %nrow#%02d|| ", j);
                     for (int k = 0; k < square[j].length; k++) {
                         Piece piece = square[j][k].getPiece();
-                        displayPiece(piece);
-                        displaySquarebakground(square[j][k]);
+                        displayPiece(piece, square[j][k], player);
+                        //displaySquarebakground(square[j][k]);
 
                     }
 
@@ -178,41 +179,17 @@ public class View {
      *
      * @param piece
      */
-    private void displayPiece(Piece piece) {
+    private void displayPiece(Piece piece, Square square, Player player) {
+        //GE=Géneral, DR=Drapeau , DM=Demineur(Miner), BO=Bomb, ES=Espion, 
+        //MA= Maréchale 
         Color couleur = new Color();
-        if (piece == null) {
+        if (piece == null && square.isLand()) {
             System.out.print(" [" + "\u001b[47m" + "  " + "\u001b[0m" + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 9) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("GE") + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 0) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("DR") + "]");
-        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 9) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("GE") + "]");
-        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 0) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("DR") + "]");
-        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 11) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("BO") + "]");
-        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 3) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("DM") + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 11) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("BO") + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 3) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("DM") + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 1) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("ES") + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 10) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("MA") + "]");
-        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 10) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("MA") + "]");
-        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 1) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("ES") + "]");
-        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 2) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("EC") + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 2) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("EC") + "]");
-
+        } else if (piece == null && !square.isLand()) {
+            System.out.print(" [" + "\u001b[46m" + "  " + "\u001b[0m" + "]");
+        } else {
+            HideCurrentPiece(piece, player);
         }
-
     }
 
     /**
@@ -231,12 +208,16 @@ public class View {
     }
 
     /**
+     * This method hide the current player piece
      *
-     * @param square
+     * @param player
      */
-    private void displaySquarebakground(Square square) {
-        if (!square.isLand()) {
-            System.out.print("\u001b[42m");
+    private void HideCurrentPiece(Piece piece, Player player) {
+        if (player.getColor() == PlayerColor.RED) {
+            hideBluePiece(piece);
+        } else {
+            hideRedPiece(piece);
+
         }
 
     }
@@ -311,4 +292,87 @@ public class View {
 
     }
 
+    /**
+     * This method hide the piece of the Blue player
+     *
+     * @param piece
+     */
+    private void hideBluePiece(Piece piece) {
+        Color couleur = new Color();
+        if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 9) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 0) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 11) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 3) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 1) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 10) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+        } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 2) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+        } else {
+            if (piece.getColor() == PlayerColor.RED && piece.getRank() == 9) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toRed("GE") + "]");
+            } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 0) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toRed("DR") + "]");
+            } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 11) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toRed("BO") + "]");
+            } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 3) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toRed("DM") + "]");
+            } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 10) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toRed("MA") + "]");
+            } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 1) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toRed("ES") + "]");
+            } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 2) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toRed("EC") + "]");
+
+            }
+        }
+
+    }
+
+    /**
+     * This method hide the piece of the RED player
+     *
+     * @param piece
+     */
+    private void hideRedPiece(Piece piece) {
+        Color couleur = new Color();
+        if (piece.getColor() == PlayerColor.RED && piece.getRank() == 9) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 0) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 11) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 3) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 10) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 1) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+        } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 2) {
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+
+        } else {
+            if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 9) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("GE") + "]");
+            } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 0) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("DR") + "]");
+            } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 11) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("BO") + "]");
+            } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 3) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("DM") + "]");
+            } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 1) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("MA") + "]");
+            } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 10) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("ES") + "]");
+            } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 2) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("EC") + "]");
+
+            }
+        }
+    }
 }
