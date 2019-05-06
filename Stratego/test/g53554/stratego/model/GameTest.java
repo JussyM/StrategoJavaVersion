@@ -184,13 +184,13 @@ public class GameTest {
         System.out.println("testWhenApplyTheSquareIsFree");
         Game instance = new Game();
         instance.initialize();
-        instance.select(4, 2);
-        Position position = new Position(4, 2);
+        instance.select(3, 2);
+        Position position = new Position(3, 2);
         Move move = new Move(instance.getSelected(), position,
-                position.next(Direction.UP));
+                position.next(Direction.DOWN));
         instance.apply(move);
         Piece result = new General(9, PlayerColor.BLUE);
-        assertEquals(defaultBoard[3][2].getPiece(), result);
+        assertEquals(defaultBoard[3][3].getPiece(), result);
 
     }
 
@@ -232,15 +232,10 @@ public class GameTest {
         System.out.println("testListWinner");
         Game instance = new Game();
         instance.initialize();
-        Player current = new Player(RED);
-        Player opponet = new Player(BLUE);
         List<Player> expResult = new ArrayList<>();
-        expResult.add(opponet);
-        expResult.add(current);
+        expResult.add(instance.getWinner().get(0));
+        expResult.add(instance.getWinner().get(1));
         List<Player> result = instance.getWinner();
-        result.add(opponet);
-        result.add(opponet);
-
         assertEquals(expResult, result);
     }
 }

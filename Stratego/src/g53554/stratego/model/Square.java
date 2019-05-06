@@ -130,10 +130,11 @@ public class Square {
 
     /**
      * This method return true if the type is on the land
-     * @return boolean 
+     *
+     * @return boolean
      */
     public boolean isLand() {
-        return this.type==SquareType.LAND;
+        return this.type == SquareType.LAND;
 
     }
 

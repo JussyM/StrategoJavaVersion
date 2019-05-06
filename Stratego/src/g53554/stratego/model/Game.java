@@ -1,4 +1,5 @@
 package g53554.stratego.model;
+
 import g53554.stratego.model.pieces.Bomb;
 import g53554.stratego.model.pieces.Eclaireur;
 import g53554.stratego.model.pieces.Espion;
@@ -21,7 +22,7 @@ public class Game implements Model {
     private Board board;
     private Player current;
     private Player opponent;
-    Position selected;
+    private Position selected;
 
     /**
      * This method is the constructor of the game with no parameter and
@@ -222,15 +223,14 @@ public class Game implements Model {
                     || (!board.isFree(selected.next(direction))
                     && !this.board.isMyOwn(selected.next(direction),
                             current.getColor()))
-                    && this.board.getPiece(selected.next(direction))
-                            .canCross(board.getSquare(selected.next(direction)))) {
+                    && getSelected().canCross(board.getSquare(selected.next(direction)))) {
                 listeMove.add(endMove);
             } else if ((this.board.isInside(selected.next(direction).next(direction))
                     && this.board.isFree(selected.next(direction).next(direction)))
                     || (!board.isFree(selected.next(direction).next(direction))
                     && !this.board.isMyOwn(selected.next(direction).next(direction),
                             current.getColor()))
-                    && this.board.getPiece(selected.next(direction).next(direction))
+                    && getSelected()
                             .canCross(board.getSquare(selected.next(direction).next(direction)))
                     && board.getPiece(selected.next(direction).next(direction)).getNbSteps() == 2) {
                 endMove = new Move(getSelected(), selected,
@@ -259,7 +259,7 @@ public class Game implements Model {
             squareBusy(moves);
 
         }
-        swapPlayer();
+          swapPlayer();
 
     }
 
@@ -316,7 +316,7 @@ public class Game implements Model {
         boolean hasMove = false;
         for (Direction direction : Direction.values()) {
             if (!board.getTakenSquare(player).isEmpty()
-                    && board.getPiece(selected.next(direction)
+                    || board.getPiece(selected.next(direction)
                     ).canCross(this.board.getSquare(selected.next(direction)))) {
                 hasMove = true;
 

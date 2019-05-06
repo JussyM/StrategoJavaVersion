@@ -23,24 +23,7 @@ public class Board {
         squares = new Square[ROW][COLUMN];
         for (int i = 0; i < squares.length; i++) {
             for (int j = 0; j < squares[i].length; j++) {
-                squares[i][j] = new Square();
-
-            }
-
-        }
-    }
-
-    /**
-     * New constructor of board
-     *
-     * @param squares
-     */
-    public Board(Square[][] squares) {
-        this.squares = squares;
-        squares = new Square[ROW][COLUMN];
-        for (int i = 0; i < squares.length; i++) {
-            for (int j = 0; j < squares[i].length; j++) {
-                if (i == 2 && j == 1 || i == 2 && j == 2 || i == 2 && j == 3) {
+                if (i == 2 && j == 1 && i == 2 && j == 2 && i == 2 && j == 3) {
                     squares[i][j] = new Square(SquareType.WATER);
                 } else {
                     squares[i][j] = new Square(SquareType.LAND);
@@ -49,7 +32,6 @@ public class Board {
             }
 
         }
-
     }
 
     /**

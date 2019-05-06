@@ -343,7 +343,7 @@ public class BoardTest {
     @Test
     public void testNewDefaultBoard() {
         System.out.println("testNewDefaultBoard");
-        Board board = new Board(newDefaultBoard);
+        Board board = new Board();
         Square[][] expResult = newDefaultBoard;
         Square[][] result = board.getSquare();
         Assert.assertArrayEquals(expResult, result);

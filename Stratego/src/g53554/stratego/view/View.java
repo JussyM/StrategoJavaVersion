@@ -181,35 +181,35 @@ public class View {
     private void displayPiece(Piece piece) {
         Color couleur = new Color();
         if (piece == null) {
-            System.out.print(" [" + "\u001b[45m" + "  " + "\u001b[0m" + "]");
+            System.out.print(" [" + "\u001b[47m" + "  " + "\u001b[0m" + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 9) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toBlue("GE") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("GE") + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 0) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toBlue("DR") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("DR") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 9) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toRed("GE") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("GE") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 0) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toRed("DR") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("DR") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 11) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toRed("BO") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("BO") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 3) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toRed("DM") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("DM") + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 11) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toBlue("BO") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("BO") + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 3) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toBlue("DM") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("DM") + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 1) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toBlue("ES") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("ES") + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 10) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toBlue("MA") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("MA") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 10) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toRed("MA") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("MA") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 1) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toRed("ES") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("ES") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 2) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toRed("EC") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("EC") + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 2) {
-            System.out.print(" [" + "\u001b[42m" + couleur.toRed("EC") + "]");
+            System.out.print(" [" + "\u001b[47m" + couleur.toRed("EC") + "]");
 
         }
 
@@ -235,10 +235,8 @@ public class View {
      * @param square
      */
     private void displaySquarebakground(Square square) {
-        if (square.isLand()) {
-            System.out.print("\u001b[40m" + "\u001b[0m");
-        } else {
-            System.out.print("\u001b[46m" + "\u001b[0m");
+        if (!square.isLand()) {
+            System.out.print("\u001b[42m");
         }
 
     }
