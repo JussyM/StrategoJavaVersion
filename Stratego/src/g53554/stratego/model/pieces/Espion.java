@@ -28,6 +28,8 @@ public class Espion extends Piece {
 
     public Espion(int rank, PlayerColor color, int nbSteps) {
         super(rank, color, 1);
+        
+                
     }
 
 }

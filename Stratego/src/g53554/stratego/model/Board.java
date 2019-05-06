@@ -167,7 +167,8 @@ public class Board {
         for (int i = 0; i < this.squares.length; i++) {
             for (int j = 0; j < this.squares[i].length; j++) {
                 positionPlayer = new Position(i, j);
-                if (this.squares[i][j].getPiece() != null && this.isMyOwn(positionPlayer, player.getColor())) {
+                if (this.squares[i][j].getPiece() != null
+                        && this.isMyOwn(positionPlayer, player.getColor())) {
 
                     listPosition.add(positionPlayer);
                 }

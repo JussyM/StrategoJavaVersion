@@ -12,14 +12,23 @@ public class Flag extends Piece {
 
     /**
      * This is the constructor of the classflag
+     *
      * @param rank
      * @param color
      */
-
     public Flag(int rank, PlayerColor color) {
         super(rank, color);
     }
-    
-    
+
+    /**
+     *
+     * @param rank
+     * @param color
+     * @param nbSteps
+     */
+
+    public Flag(int rank, PlayerColor color, int nbSteps) {
+        super(rank, color, 0);  
+    }
 
 }

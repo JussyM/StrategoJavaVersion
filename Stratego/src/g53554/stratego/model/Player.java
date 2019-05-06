@@ -3,7 +3,7 @@ package g53554.stratego.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import g53554.stratego.model.pieces.Flag;
+
 
 /**
  * This is the class that creat the player and all his option like the color of

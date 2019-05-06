@@ -45,7 +45,7 @@ public class Controller {
         game.start();
         view.displayHelp();
         while (!game.isOver()) {
-            view.displayBoard(game.getBoard(),game.getcurrent());
+            view.displayBoard(game.getBoard(), game.getcurrent());
             System.out.println("");
             view.displayCurrentPlayer(game.getcurrent());
             gameCmde();
@@ -125,8 +125,11 @@ public class Controller {
             applyValue = selectValue(cmde)[0];
             game.apply(game.getMoves().get(applyValue));
 
-        }
+        } else {
+            System.out.println("La commande entrez n'est pas valable :(");
+            gameCmde();
 
+        }
     }
 
 }

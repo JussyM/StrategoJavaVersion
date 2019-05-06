@@ -19,4 +19,9 @@ public class General extends Piece {
         super(rank, color);
     }
 
+    public General(int rank, PlayerColor color, int nbSteps) {
+        super(rank, color, 0);
+    }
+    
+
 }

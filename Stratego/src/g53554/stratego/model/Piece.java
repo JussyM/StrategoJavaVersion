@@ -11,7 +11,7 @@ public class Piece {
 
     private int rank;
     private PlayerColor color;
-    private int nbSteps;
+    private int nbSteps=1;
 
     /**
      * This method initialized the attribut of the class Piece
@@ -41,7 +41,8 @@ public class Piece {
         }
         this.rank = rank;
         this.color = color;
-        this.nbSteps = 1;
+        this.nbSteps = nbSteps;
+       
 
     }
 
@@ -105,9 +106,9 @@ public class Piece {
 
     /**
      * getter for nbrSteps
+     *
      * @return nbSteps
      */
-
     public int getNbSteps() {
         return nbSteps;
     }
