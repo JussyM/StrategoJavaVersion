@@ -10,10 +10,6 @@ import g53554.stratego.model.PlayerColor;
  */
 public class Eclaireur extends Piece {
 
-    public Eclaireur(int rank, PlayerColor color) {
-        super(rank, color);
-    }
-
     /**
      * Constructor with nbSteps
      *

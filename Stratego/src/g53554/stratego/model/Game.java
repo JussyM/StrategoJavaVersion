@@ -55,10 +55,10 @@ public class Game implements Model {
         board.put(new Espion(1, PlayerColor.BLUE), new Position(0, 3));
         board.put(new Maréchal(10, PlayerColor.BLUE), new Position(2, 4));
         board.put(new Miner(3, PlayerColor.BLUE), new Position(2, 0));
-        board.put(new Eclaireur(2, PlayerColor.BLUE), new Position(0, 2));
-        board.put(new Eclaireur(2, PlayerColor.RED), new Position(3, 0));
+        board.put(new Eclaireur(PlayerColor.BLUE), new Position(0, 2));
+        board.put(new Eclaireur(PlayerColor.RED), new Position(0, 4));
         current.addPiece(new Flag(0, PlayerColor.RED));
-        opponent.addPiece(new General(0, PlayerColor.BLUE));
+        opponent.addPiece(new Flag(0, PlayerColor.BLUE));
         opponent.addPiece(new General(9, PlayerColor.BLUE));
         current.addPiece(new Bomb(11, PlayerColor.RED));
         current.addPiece(new Espion(1, PlayerColor.RED));
@@ -68,8 +68,8 @@ public class Game implements Model {
         opponent.addPiece(new Espion(1, PlayerColor.BLUE));
         opponent.addPiece(new Maréchal(10, PlayerColor.BLUE));
         opponent.addPiece(new Miner(3, PlayerColor.BLUE));
-        current.addPiece(new Eclaireur(2, PlayerColor.RED));
-        opponent.addPiece(new Eclaireur(2, PlayerColor.BLUE));
+        current.addPiece(new Eclaireur(PlayerColor.RED));
+        opponent.addPiece(new Eclaireur(PlayerColor.BLUE));
 
     }
 
@@ -216,6 +216,12 @@ public class Game implements Model {
         } else if (getSelected().getNbSteps() == 1) {
             listeMove = moveNbStepIsOne();
         } else if (getSelected().getNbSteps() == 2) {
+            for (int i = 0; i < listeMove.size(); i++) {
+                if (isPossible(moveNbStepIsOne())) {
+                    moveNbStepIsTwo().add(moveNbStepIsOne().get(i));
+                }
+
+            }
             listeMove = moveNbStepIsTwo();
 
         }
@@ -368,7 +374,7 @@ public class Game implements Model {
         for (Direction direction : Direction.values()) {
             Move move = new Move(getSelected(), selected, selected.next(direction)
                     .next(direction));
-            if (!this.board.isInside(selected.next(direction).next(direction))) {
+            if (!this.board.isInside(move.getEnd())) {
                 listeMove.remove(move);
             } else if (this.board.isInside(move.getEnd())
                     && this.board.isFree(move.getEnd())
@@ -382,6 +388,29 @@ public class Game implements Model {
         }
 
         return listeMove;
+    }
+
+    /**
+     * This method check if a move is possible
+     *
+     * @param move
+     * @return boolean
+     */
+    private boolean isPossible(List<Move> move) {
+        for (int i = 0; i < move.size(); i++) {
+            if (this.board.isInside(move.get(i).getEnd())
+                    && this.board.isFree(move.get(i).getEnd())
+                    && getSelected().canCross(board.getSquare(move.get(i).getEnd()))
+                    || (!board.isFree(move.get(i).getEnd())
+                    && !this.board.isMyOwn(move.get(i).getEnd(),
+                            current.getColor()))) {
+                return true;
+
+            }
+
+        }
+
+        return false;
     }
 
 }

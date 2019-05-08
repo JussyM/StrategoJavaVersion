@@ -181,7 +181,6 @@ public class View {
     private void displayPiece(Piece piece, Square square, Player player) {
         //GE=Géneral, DR=Drapeau , DM=Demineur(Miner), BO=Bomb, ES=Espion, 
         //MA= Maréchale 
-        Color couleur = new Color();
         if (piece == null && square.isLand()) {
             System.out.print(" [" + "\u001b[47m" + "  " + "\u001b[0m" + "]");
         } else if (piece == null && !square.isLand()) {
@@ -228,13 +227,18 @@ public class View {
      */
     public void displayOver(List<Player> Winner) {
         for (int i = 0; i < Winner.size(); i++) {
-            if (Winner.get(i).getColor() == PlayerColor.RED) {
-                System.out.println("Félicitation joueur rouge ");
-            } else if (Winner.get(i).getColor() == PlayerColor.BLUE) {
-                System.out.println("Félicitation joueur bleu ");
-            } else {
+            if (null == Winner.get(i).getColor()) {
                 System.out.println("Félicitation joueur bleu et rouge ");
 
+            } else {
+                switch (Winner.get(i).getColor()) {
+                    case RED:
+                        System.out.println("Félicitation joueur rouge vous avez gagné ");
+                        break;
+                    case BLUE:
+                        System.out.println("Félicitation joueur bleu vous avez gagné ");
+                        break;
+                }
             }
 
         }
