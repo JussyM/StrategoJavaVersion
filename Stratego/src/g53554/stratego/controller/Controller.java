@@ -53,6 +53,8 @@ public class Controller {
             gameCmde();
         } while (!game.isOver() && !quit());
         if (game.isOver()) {
+            view.displayBoard(game.getBoard(), game.getcurrent());
+            System.out.println("");
             view.displayOver(game.getWinner());
         }
 

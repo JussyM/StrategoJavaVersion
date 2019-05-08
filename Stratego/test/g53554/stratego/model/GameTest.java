@@ -19,14 +19,6 @@ import g53554.stratego.model.pieces.Miner;
 import static org.junit.Assert.assertTrue;
 
 public class GameTest {
-
-    private final Square[][] defaultBoard = {
-        {new Square(), new Square(), new Square(), new Square(), new Square()},
-        {new Square(), new Square(), new Square(), new Square(), new Square()},
-        {new Square(), new Square(), new Square(), new Square(), new Square()},
-        {new Square(), new Square(), new Square(), new Square(), new Square()},
-        {new Square(), new Square(), new Square(), new Square(), new Square()},
-        {new Square(), new Square(), new Square(), new Square(), new Square()}};
     private final Square[][] newDefaultBoard = {
         {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
             new Square(SquareType.LAND), new Square(SquareType.LAND)},
@@ -228,7 +220,10 @@ public class GameTest {
         Position position = new Position(0, 1);
         Move move = new Move(instance.getSelected(), position,
                 position.next(Direction.DOWN));
+        Piece expResult= null;
         instance.apply(move);
+        Piece result = instance.getSelected();
+        assertEquals(expResult, result);
 
     }
 

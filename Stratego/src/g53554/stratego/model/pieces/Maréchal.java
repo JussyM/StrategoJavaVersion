@@ -10,7 +10,8 @@ import g53554.stratego.model.PlayerColor;
 public class Maréchal extends Piece {
 
     public Maréchal(PlayerColor color) {
-        super(11, color);
+        super(10
+                , color);
     }
 
 }

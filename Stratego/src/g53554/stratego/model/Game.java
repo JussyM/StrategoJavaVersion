@@ -369,17 +369,26 @@ public class Game implements Model {
         for (Direction direction : Direction.values()) {
             Move move = new Move(getSelected(), selected, selected.next(direction)
                     .next(direction));
-            if (!this.board.isInside(move.getEnd())) {
-                listeMove.remove(move);
-            } else if (this.board.isInside(move.getEnd())
-                    && this.board.isFree(move.getEnd())
-                    && getSelected().canCross(board.getSquare(move.getEnd()))
-                    || (!board.isFree(move.getEnd())
-                    && !this.board.isMyOwn(move.getEnd(),
-                            current.getColor()))) {
-                listeMove.add(move);
-            }
+            Move move1 = new Move(getSelected(), selected, selected.next(direction));
+            if (!isPossible(move1)) {
+                listeMove.remove(move1);
+            } else {
+                listeMove.add(move1);
 
+                if (!this.board.isInside(move.getEnd())) {
+                    listeMove.remove(move);
+                } else {
+                    if (this.board.isInside(move.getEnd())
+                            && this.board.isFree(move.getEnd())
+                            && getSelected().canCross(board.getSquare(move.getEnd()))
+                            || (!board.isFree(move.getEnd())
+                            && !this.board.isMyOwn(move.getEnd(),
+                                    current.getColor()))) {
+                        listeMove.add(move);
+                    }
+                }
+
+            }
         }
 
         return listeMove;
@@ -391,21 +400,24 @@ public class Game implements Model {
      * @param move
      * @return boolean
      */
-    private boolean isPossible(List<Move> move) {
-        for (int i = 0; i < move.size(); i++) {
-            if (this.board.isInside(move.get(i).getEnd())
-                    && this.board.isFree(move.get(i).getEnd())
-                    && getSelected().canCross(board.getSquare(move.get(i).getEnd()))
-                    || (!board.isFree(move.get(i).getEnd())
-                    && !this.board.isMyOwn(move.get(i).getEnd(),
+    private boolean isPossible(Move move) {
+        boolean tralala = false;
+        if (!this.board.isInside(move.getEnd())) {
+            tralala = false;
+        } else {
+            if (this.board.isInside(move.getEnd())
+                    && this.board.isFree(move.getEnd())
+                    && getSelected().canCross(board.getSquare(move.getEnd()))
+                    || (!board.isFree(move.getEnd())
+                    && !this.board.isMyOwn(move.getEnd(),
                             current.getColor()))) {
-                return true;
+                tralala = true;
 
             }
 
         }
 
-        return false;
+        return tralala;
     }
 
 }
