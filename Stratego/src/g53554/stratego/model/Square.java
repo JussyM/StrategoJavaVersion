@@ -108,14 +108,7 @@ public class Square {
      * @return checkColor
      */
     public boolean isMyOwn(PlayerColor color) {
-        boolean checkColor = false;
-        if (this.piece.getColor() == color) {
-            checkColor = true;
-        } else if (this.piece.getColor() != color || isFree()) {
-            checkColor = false;
-
-        }
-        return checkColor;
+        return this.piece.getColor() == color || isFree();
     }
 
     /**

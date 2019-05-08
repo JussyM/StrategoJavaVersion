@@ -325,8 +325,8 @@ public class BoardTest {
     public void testListPosition() {
         System.out.println("testListPosition");
         Board board = new Board();
-        board.put(new General(9, PlayerColor.RED), new Position(0, 1));
-        board.put(new Flag(0, PlayerColor.RED), new Position(3, 2));
+        board.put(new General(PlayerColor.RED), new Position(0, 1));
+        board.put(new Flag(PlayerColor.RED), new Position(3, 2));
         defaultBoard[0][1].put(new Piece(0, PlayerColor.RED));
         defaultBoard[3][2].put(new Piece(0, PlayerColor.RED));
         List<Position> expResult = new ArrayList<>();

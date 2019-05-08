@@ -10,8 +10,8 @@ import g53554.stratego.model.PlayerColor;
  */
 public class Bomb extends Piece {
 
-    public Bomb(int rank, PlayerColor color) {
-        super(rank, color,0);
+    public Bomb(PlayerColor color) {
+        super(11, color, 0);
     }
 
 }

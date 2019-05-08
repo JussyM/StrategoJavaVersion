@@ -43,31 +43,31 @@ public class Game implements Model {
         board = new Board();
         this.current = new Player(PlayerColor.RED);
         this.opponent = new Player(PlayerColor.BLUE);
-        board.put(new Flag(0, PlayerColor.RED), new Position(0, 1));
-        board.put(new General(9, PlayerColor.RED), new Position(3, 2));
-        board.put(new Flag(0, PlayerColor.BLUE), new Position(4, 2));
-        board.put(new General(9, PlayerColor.BLUE), new Position(4, 1));
-        board.put(new Bomb(11, PlayerColor.RED), new Position(1, 0));
-        board.put(new Espion(1, PlayerColor.RED), new Position(0, 0));
-        board.put(new Maréchal(10, PlayerColor.RED), new Position(5, 1));
-        board.put(new Miner(3, PlayerColor.RED), new Position(1, 2));
-        board.put(new Bomb(11, PlayerColor.BLUE), new Position(3, 1));
-        board.put(new Espion(1, PlayerColor.BLUE), new Position(0, 3));
-        board.put(new Maréchal(10, PlayerColor.BLUE), new Position(2, 4));
-        board.put(new Miner(3, PlayerColor.BLUE), new Position(2, 0));
+        board.put(new Flag(PlayerColor.RED), new Position(0, 1));
+        board.put(new General(PlayerColor.RED), new Position(3, 2));
+        board.put(new Flag(PlayerColor.BLUE), new Position(4, 2));
+        board.put(new General(PlayerColor.BLUE), new Position(4, 1));
+        board.put(new Bomb(PlayerColor.RED), new Position(1, 0));
+        board.put(new Espion(PlayerColor.RED), new Position(0, 0));
+        board.put(new Maréchal(PlayerColor.RED), new Position(5, 1));
+        board.put(new Miner(PlayerColor.RED), new Position(1, 2));
+        board.put(new Bomb(PlayerColor.BLUE), new Position(3, 1));
+        board.put(new Espion(PlayerColor.BLUE), new Position(0, 3));
+        board.put(new Maréchal(PlayerColor.BLUE), new Position(2, 4));
+        board.put(new Miner(PlayerColor.BLUE), new Position(2, 0));
         board.put(new Eclaireur(PlayerColor.BLUE), new Position(0, 2));
         board.put(new Eclaireur(PlayerColor.RED), new Position(0, 4));
-        current.addPiece(new Flag(0, PlayerColor.RED));
-        opponent.addPiece(new Flag(0, PlayerColor.BLUE));
-        opponent.addPiece(new General(9, PlayerColor.BLUE));
-        current.addPiece(new Bomb(11, PlayerColor.RED));
-        current.addPiece(new Espion(1, PlayerColor.RED));
-        current.addPiece(new Maréchal(10, PlayerColor.RED));
-        current.addPiece(new Miner(3, PlayerColor.RED));
-        opponent.addPiece(new Bomb(11, PlayerColor.BLUE));
-        opponent.addPiece(new Espion(1, PlayerColor.BLUE));
-        opponent.addPiece(new Maréchal(10, PlayerColor.BLUE));
-        opponent.addPiece(new Miner(3, PlayerColor.BLUE));
+        current.addPiece(new Flag(PlayerColor.RED));
+        opponent.addPiece(new Flag(PlayerColor.BLUE));
+        opponent.addPiece(new General(PlayerColor.BLUE));
+        current.addPiece(new Bomb(PlayerColor.RED));
+        current.addPiece(new Espion(PlayerColor.RED));
+        current.addPiece(new Maréchal(PlayerColor.RED));
+        current.addPiece(new Miner(PlayerColor.RED));
+        opponent.addPiece(new Bomb(PlayerColor.BLUE));
+        opponent.addPiece(new Espion(PlayerColor.BLUE));
+        opponent.addPiece(new Maréchal(PlayerColor.BLUE));
+        opponent.addPiece(new Miner(PlayerColor.BLUE));
         current.addPiece(new Eclaireur(PlayerColor.RED));
         opponent.addPiece(new Eclaireur(PlayerColor.BLUE));
 
@@ -214,7 +214,7 @@ public class Game implements Model {
         } else if (getSelected().getNbSteps() == 0) {
             listeMove = listeMove;
         } else if (getSelected().getNbSteps() == 1) {
-            if(getSelected().getNbSteps() == 2);
+            if (getSelected().getNbSteps() == 2);
             listeMove = moveNbStepIsOne();
         } else if (getSelected().getNbSteps() == 2) {
             listeMove = moveNbStepIsTwo();

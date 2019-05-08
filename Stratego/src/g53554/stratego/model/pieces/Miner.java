@@ -9,8 +9,8 @@ import g53554.stratego.model.PlayerColor;
  */
 public class Miner extends Piece {
 
-    public Miner(int rank, PlayerColor color) {
-        super(rank, color);
+    public Miner(PlayerColor color) {
+        super(3, color);
     }
 
     public Miner(int rank, PlayerColor color, int nbSteps) {

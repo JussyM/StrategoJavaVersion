@@ -9,8 +9,8 @@ import g53554.stratego.model.PlayerColor;
  */
 public class Maréchal extends Piece {
 
-    public Maréchal(int rank, PlayerColor color) {
-        super(rank, color);
+    public Maréchal(PlayerColor color) {
+        super(11, color);
     }
 
 }

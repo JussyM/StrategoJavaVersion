@@ -10,7 +10,7 @@ import g53554.stratego.model.PlayerColor;
  */
 public class Flag extends Piece {
 
-    public Flag(int rank,PlayerColor color) {
+    public Flag(PlayerColor color) {
         super(0, color, 0);
     }
 

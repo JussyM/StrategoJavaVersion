@@ -9,8 +9,8 @@ import g53554.stratego.model.PlayerColor;
  */
 public class General extends Piece {
 
-    public General(int rank, PlayerColor color) {
-        super(rank, color);
+    public General(PlayerColor color) {
+        super(9, color);
     }
 
 }

@@ -43,18 +43,18 @@ public class GameTest {
 
     @Before
     public void setUp() throws Exception {
-        newDefaultBoard[0][1].put(new Flag(0, RED));
-        newDefaultBoard[3][2].put(new General(9, RED));
-        newDefaultBoard[4][2].put(new Flag(0, BLUE));
-        newDefaultBoard[4][1].put(new General(9, BLUE));
-        newDefaultBoard[1][0].put(new Bomb(11, RED));
-        newDefaultBoard[1][2].put(new Miner(3, RED));
-        newDefaultBoard[5][1].put(new Maréchal(10, RED));
-        newDefaultBoard[0][0].put(new Espion(1, RED));
-        newDefaultBoard[3][1].put(new Bomb(11, BLUE));
-        newDefaultBoard[2][0].put(new Miner(3, BLUE));
-        newDefaultBoard[2][4].put(new Maréchal(10, BLUE));
-        newDefaultBoard[0][3].put(new Espion(1, BLUE));
+        newDefaultBoard[0][1].put(new Flag(RED));
+        newDefaultBoard[3][2].put(new General(RED));
+        newDefaultBoard[4][2].put(new Flag(BLUE));
+        newDefaultBoard[4][1].put(new General(BLUE));
+        newDefaultBoard[1][0].put(new Bomb(RED));
+        newDefaultBoard[1][2].put(new Miner(RED));
+        newDefaultBoard[5][1].put(new Maréchal(RED));
+        newDefaultBoard[0][0].put(new Espion(RED));
+        newDefaultBoard[3][1].put(new Bomb(BLUE));
+        newDefaultBoard[2][0].put(new Miner(BLUE));
+        newDefaultBoard[2][4].put(new Maréchal(BLUE));
+        newDefaultBoard[0][3].put(new Espion(BLUE));
         newDefaultBoard[0][2].put(new Eclaireur(BLUE));
         newDefaultBoard[0][4].put(new Eclaireur(RED));
 
@@ -198,7 +198,7 @@ public class GameTest {
                 position.next(Direction.DOWN));
         Piece result = instance.getSelected();
         instance.apply(move);
-        Piece expResult = new Flag(9, PlayerColor.RED);
+        Piece expResult = new Flag(PlayerColor.RED);
         assertEquals(expResult, result);
 
     }
@@ -214,7 +214,7 @@ public class GameTest {
                 position.next(Direction.DOWN));
         Piece result = instance.getSelected();
         instance.apply(move);
-        Piece expResult = new General(9, RED);
+        Piece expResult = new General(RED);
         assertEquals(expResult, result);
 
     }

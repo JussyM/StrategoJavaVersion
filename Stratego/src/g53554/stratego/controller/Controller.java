@@ -1,5 +1,6 @@
 package g53554.stratego.controller;
 
+import g53554.stratego.main.Color;
 import g53554.stratego.model.Model;
 import g53554.stratego.view.View;
 import java.util.ArrayList;
@@ -51,7 +52,9 @@ public class Controller {
             view.displayCurrentPlayer(game.getcurrent());
             gameCmde();
         } while (!game.isOver() && !quit());
-        view.displayOver(game.getWinner());
+        if (game.isOver()) {
+            view.displayOver(game.getWinner());
+        }
 
     }
 
@@ -86,6 +89,7 @@ public class Controller {
      * @param cmde
      */
     private void gameCmde() {
+        Color couleur = new Color();
         cmd = view.askCommand();
         String endGamecmde = "quit";
         String piecePostionCmde = "select(.*)";
@@ -98,33 +102,48 @@ public class Controller {
             view.quit();
 
         } else if (cmd.matches(piecePostionCmde)) {
-            row = selectValue(cmd)[0];
-            column = selectValue(cmd)[1];
-            game.select(row, column);
-            view.displaySelected(game.getSelected());
-            view.displayBoard(game.getBoard(), game.getcurrent());
-            System.out.println("");
-            gameCmde();
+            try {
+                row = selectValue(cmd)[0];
+                column = selectValue(cmd)[1];
+                game.select(row, column);
+                view.displaySelected(game.getSelected());
+                view.displayBoard(game.getBoard(), game.getcurrent());
+                System.out.println("");
+                gameCmde();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(couleur.toRed("commande imcomplete"));
+                System.out.println("");
+                gameCmde();
+            }
 
         } else if (cmd.matches(movePieceCmd)) {
-            if (game.getSelected() == null) {
-                try {
-                    throw new IllegalArgumentException();
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Aucune piece n'a été selectioner: ");
+            try {
+                if (game.getSelected() == null);
 
-                }
-            } else {
-                view.displayMoves(game.getMoves());
+            } catch (IllegalArgumentException e) {
+                System.out.println(couleur.toRed("Aucune piece n'a été selectioner "));
+                System.out.println(couleur.toRed("commande imcomplete"));
+                System.out.println("Veuillez ressayé");
+                System.out.println("");
+                gameCmde();
+            }
+            view.displayMoves(game.getMoves());
+            gameCmde();
+        } else if (cmd.matches(applyMoveCmd)) {
+            try {
+                applyValue = selectValue(cmd)[0];
+                game.apply(game.getMoves().get(applyValue));
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(couleur.toRed("commande imcomplete"));
+                System.out.println("");
                 gameCmde();
 
             }
-        } else if (cmd.matches(applyMoveCmd)) {
-            applyValue = selectValue(cmd)[0];
-            game.apply(game.getMoves().get(applyValue));
 
         } else {
             System.out.println("La commande entrez n'est pas valable :(");
+            System.out.println("Veuillez ressayé");
+            System.out.println("");
             gameCmde();
 
         }

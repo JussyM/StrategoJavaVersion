@@ -2,7 +2,6 @@ package g53554.stratego.model;
 
 import static g53554.stratego.model.PlayerColor.BLUE;
 import static g53554.stratego.model.PlayerColor.RED;
-import g53554.stratego.model.pieces.Flag;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
