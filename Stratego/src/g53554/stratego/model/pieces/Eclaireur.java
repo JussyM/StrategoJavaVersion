@@ -5,15 +5,10 @@ import g53554.stratego.model.PlayerColor;
 
 /**
  * New Piece call Eclaireur
+ *
  * @author jussy-lili
  */
 public class Eclaireur extends Piece {
-
-    /**
-     * Constructor without nbSteps
-     * @param rank
-     * @param color
-     */
 
     public Eclaireur(int rank, PlayerColor color) {
         super(rank, color);
@@ -21,13 +16,11 @@ public class Eclaireur extends Piece {
 
     /**
      * Constructor with nbSteps
-     * @param rank
+     *
      * @param color
-     * @param nbSteps
      */
-
-    public Eclaireur(int rank, PlayerColor color, int nbSteps) {
-        super(rank, color, 2);
+    public Eclaireur(PlayerColor color) {
+        super(2, color, 2);
     }
 
 }

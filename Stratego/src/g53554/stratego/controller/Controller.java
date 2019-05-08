@@ -14,6 +14,7 @@ public class Controller {
 
     private Model game;
     private View view;
+    private String cmd;
 
     /**
      * This method initialized the attribute declared
@@ -44,17 +45,14 @@ public class Controller {
     public void startGame() {
         game.start();
         view.displayHelp();
-        while (!game.isOver()) {
+        do {
             view.displayBoard(game.getBoard(), game.getcurrent());
             System.out.println("");
             view.displayCurrentPlayer(game.getcurrent());
             gameCmde();
-
-        }
-
-        System.out.println("");
+        } while (!game.isOver() && !quit());
         view.displayOver(game.getWinner());
-        view.quit();
+
     }
 
     /**
@@ -88,7 +86,7 @@ public class Controller {
      * @param cmde
      */
     private void gameCmde() {
-        String cmde = view.askCommand();
+        cmd = view.askCommand();
         String endGamecmde = "quit";
         String piecePostionCmde = "select(.*)";
         String movePieceCmd = "move(.*)";
@@ -96,19 +94,19 @@ public class Controller {
         int row;
         int column;
         int applyValue;
-        if (cmde.matches(endGamecmde)) {
+        if (cmd.matches(endGamecmde)) {
             view.quit();
 
-        } else if (cmde.matches(piecePostionCmde)) {
-            row = selectValue(cmde)[0];
-            column = selectValue(cmde)[1];
+        } else if (cmd.matches(piecePostionCmde)) {
+            row = selectValue(cmd)[0];
+            column = selectValue(cmd)[1];
             game.select(row, column);
             view.displaySelected(game.getSelected());
             view.displayBoard(game.getBoard(), game.getcurrent());
             System.out.println("");
             gameCmde();
 
-        } else if (cmde.matches(movePieceCmd)) {
+        } else if (cmd.matches(movePieceCmd)) {
             if (game.getSelected() == null) {
                 try {
                     throw new IllegalArgumentException();
@@ -121,8 +119,8 @@ public class Controller {
                 gameCmde();
 
             }
-        } else if (cmde.matches(applyMoveCmd)) {
-            applyValue = selectValue(cmde)[0];
+        } else if (cmd.matches(applyMoveCmd)) {
+            applyValue = selectValue(cmd)[0];
             game.apply(game.getMoves().get(applyValue));
 
         } else {
@@ -132,4 +130,7 @@ public class Controller {
         }
     }
 
+    private boolean quit() {
+        return cmd.equals("quit");
+    }
 }

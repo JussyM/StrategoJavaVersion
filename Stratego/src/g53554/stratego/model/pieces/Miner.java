@@ -9,24 +9,23 @@ import g53554.stratego.model.PlayerColor;
  */
 public class Miner extends Piece {
 
-    /**
-     * Constructor of Miner
-     *
-     * @param rank
-     * @param color
-     */
     public Miner(int rank, PlayerColor color) {
         super(rank, color);
     }
 
+    public Miner(int rank, PlayerColor color, int nbSteps) {
+        super(rank, color, nbSteps);
+    }
+
     /**
-     * cherck if the Miner is Stronger 
+     * cherck if the Miner is Stronger
+     *
      * @param other
-     * @return boolean 
+     * @return boolean
      */
     @Override
     public boolean isStronger(Piece other) {
-        return super.isStronger(other)|| other.getRank()==11;
+        return super.isStronger(other) || other.getRank() == 11;
     }
 
 }

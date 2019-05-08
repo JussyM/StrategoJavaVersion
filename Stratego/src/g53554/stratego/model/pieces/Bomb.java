@@ -5,29 +5,13 @@ import g53554.stratego.model.PlayerColor;
 
 /**
  * New piece call Bomb
+ *
  * @author jussy-lili
  */
 public class Bomb extends Piece {
 
-    /**
-     * constructor of Bomb
-     *
-     * @param rank
-     * @param color
-     */
     public Bomb(int rank, PlayerColor color) {
-        super(rank, color);
-    }
-
-    /**
-     * New constructor of Bomb
-     * @param rank
-     * @param color
-     * @param nbSteps
-     */
-
-    public Bomb(int rank, PlayerColor color, int nbSteps) {
-        super(rank, color, 0);
+        super(rank, color,0);
     }
 
 }

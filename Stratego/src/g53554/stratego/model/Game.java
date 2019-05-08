@@ -59,7 +59,6 @@ public class Game implements Model {
         board.put(new Eclaireur(2, PlayerColor.RED), new Position(3, 0));
         current.addPiece(new Flag(0, PlayerColor.RED));
         opponent.addPiece(new General(0, PlayerColor.BLUE));
-        current.addPiece(new Flag(9, PlayerColor.RED));
         opponent.addPiece(new General(9, PlayerColor.BLUE));
         current.addPiece(new Bomb(11, PlayerColor.RED));
         current.addPiece(new Espion(1, PlayerColor.RED));
@@ -94,12 +93,13 @@ public class Game implements Model {
     @Override
     public boolean isOver() {
         boolean over = false;
-        if (!hasMoves(current) && !hasMoves(opponent)
-                || (!current.hasFlag() || !opponent.hasFlag())) {
+        if (!current.hasFlag()
+                || !opponent.hasFlag()
+                || !hasMoves(current) && !hasMoves(opponent)) {
             over = true;
-
         }
         return over;
+
     }
 
     /**
@@ -208,46 +208,19 @@ public class Game implements Model {
     @Override
     public List<Move> getMoves() {
         List<Move> listeMove = new ArrayList<>();
-        for (Direction direction : Direction.values()) {
-            Move endMove = new Move(getSelected(), selected,
-                    selected.next(direction));
-            if (selected == null) {
-                throw new IllegalArgumentException("La position selectionner "
-                        + "est hors du tableau");
-            } else if (!this.board.isInside(selected.next(direction))
-                    || getSelected().getNbSteps() == 0) {
-                listeMove.remove(endMove);
+        if (selected == null) {
+            throw new IllegalArgumentException("La position selectionner est null ");
 
-            } else if ((this.board.isInside(selected.next(direction))
-                    && this.board.isFree(selected.next(direction))
-                    && getSelected().canCross(board.getSquare(selected.next(direction)))
-                    || getSelected().getNbSteps() == 1
-                    || getSelected().getNbSteps() == 2
-                    || (!board.isFree(selected.next(direction))
-                    && !this.board.isMyOwn(selected.next(direction),
-                            current.getColor())))
-                    && getSelected().canCross(board.getSquare(selected.next(direction)))) {
-                listeMove.add(endMove);
-            } else {
-                endMove = new Move(getSelected(), selected, selected.next(direction).next(direction));
-                if (!this.board.isInside(selected.next(direction).next(direction))
-                        || getSelected().getNbSteps() == 0) {
-                    listeMove.remove(endMove);
-                } else if (this.board.isInside(selected.next(direction).next(direction))
-                        && this.board.isFree(selected.next(direction).next(direction))
-                        && getSelected().canCross(board.getSquare(selected.next(direction).next(direction)))
-                        || getSelected().getNbSteps() == 2
-                        || (!board.isFree(selected.next(direction).next(direction)))
-                        || !board.isMyOwn(selected.next(direction).next(direction), current.getColor())
-                        && getSelected().canCross(board.getSquare(selected.next(direction).next(direction)))) {
-                    listeMove.add(endMove);
+        } else if (getSelected().getNbSteps() == 0) {
+            listeMove = listeMove;
+        } else if (getSelected().getNbSteps() == 1) {
+            listeMove = moveNbStepIsOne();
+        } else if (getSelected().getNbSteps() == 2) {
+            listeMove = moveNbStepIsTwo();
 
-                }
-
-            }
         }
-        return listeMove;
 
+        return listeMove;
     }
 
     /**
@@ -277,15 +250,19 @@ public class Game implements Model {
      */
     private void squareBusy(Move moves) {
         if (moves.getPiece().isStronger(board.getPiece(moves.getEnd()))) {
+            opponent.remove(board.getPiece(moves.getEnd()));
+            opponent.getPieces().remove(board.getPiece(moves.getEnd()));
             board.remove(moves.getEnd());
             board.remove(moves.getStart());
             board.put(moves.getPiece(), moves.getEnd());
-            opponent.remove(board.getPiece(moves.getEnd()));
+
         } else if (moves.getPiece().hasSameRank(board.getPiece(moves.getEnd()))) {
-            board.remove(moves.getStart());
-            board.remove(moves.getEnd());
             current.remove(board.getPiece(moves.getStart()));
             opponent.remove(board.getPiece(moves.getEnd()));
+            current.getPieces().remove(board.getPiece(moves.getStart()));
+            opponent.getPieces().remove(board.getPiece(moves.getEnd()));
+            board.remove(moves.getStart());
+            board.remove(moves.getEnd());
 
         }
 
@@ -321,16 +298,18 @@ public class Game implements Model {
      * @return hasMoves
      */
     public boolean hasMoves(Player player) {
-        boolean hasMove = false;
-        for (int i = 0; i < board.getTakenSquare(player).size(); i++) {
-            if (!board.getTakenSquare(player).isEmpty()
-                    || board.getTakenSquare(player).get(i)
-                    == getMoves().get(i).getStart()) {
-                hasMove = true;
+        for (Position position : board.getTakenSquare(player)) {
+            for (Direction direction : Direction.values()) {
+                Position end = position.next(direction);
+                if (board.isInside(end) && (board.isFree(end)
+                        || !board.isMyOwn(end, player.getColor()))) {
+                    return true;
+                }
+
             }
         }
 
-        return hasMove;
+        return false;
     }
 
     /**
@@ -351,6 +330,58 @@ public class Game implements Model {
         }
 
         return listWinner;
+    }
+
+    /**
+     * This method return a list of move when nbStep is one
+     *
+     * @return listemove
+     */
+    private List<Move> moveNbStepIsOne() {
+        List<Move> listeMove = new ArrayList<>();
+        for (Direction direction : Direction.values()) {
+            Move move = new Move(getSelected(),
+                    selected,
+                    selected.next(direction));
+            if (!this.board.isInside(move.getEnd())) {
+                listeMove.remove(move);
+            } else if (this.board.isInside(move.getEnd())
+                    && this.board.isFree(move.getEnd())
+                    && getSelected().canCross(board.getSquare(move.getEnd()))
+                    || (!board.isFree(move.getEnd())
+                    && !this.board.isMyOwn(move.getEnd(),
+                            current.getColor()))) {
+                listeMove.add(move);
+
+            }
+        }
+        return listeMove;
+    }
+
+    /**
+     * This method return a list of move when nbStep is two
+     *
+     * @return listemove
+     */
+    private List<Move> moveNbStepIsTwo() {
+        List<Move> listeMove = new ArrayList<>();
+        for (Direction direction : Direction.values()) {
+            Move move = new Move(getSelected(), selected, selected.next(direction)
+                    .next(direction));
+            if (!this.board.isInside(selected.next(direction).next(direction))) {
+                listeMove.remove(move);
+            } else if (this.board.isInside(move.getEnd())
+                    && this.board.isFree(move.getEnd())
+                    && getSelected().canCross(board.getSquare(move.getEnd()))
+                    || (!board.isFree(move.getEnd())
+                    && !this.board.isMyOwn(move.getEnd(),
+                            current.getColor()))) {
+                listeMove.add(move);
+            }
+
+        }
+
+        return listeMove;
     }
 
 }

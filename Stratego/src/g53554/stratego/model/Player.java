@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 /**
  * This is the class that creat the player and all his option like the color of
  * the player and a list of piece
@@ -117,12 +116,15 @@ public class Player {
     /**
      * This method verified if the list of the player contain flag
      *
-     * @return contain 
+     * @return contain
      */
     public boolean hasFlag() {
         boolean contain = false;
-           if( getPieces().get(0).getRank()==0){
-            contain = true;
+        for (int i = 0; i < getPieces().size(); i++) {
+            if (getPieces().get(i).getRank() == 0) {
+                contain = true;
+
+            }
         }
         return contain;
 

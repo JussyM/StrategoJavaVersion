@@ -9,27 +9,18 @@ import g53554.stratego.model.PlayerColor;
  */
 public class Espion extends Piece {
 
-    /**
-     * Constructor of espion
-     * @param rank
-     * @param color
-     */
-
     public Espion(int rank, PlayerColor color) {
         super(rank, color);
     }
 
     /**
-     *new constructor 
-     * @param rank
+     * new constructor
+     *
      * @param color
-     * @param nbSteps
      */
+    public Espion(PlayerColor color) {
+        super(1, color);
 
-    public Espion(int rank, PlayerColor color, int nbSteps) {
-        super(rank, color, 1);
-        
-                
     }
 
 }
