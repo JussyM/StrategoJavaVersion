@@ -174,9 +174,9 @@ public class Game implements Model {
      */
     @Override
     public void select(int row, int column) {
-        if (this.board.isInside(new Position(row, column)) == false) {
+        if (!this.board.isInside(new Position(row, column))) {
             throw new IllegalArgumentException("les coordonnées en paramètre sont hors du plateau");
-        } else if (this.board.isFree(new Position(row, column)) == true) {
+        } else if (this.board.isFree(new Position(row, column))) {
             throw new IllegalArgumentException("Les coordonnées en paramètre réfère à une case vide");
         } else if (this.board.getSquare(new Position(row, column)).isMyOwn(opponent.getColor())) {
             throw new IllegalArgumentException("la case est occuper par le joueur adverse");
@@ -214,14 +214,9 @@ public class Game implements Model {
         } else if (getSelected().getNbSteps() == 0) {
             listeMove = listeMove;
         } else if (getSelected().getNbSteps() == 1) {
+            if(getSelected().getNbSteps() == 2);
             listeMove = moveNbStepIsOne();
         } else if (getSelected().getNbSteps() == 2) {
-            for (int i = 0; i < listeMove.size(); i++) {
-                if (isPossible(moveNbStepIsOne())) {
-                    moveNbStepIsTwo().add(moveNbStepIsOne().get(i));
-                }
-
-            }
             listeMove = moveNbStepIsTwo();
 
         }

@@ -16,6 +16,7 @@ import g53554.stratego.model.pieces.Eclaireur;
 import g53554.stratego.model.pieces.Espion;
 import g53554.stratego.model.pieces.Maréchal;
 import g53554.stratego.model.pieces.Miner;
+import static org.junit.Assert.assertTrue;
 
 public class GameTest {
 
@@ -26,23 +27,36 @@ public class GameTest {
         {new Square(), new Square(), new Square(), new Square(), new Square()},
         {new Square(), new Square(), new Square(), new Square(), new Square()},
         {new Square(), new Square(), new Square(), new Square(), new Square()}};
+    private final Square[][] newDefaultBoard = {
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+            new Square(SquareType.LAND), new Square(SquareType.LAND)},
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+            new Square(SquareType.LAND), new Square(SquareType.LAND)},
+        {new Square(SquareType.WATER), new Square(SquareType.WATER), new Square(SquareType.WATER),
+            new Square(SquareType.LAND), new Square(SquareType.LAND)},
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+            new Square(SquareType.LAND), new Square(SquareType.LAND)},
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+            new Square(SquareType.LAND), new Square(SquareType.LAND)},
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+            new Square(SquareType.LAND), new Square(SquareType.LAND)}};
 
     @Before
     public void setUp() throws Exception {
-        defaultBoard[0][1].put(new Flag(0, RED));
-        defaultBoard[3][2].put(new General(9, RED));
-        defaultBoard[4][2].put(new Flag(0, BLUE));
-        defaultBoard[4][1].put(new General(9, BLUE));
-        defaultBoard[1][0].put(new Bomb(11, RED));
-        defaultBoard[1][2].put(new Miner(3, RED));
-        defaultBoard[5][1].put(new Maréchal(10, RED));
-        defaultBoard[0][0].put(new Espion(1, RED));
-        defaultBoard[3][0].put(new Eclaireur(2, RED));
-        defaultBoard[3][1].put(new Bomb(11, BLUE));
-        defaultBoard[2][0].put(new Miner(3, BLUE));
-        defaultBoard[2][4].put(new Maréchal(10, BLUE));
-        defaultBoard[0][3].put(new Espion(1, BLUE));
-        defaultBoard[0][2].put(new Eclaireur(2, BLUE));
+        newDefaultBoard[0][1].put(new Flag(0, RED));
+        newDefaultBoard[3][2].put(new General(9, RED));
+        newDefaultBoard[4][2].put(new Flag(0, BLUE));
+        newDefaultBoard[4][1].put(new General(9, BLUE));
+        newDefaultBoard[1][0].put(new Bomb(11, RED));
+        newDefaultBoard[1][2].put(new Miner(3, RED));
+        newDefaultBoard[5][1].put(new Maréchal(10, RED));
+        newDefaultBoard[0][0].put(new Espion(1, RED));
+        newDefaultBoard[3][1].put(new Bomb(11, BLUE));
+        newDefaultBoard[2][0].put(new Miner(3, BLUE));
+        newDefaultBoard[2][4].put(new Maréchal(10, BLUE));
+        newDefaultBoard[0][3].put(new Espion(1, BLUE));
+        newDefaultBoard[0][2].put(new Eclaireur(BLUE));
+        newDefaultBoard[0][4].put(new Eclaireur(RED));
 
     }
 
@@ -52,7 +66,7 @@ public class GameTest {
         Game instance = new Game();
         instance.initialize();
         Square[][] result = instance.getBoard();
-        assertArrayEquals(defaultBoard, result);
+        assertArrayEquals(newDefaultBoard, result);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -71,18 +85,19 @@ public class GameTest {
         assertFalse(instance.isOver());
     }
 
-//    @Test
-//    public void testIsOverWhenGameBegin() {
-//        System.out.println("testIsOverWhenGameBegin");
-//        Game instance = new Game();
-//        assertTrue(instance.isOver());
-//    }
+    @Test
+    public void testIsOverWhenGameBegin() {
+        System.out.println("testIsOverWhenGameBegin");
+        Game instance = new Game();
+        assertTrue(instance.isOver());
+    }
+
     @Test
     public void testGetBoardWhenGameBegin() {
         System.out.println("testGetBoardWhenGameBegin");
         Game instance = new Game();
         instance.initialize();
-        Square[][] expResult = defaultBoard;
+        Square[][] expResult = newDefaultBoard;
         Square[][] result = instance.getBoard();
         assertArrayEquals(expResult, result);
     }
@@ -101,8 +116,8 @@ public class GameTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSelectWhenSquareIsNull() {
         System.out.println("testSelectWhenSquareIsNull");
-        int row = 0;
-        int column = 0;
+        int row = 5;
+        int column = 3;
         Game instance = new Game();
         instance.initialize();
         instance.select(row, column);
@@ -133,7 +148,7 @@ public class GameTest {
         System.out.println("testGetSelectedReturnPiece");
         Game instance = new Game();
         instance.initialize();
-        Piece expResult = defaultBoard[3][2].getPiece();
+        Piece expResult = newDefaultBoard[3][2].getPiece();
         instance.select(3, 2);
         Piece Result = instance.getSelected();
         assertEquals(expResult, Result);
@@ -141,20 +156,12 @@ public class GameTest {
     }
 
     @Test
-    public void testGetMoves() {
-        System.out.println("getMoves");
+    public void testGetMovesWhenNbStepIsZero() {
+        System.out.println("testGetMovesWhenNbStepIsZero");
         Game instance = new Game();
         instance.initialize();
-        instance.select(3, 2);
-        Position position = new Position(3, 2);
-        List<Move> listMove = new ArrayList<>();
-        Move mov = new Move(instance.getSelected(), new Position(3, 2), position.next(Direction.UP));
-        Move mov2 = new Move(instance.getSelected(), position, position.next(Direction.LEFT));
-        Move mov3 = new Move(instance.getSelected(), position, position.next(Direction.RIGHT));
-        listMove.add(mov);
-        listMove.add(mov2);
-        listMove.add(mov3);
-        List<Move> expResult = listMove;
+        instance.select(0, 1);
+        List<Move> expResult = new ArrayList<>();
         List<Move> result = instance.getMoves();
         assertEquals(expResult.size(), result.size());
 
@@ -164,8 +171,9 @@ public class GameTest {
     public void testWhenPositionSelectedIsNull() {
         System.out.println("testWhenPositionSelectedIsNull");
         Game instance = new Game();
-        instance.select(0, 0);
-        instance.getMoves();
+        instance.initialize();
+        Position position = new Position(7, 5);
+        instance.select(position.getRow(), position.getColumn());
 
     }
 
@@ -184,13 +192,14 @@ public class GameTest {
         System.out.println("testWhenApplyTheSquareIsFree");
         Game instance = new Game();
         instance.initialize();
-        instance.select(3, 2);
-        Position position = new Position(3, 2);
+        instance.select(0, 1);
+        Position position = new Position(0, 1);
         Move move = new Move(instance.getSelected(), position,
                 position.next(Direction.DOWN));
+        Piece result = instance.getSelected();
         instance.apply(move);
-        Piece result = new General(9, PlayerColor.BLUE);
-        assertEquals(defaultBoard[3][3].getPiece(), result);
+        Piece expResult = new Flag(9, PlayerColor.RED);
+        assertEquals(expResult, result);
 
     }
 
@@ -203,9 +212,10 @@ public class GameTest {
         Position position = new Position(3, 2);
         Move move = new Move(instance.getSelected(), position,
                 position.next(Direction.DOWN));
+        Piece result = instance.getSelected();
         instance.apply(move);
-        Piece result = new General(9, PlayerColor.RED);
-        assertEquals(defaultBoard[3][2].getPiece(), result);
+        Piece expResult = new General(9, RED);
+        assertEquals(expResult, result);
 
     }
 
@@ -238,4 +248,45 @@ public class GameTest {
         List<Player> result = instance.getWinner();
         assertEquals(expResult, result);
     }
+
+    @Test
+    public void testMoveWhenNbPieceIsOne() {
+        System.out.println("testMoveWhenNbPieceIsOne");
+        Game instance = new Game();
+        instance.initialize();
+        instance.select(3, 2);
+        Position position = new Position(3, 2);
+        Move move1 = new Move(instance.getSelected(), position, position.next(Direction.DOWN));
+        Move move2 = new Move(instance.getSelected(), position, position.next(Direction.LEFT));
+        Move move3 = new Move(instance.getSelected(), position, position.next(Direction.RIGHT));
+        List<Move> expResult = new ArrayList<>();
+        expResult.add(move3);
+        expResult.add(move2);
+        expResult.add(move1);
+        List<Move> result = instance.getMoves();
+        assertEquals(expResult.size(), result.size());
+
+    }
+
+    @Test
+    public void testMoveWhenNbPieceIsTwo() {
+        System.out.println("testMoveWhenNbPieceIsTwo");
+        Game instance = new Game();
+        instance.initialize();
+        instance.select(0, 4);
+        Position position = new Position(0, 4);
+        Move move1 = new Move(instance.getSelected(), position, position.next(Direction.DOWN));
+        Move move2 = new Move(instance.getSelected(), position, position.next(Direction.LEFT));
+        Move move3 = new Move(instance.getSelected(), position, position.next(Direction.LEFT).next(Direction.LEFT));
+        Move move4 = new Move(instance.getSelected(), position, position.next(Direction.DOWN).next(Direction.DOWN));
+        List<Move> expResult = new ArrayList<>();
+        expResult.add(move3);
+        expResult.add(move2);
+        expResult.add(move1);
+        expResult.add(move4);
+        List<Move> result = instance.getMoves();
+        assertEquals(expResult.size(), result.size());
+
+    }
+
 }

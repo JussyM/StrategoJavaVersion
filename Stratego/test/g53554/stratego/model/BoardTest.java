@@ -20,19 +20,17 @@ public class BoardTest {
         {new Square(), new Square(), new Square(), new Square(), new Square()}};
     private final Square[][] newDefaultBoard = {
         {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
-            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)},
+            new Square(SquareType.LAND), new Square(SquareType.LAND)},
         {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
-            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)},
+            new Square(SquareType.LAND), new Square(SquareType.LAND)},
         {new Square(SquareType.WATER), new Square(SquareType.WATER), new Square(SquareType.WATER),
-            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)},
+            new Square(SquareType.LAND), new Square(SquareType.LAND)},
         {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
-            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)},
+            new Square(SquareType.LAND), new Square(SquareType.LAND)},
         {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
-            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)},
+            new Square(SquareType.LAND), new Square(SquareType.LAND)},
         {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
-            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)},
-        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
-            new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND)}};
+            new Square(SquareType.LAND), new Square(SquareType.LAND)}};
 
     @Test
     public void testGetSquareWhenSquareIsFill() {

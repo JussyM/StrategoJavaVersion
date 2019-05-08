@@ -128,9 +128,10 @@ public class PositionTest {
         Direction direction = Direction.UP;
         Game game = new Game();
         game.initialize();
-        game.selected = new Position(4, 1);
-        Position instance = game.selected;
-        Position expResult = new Position(3, 1);
+        game.select(3, 2);
+        Position selected = new Position(3, 2);
+        Position instance =selected;
+        Position expResult = new Position(2, 2);
         Position result = instance.next(direction);
         assertEquals(expResult, result);
     }
@@ -141,8 +142,9 @@ public class PositionTest {
         Direction direction = Direction.DOWN;
         Game game = new Game();
         game.initialize();
-        game.selected = new Position(0, 1);
-        Position instance = game.selected;
+        game.select(0, 1);
+        Position selected = new Position(0, 1);
+        Position instance = selected;
         Position expResult = new Position(1, 1);
         Position result = instance.next(direction);
         assertEquals(expResult, result);
@@ -154,8 +156,9 @@ public class PositionTest {
         Direction direction = Direction.LEFT;
         Game game = new Game();
         game.initialize();
-        game.selected = new Position(3, 2);
-        Position instance = game.selected;
+        game.select(3, 2);
+        Position selected = new Position(3, 2);
+        Position instance =selected;
         Position expResult = new Position(3, 1);
         Position result = instance.next(direction);
         assertEquals(expResult, result);
@@ -167,8 +170,9 @@ public class PositionTest {
         Direction direction = Direction.RIGHT;
         Game game = new Game();
         game.initialize();
-        game.selected = new Position(3, 2);
-        Position instance = game.selected;
+        game.select(3, 2);
+        Position selected = new Position(3, 2);
+        Position instance =selected;
         Position expResult = new Position(3, 3);
         Position result = instance.next(direction);
         assertEquals(expResult, result);
