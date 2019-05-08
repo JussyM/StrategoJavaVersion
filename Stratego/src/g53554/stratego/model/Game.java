@@ -401,9 +401,9 @@ public class Game implements Model {
      * @return boolean
      */
     private boolean isPossible(Move move) {
-        boolean tralala = false;
+        boolean isPossible = false;
         if (!this.board.isInside(move.getEnd())) {
-            tralala = false;
+            isPossible = false;
         } else {
             if (this.board.isInside(move.getEnd())
                     && this.board.isFree(move.getEnd())
@@ -411,13 +411,13 @@ public class Game implements Model {
                     || (!board.isFree(move.getEnd())
                     && !this.board.isMyOwn(move.getEnd(),
                             current.getColor()))) {
-                tralala = true;
+                isPossible = true;
 
             }
 
         }
 
-        return tralala;
+        return isPossible;
     }
 
 }

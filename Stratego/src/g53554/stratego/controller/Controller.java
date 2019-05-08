@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  * This class creat the dynamism of the game is where we put all the method
- * usful to control and play the game
+ * useful to control and play the game
  *
  * @author 53554
  */
@@ -61,7 +61,8 @@ public class Controller {
     }
 
     /**
-     * This method will extract and return the value given by the player
+     * This method will extract the integer from a String
+     * and return the value given by the player
      *
      * @param cmd
      * @return arrays
