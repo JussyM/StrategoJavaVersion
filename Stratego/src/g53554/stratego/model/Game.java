@@ -264,6 +264,10 @@ public class Game implements Model {
             opponent.getPieces().remove(board.getPiece(moves.getEnd()));
             board.remove(moves.getStart());
             board.remove(moves.getEnd());
+        } else if (!moves.getPiece().isStronger(board.getPiece(moves.getEnd()))) {
+            current.remove(board.getPiece(moves.getStart()));
+            current.getPieces().remove(board.getPiece(moves.getStart()));
+            board.remove(moves.getStart());
 
         }
 

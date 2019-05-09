@@ -19,6 +19,7 @@ import g53554.stratego.model.pieces.Miner;
 import static org.junit.Assert.assertTrue;
 
 public class GameTest {
+
     private final Square[][] newDefaultBoard = {
         {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
             new Square(SquareType.LAND), new Square(SquareType.LAND)},
@@ -220,7 +221,7 @@ public class GameTest {
         Position position = new Position(0, 1);
         Move move = new Move(instance.getSelected(), position,
                 position.next(Direction.DOWN));
-        Piece expResult= null;
+        Piece expResult = null;
         instance.apply(move);
         Piece result = instance.getSelected();
         assertEquals(expResult, result);
@@ -286,4 +287,19 @@ public class GameTest {
 
     }
 
+    @Test
+    public void testWhenApplySquareIsNotFreeAndWeak() {
+        System.out.println("testWhenApplyTheSquareIsNotFreeAndWeak");
+        Game instance = new Game();
+        instance.initialize();
+        instance.select(0, 4);
+        Position position = new Position(0, 4);
+        Move move = new Move(instance.getSelected(), position,
+                position.next(Direction.DOWN).next(Direction.DOWN));
+        Piece result = new Maréchal(BLUE);
+        instance.apply(move);
+        Piece expResult = new Maréchal(BLUE);
+        assertEquals(expResult, result);
+
+    }
 }

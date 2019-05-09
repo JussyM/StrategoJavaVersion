@@ -368,9 +368,9 @@ public class View {
                 System.out.print(" [" + "\u001b[47m" + couleur.toBlue("BO") + "]");
             } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 3) {
                 System.out.print(" [" + "\u001b[47m" + couleur.toBlue("DM") + "]");
-            } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 1) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("MA") + "]");
             } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 10) {
+                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("MA") + "]");
+            } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 1) {
                 System.out.print(" [" + "\u001b[47m" + couleur.toBlue("ES") + "]");
             } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 2) {
                 System.out.print(" [" + "\u001b[47m" + couleur.toBlue("EC") + "]");
