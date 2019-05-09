@@ -86,7 +86,7 @@ public class Game implements Model {
     }
 
     /**
-     * Thos method return true or false if the game is over
+     * This method return true or false if the game is over
      *
      * @return over
      */

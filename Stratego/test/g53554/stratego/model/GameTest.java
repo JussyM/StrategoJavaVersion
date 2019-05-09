@@ -217,10 +217,12 @@ public class GameTest {
         System.out.println("testWhenAppltSquareIsNotFreeAndHaveSameRank");
         Game instance = new Game();
         instance.initialize();
-        instance.select(0, 1);
-        Position position = new Position(0, 1);
-        Move move = new Move(instance.getSelected(), position,
-                position.next(Direction.DOWN));
+        instance.select(0, 4);
+        Position position = new Position(0, 4);
+        Move move =new Move(
+                instance.getSelected(), 
+                position, 
+                position.next(Direction.LEFT).next(Direction.LEFT));
         Piece expResult = null;
         instance.apply(move);
         Piece result = instance.getSelected();
@@ -233,6 +235,7 @@ public class GameTest {
         System.out.println("testHasMove");
         Game instance = new Game();
         instance.initialize();
+        assertTrue(instance.hasMoves(instance.getcurrent()));
     }
 
     @Test
@@ -254,9 +257,12 @@ public class GameTest {
         instance.initialize();
         instance.select(3, 2);
         Position position = new Position(3, 2);
-        Move move1 = new Move(instance.getSelected(), position, position.next(Direction.DOWN));
-        Move move2 = new Move(instance.getSelected(), position, position.next(Direction.LEFT));
-        Move move3 = new Move(instance.getSelected(), position, position.next(Direction.RIGHT));
+        Move move1 = new Move(instance.getSelected(),
+                position, position.next(Direction.DOWN));
+        Move move2 = new Move(instance.getSelected(),
+                position, position.next(Direction.LEFT));
+        Move move3 = new Move(instance.getSelected(),
+                position, position.next(Direction.RIGHT));
         List<Move> expResult = new ArrayList<>();
         expResult.add(move3);
         expResult.add(move2);
@@ -273,10 +279,14 @@ public class GameTest {
         instance.initialize();
         instance.select(0, 4);
         Position position = new Position(0, 4);
-        Move move1 = new Move(instance.getSelected(), position, position.next(Direction.DOWN));
-        Move move2 = new Move(instance.getSelected(), position, position.next(Direction.LEFT));
-        Move move3 = new Move(instance.getSelected(), position, position.next(Direction.LEFT).next(Direction.LEFT));
-        Move move4 = new Move(instance.getSelected(), position, position.next(Direction.DOWN).next(Direction.DOWN));
+        Move move1 = new Move(instance.getSelected(),
+                position, position.next(Direction.DOWN));
+        Move move2 = new Move(instance.getSelected(),
+                position, position.next(Direction.LEFT));
+        Move move3 = new Move(instance.getSelected(),
+                position, position.next(Direction.LEFT).next(Direction.LEFT));
+        Move move4 = new Move(instance.getSelected(),
+                position, position.next(Direction.DOWN).next(Direction.DOWN));
         List<Move> expResult = new ArrayList<>();
         expResult.add(move3);
         expResult.add(move2);
