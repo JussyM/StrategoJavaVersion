@@ -61,8 +61,8 @@ public class Controller {
     }
 
     /**
-     * This method will extract the integer from a String
-     * and return the value given by the player
+     * This method will extract the integer from a String and return the value
+     * given by the player
      *
      * @param cmd
      * @return arrays
@@ -114,7 +114,8 @@ public class Controller {
                 System.out.println("");
                 gameCmde();
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println(couleur.toRed("commande imcomplete"));
+                System.out.println(couleur.toRed("commande imcomplete ou"
+                        + " non valide"));
                 System.out.println("");
                 gameCmde();
             }
