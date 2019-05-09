@@ -344,14 +344,9 @@ public class Game implements Model {
             Move move = new Move(getSelected(),
                     selected,
                     selected.next(direction));
-            if (!this.board.isInside(move.getEnd())) {
+            if (!isPossible(move)) {
                 listeMove.remove(move);
-            } else if (this.board.isInside(move.getEnd())
-                    && this.board.isFree(move.getEnd())
-                    && getSelected().canCross(board.getSquare(move.getEnd()))
-                    || (!board.isFree(move.getEnd())
-                    && !this.board.isMyOwn(move.getEnd(),
-                            current.getColor()))) {
+            } else if (isPossible(move)) {
                 listeMove.add(move);
 
             }
@@ -375,15 +370,10 @@ public class Game implements Model {
             } else {
                 listeMove.add(move1);
 
-                if (!this.board.isInside(move.getEnd())) {
+                if (!isPossible(move)) {
                     listeMove.remove(move);
                 } else {
-                    if (this.board.isInside(move.getEnd())
-                            && this.board.isFree(move.getEnd())
-                            && getSelected().canCross(board.getSquare(move.getEnd()))
-                            || (!board.isFree(move.getEnd())
-                            && !this.board.isMyOwn(move.getEnd(),
-                                    current.getColor()))) {
+                    if (isPossible(move)) {
                         listeMove.add(move);
                     }
                 }

@@ -230,6 +230,8 @@ public class GameTest {
     @Test
     public void testHasMove() {
         System.out.println("testHasMove");
+        Game instance = new Game();
+        instance.initialize();
     }
 
     @Test
