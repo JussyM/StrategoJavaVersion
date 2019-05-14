@@ -10,6 +10,7 @@ import g53554.stratego.model.pieces.Miner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import jdk.nashorn.internal.runtime.regexp.joni.Option;
 
 /**
  * This class is specified in initializing the game option and verifie if the
@@ -214,7 +215,6 @@ public class Game implements Model {
         } else if (getSelected().getNbSteps() == 0) {
             listeMove = listeMove;
         } else if (getSelected().getNbSteps() == 1) {
-            if (getSelected().getNbSteps() == 2);
             listeMove = moveNbStepIsOne();
         } else if (getSelected().getNbSteps() == 2) {
             listeMove = moveNbStepIsTwo();
@@ -369,6 +369,8 @@ public class Game implements Model {
             Move move = new Move(getSelected(), selected, selected.next(direction)
                     .next(direction));
             Move move1 = new Move(getSelected(), selected, selected.next(direction));
+            Move move2 = new Move(getSelected(), selected, selected.next(direction)
+                    .next(direction).next(direction));
             if (!isPossible(move1)) {
                 listeMove.remove(move1);
             } else {
@@ -380,6 +382,11 @@ public class Game implements Model {
                     if (isPossible(move)) {
                         listeMove.add(move);
                     }
+                }
+                if (!isPossible(move2)) {
+                    listeMove.remove(move2);
+                } else if (isPossible(move2)) {
+                    listeMove.add(move2);
                 }
 
             }

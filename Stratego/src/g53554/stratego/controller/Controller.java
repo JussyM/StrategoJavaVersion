@@ -152,6 +152,10 @@ public class Controller {
 
         }
     }
+    /**
+    * Check if the the cmd is quit 
+    *
+    */
 
     private boolean quit() {
         return cmd.equals("quit");

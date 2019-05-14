@@ -89,12 +89,4 @@ public class Move {
         return piece;
     }
 
-    @Override
-    public String toString() {
-        return "Move{" + "piece=" + piece + ", start=" + start + ", end=" + end + '}';
-    }
-    
-    
-    
-
 }

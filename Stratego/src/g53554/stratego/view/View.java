@@ -198,7 +198,7 @@ public class View {
     private void PrintEqualSign(Square tab[][]) {
         int i = 0;
         while (i < tab.length) {
-            System.out.print("======");
+            System.out.print("******");
             i++;
 
         }
