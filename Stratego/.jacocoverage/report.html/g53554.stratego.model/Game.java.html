@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Game.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Stratego&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">g53554.stratego.model</a> &gt; <span class="el_source">Game.java</span></div><h1>Game.java</h1><pre class="source lang-java linenums">package g53554.stratego.model;
+
+import g53554.stratego.model.pieces.Bomb;
+import g53554.stratego.model.pieces.Eclaireur;
+import g53554.stratego.model.pieces.Espion;
+import g53554.stratego.model.pieces.Flag;
+import g53554.stratego.model.pieces.General;
+import g53554.stratego.model.pieces.Maréchal;
+import g53554.stratego.model.pieces.Miner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * This class is specified in initializing the game option and verifie if the
+ * game can start or not and also is the game is over
+ *
+ * @author g53554
+ */
+public class Game implements Model {
+
+    private Board board;
+    private Player current;
+    private Player opponent;
+    private Position selected;
+
+    /**
+     * This method is the constructor of the game with no parameter and
+     * initialized the players
+     */
+<span class="nc" id="L31">    public Game() {</span>
+<span class="nc" id="L32">        this.current = new Player(PlayerColor.RED);</span>
+<span class="nc" id="L33">        this.opponent = new Player(PlayerColor.BLUE);</span>
+
+<span class="nc" id="L35">    }</span>
+
+    /**
+     * This method initialized the board of the game with default parameter give
+     * in
+     */
+    @Override
+    public void initialize() {
+<span class="nc" id="L43">        board = new Board();</span>
+<span class="nc" id="L44">        this.current = new Player(PlayerColor.RED);</span>
+<span class="nc" id="L45">        this.opponent = new Player(PlayerColor.BLUE);</span>
+<span class="nc" id="L46">        board.put(new Flag(PlayerColor.RED), new Position(0, 1));</span>
+<span class="nc" id="L47">        board.put(new General(PlayerColor.RED), new Position(3, 2));</span>
+<span class="nc" id="L48">        board.put(new Flag(PlayerColor.BLUE), new Position(4, 2));</span>
+<span class="nc" id="L49">        board.put(new General(PlayerColor.BLUE), new Position(4, 1));</span>
+<span class="nc" id="L50">        board.put(new Bomb(PlayerColor.RED), new Position(1, 0));</span>
+<span class="nc" id="L51">        board.put(new Espion(PlayerColor.RED), new Position(0, 0));</span>
+<span class="nc" id="L52">        board.put(new Maréchal(PlayerColor.RED), new Position(5, 1));</span>
+<span class="nc" id="L53">        board.put(new Miner(PlayerColor.RED), new Position(1, 2));</span>
+<span class="nc" id="L54">        board.put(new Bomb(PlayerColor.BLUE), new Position(3, 1));</span>
+<span class="nc" id="L55">        board.put(new Espion(PlayerColor.BLUE), new Position(0, 3));</span>
+<span class="nc" id="L56">        board.put(new Maréchal(PlayerColor.BLUE), new Position(2, 4));</span>
+<span class="nc" id="L57">        board.put(new Miner(PlayerColor.BLUE), new Position(2, 0));</span>
+<span class="nc" id="L58">        board.put(new Eclaireur(PlayerColor.BLUE), new Position(0, 2));</span>
+<span class="nc" id="L59">        board.put(new Eclaireur(PlayerColor.RED), new Position(0, 4));</span>
+<span class="nc" id="L60">        current.addPiece(new Flag(PlayerColor.RED));</span>
+<span class="nc" id="L61">        opponent.addPiece(new Flag(PlayerColor.BLUE));</span>
+<span class="nc" id="L62">        opponent.addPiece(new General(PlayerColor.BLUE));</span>
+<span class="nc" id="L63">        current.addPiece(new Bomb(PlayerColor.RED));</span>
+<span class="nc" id="L64">        current.addPiece(new Espion(PlayerColor.RED));</span>
+<span class="nc" id="L65">        current.addPiece(new Maréchal(PlayerColor.RED));</span>
+<span class="nc" id="L66">        current.addPiece(new Miner(PlayerColor.RED));</span>
+<span class="nc" id="L67">        opponent.addPiece(new Bomb(PlayerColor.BLUE));</span>
+<span class="nc" id="L68">        opponent.addPiece(new Espion(PlayerColor.BLUE));</span>
+<span class="nc" id="L69">        opponent.addPiece(new Maréchal(PlayerColor.BLUE));</span>
+<span class="nc" id="L70">        opponent.addPiece(new Miner(PlayerColor.BLUE));</span>
+<span class="nc" id="L71">        current.addPiece(new Eclaireur(PlayerColor.RED));</span>
+<span class="nc" id="L72">        opponent.addPiece(new Eclaireur(PlayerColor.BLUE));</span>
+
+<span class="nc" id="L74">    }</span>
+
+    /**
+     * This method verifie if the game can start if not an exeption is displays
+     */
+    @Override
+    public void start() {
+<span class="nc bnc" id="L81" title="All 4 branches missed.">        if (board == null || isOver() == true) {</span>
+<span class="nc" id="L82">            throw new IllegalStateException(&quot;board est null ou le jeux est faux &quot;);</span>
+
+        }
+
+<span class="nc" id="L86">    }</span>
+
+    /**
+     * Thos method return true or false if the game is over
+     *
+     * @return over
+     */
+    @Override
+    public boolean isOver() {
+<span class="nc" id="L95">        boolean over = false;</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        if (!current.hasFlag()</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">                || !opponent.hasFlag()</span>
+<span class="nc bnc" id="L98" title="All 4 branches missed.">                || !hasMoves(current) &amp;&amp; !hasMoves(opponent)) {</span>
+<span class="nc" id="L99">            over = true;</span>
+        }
+<span class="nc" id="L101">        return over;</span>
+
+    }
+
+    /**
+     * This method return the board of the game
+     *
+     * @return board
+     */
+    @Override
+    public Square[][] getBoard() {
+<span class="nc" id="L112">        return this.board.getSquare();</span>
+    }
+
+    /**
+     * This is the method that generate the hascode of game
+     *
+     * @return hash
+     */
+    @Override
+    public int hashCode() {
+<span class="nc" id="L122">        int hash = 5;</span>
+<span class="nc" id="L123">        hash = 89 * hash + Objects.hashCode(this.board);</span>
+<span class="nc" id="L124">        hash = 89 * hash + Objects.hashCode(this.current);</span>
+<span class="nc" id="L125">        hash = 89 * hash + Objects.hashCode(this.opponent);</span>
+<span class="nc" id="L126">        return hash;</span>
+    }
+
+    /**
+     * This method verfie if all the attribut of the game are equals
+     *
+     * @param obj
+     * @return true
+     */
+    @Override
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        if (this == obj) {</span>
+<span class="nc" id="L138">            return true;</span>
+        }
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L141">            return false;</span>
+        }
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L144">            return false;</span>
+        }
+<span class="nc" id="L146">        final Game other = (Game) obj;</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        if (!Objects.equals(this.board, other.board)) {</span>
+<span class="nc" id="L148">            return false;</span>
+        }
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        if (!Objects.equals(this.current, other.current)) {</span>
+<span class="nc" id="L151">            return false;</span>
+        }
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        if (!Objects.equals(this.opponent, other.opponent)) {</span>
+<span class="nc" id="L154">            return false;</span>
+        }
+<span class="nc" id="L156">        return true;</span>
+    }
+
+    /**
+     * This method diplays the board and the players
+     *
+     * @return bord and players
+     */
+    @Override
+    public String toString() {
+<span class="nc" id="L166">        return &quot;Game{&quot; + &quot;board=&quot; + board + &quot;, current=&quot; + current + &quot;, opponent=&quot; + opponent + '}';</span>
+    }
+
+    /**
+     * This method decmared a new instance for the position selected
+     *
+     * @param row
+     * @param column
+     */
+    @Override
+    public void select(int row, int column) {
+<span class="nc bnc" id="L177" title="All 2 branches missed.">        if (!this.board.isInside(new Position(row, column))) {</span>
+<span class="nc" id="L178">            throw new IllegalArgumentException(&quot;les coordonnées en paramètre sont hors du plateau&quot;);</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">        } else if (this.board.isFree(new Position(row, column))) {</span>
+<span class="nc" id="L180">            throw new IllegalArgumentException(&quot;Les coordonnées en paramètre réfère à une case vide&quot;);</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        } else if (this.board.getSquare(new Position(row, column)).isMyOwn(opponent.getColor())) {</span>
+<span class="nc" id="L182">            throw new IllegalArgumentException(&quot;la case est occuper par le joueur adverse&quot;);</span>
+
+        }
+<span class="nc" id="L185">        this.selected = new Position(row, column);</span>
+
+<span class="nc" id="L187">    }</span>
+
+    /**
+     * This method return the piece à the position selected
+     *
+     * @return piece
+     */
+    @Override
+    public Piece getSelected() {
+<span class="nc bnc" id="L196" title="All 2 branches missed.">        if (this.selected == null) {</span>
+<span class="nc" id="L197">            throw new IllegalArgumentException(&quot;La position selectionner est hors du tableau&quot;);</span>
+        }
+
+<span class="nc" id="L200">        return this.board.getPiece(selected);</span>
+    }
+
+    /**
+     * This method return a list of possibilities to move a piece
+     *
+     * @return listeMove
+     */
+    @Override
+    public List&lt;Move&gt; getMoves() {
+<span class="nc" id="L210">        List&lt;Move&gt; listeMove = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">        if (selected == null) {</span>
+<span class="nc" id="L212">            throw new IllegalArgumentException(&quot;La position selectionner est null &quot;);</span>
+
+<span class="nc bnc" id="L214" title="All 2 branches missed.">        } else if (getSelected().getNbSteps() == 0) {</span>
+<span class="nc" id="L215">            listeMove = listeMove;</span>
+<span class="nc bnc" id="L216" title="All 2 branches missed.">        } else if (getSelected().getNbSteps() == 1) {</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">            if (getSelected().getNbSteps() == 2);</span>
+<span class="nc" id="L218">            listeMove = moveNbStepIsOne();</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">        } else if (getSelected().getNbSteps() == 2) {</span>
+<span class="nc" id="L220">            listeMove = moveNbStepIsTwo();</span>
+
+        }
+
+<span class="nc" id="L224">        return listeMove;</span>
+    }
+
+    /**
+     * This method apply the moves of the player
+     *
+     * @param moves
+     */
+    @Override
+    public void apply(Move moves) {
+<span class="nc bnc" id="L234" title="All 2 branches missed.">        if (moves == null) {</span>
+<span class="nc" id="L235">            throw new IllegalArgumentException(&quot;Le déplacement est null&quot;);</span>
+<span class="nc bnc" id="L236" title="All 2 branches missed.">        } else if (board.isFree(moves.getEnd())) {</span>
+<span class="nc" id="L237">            board.remove(moves.getStart());</span>
+<span class="nc" id="L238">            board.put(moves.getPiece(), moves.getEnd());</span>
+
+<span class="nc bnc" id="L240" title="All 2 branches missed.">        } else if (!board.isFree(moves.getEnd())) {</span>
+<span class="nc" id="L241">            squareBusy(moves);</span>
+
+        }
+<span class="nc" id="L244">        swapPlayer();</span>
+
+<span class="nc" id="L246">    }</span>
+
+    /**
+     * This method apply the rules of the game if the the piece selected has the
+     * same rank or is stronger
+     */
+    private void squareBusy(Move moves) {
+<span class="nc bnc" id="L253" title="All 2 branches missed.">        if (moves.getPiece().isStronger(board.getPiece(moves.getEnd()))) {</span>
+<span class="nc" id="L254">            opponent.remove(board.getPiece(moves.getEnd()));</span>
+<span class="nc" id="L255">            opponent.getPieces().remove(board.getPiece(moves.getEnd()));</span>
+<span class="nc" id="L256">            board.remove(moves.getEnd());</span>
+<span class="nc" id="L257">            board.remove(moves.getStart());</span>
+<span class="nc" id="L258">            board.put(moves.getPiece(), moves.getEnd());</span>
+
+<span class="nc bnc" id="L260" title="All 2 branches missed.">        } else if (moves.getPiece().hasSameRank(board.getPiece(moves.getEnd()))) {</span>
+<span class="nc" id="L261">            current.remove(board.getPiece(moves.getStart()));</span>
+<span class="nc" id="L262">            opponent.remove(board.getPiece(moves.getEnd()));</span>
+<span class="nc" id="L263">            current.getPieces().remove(board.getPiece(moves.getStart()));</span>
+<span class="nc" id="L264">            opponent.getPieces().remove(board.getPiece(moves.getEnd()));</span>
+<span class="nc" id="L265">            board.remove(moves.getStart());</span>
+<span class="nc" id="L266">            board.remove(moves.getEnd());</span>
+
+        }
+
+<span class="nc" id="L270">    }</span>
+
+    /**
+     * This method swap the value of the players
+     */
+    public void swapPlayer() {
+<span class="nc bnc" id="L276" title="All 2 branches missed.">        if (hasMoves(opponent)) {</span>
+<span class="nc" id="L277">            Player player = this.current;</span>
+<span class="nc" id="L278">            this.current = this.opponent;</span>
+<span class="nc" id="L279">            this.opponent = player;</span>
+        }
+
+<span class="nc" id="L282">    }</span>
+
+    /**
+     * This method return thr current player
+     *
+     * @return current player
+     */
+    @Override
+    public Player getcurrent() {
+<span class="nc" id="L291">        return this.current;</span>
+    }
+
+    /**
+     * This method verified if the moves of the player is availaible in the list
+     * of the moves
+     *
+     * @param player
+     * @return hasMoves
+     */
+    public boolean hasMoves(Player player) {
+<span class="nc bnc" id="L302" title="All 2 branches missed.">        for (Position position : board.getTakenSquare(player)) {</span>
+<span class="nc bnc" id="L303" title="All 2 branches missed.">            for (Direction direction : Direction.values()) {</span>
+<span class="nc" id="L304">                Position end = position.next(direction);</span>
+<span class="nc bnc" id="L305" title="All 4 branches missed.">                if (board.isInside(end) &amp;&amp; (board.isFree(end)</span>
+<span class="nc bnc" id="L306" title="All 2 branches missed.">                        || !board.isMyOwn(end, player.getColor()))) {</span>
+<span class="nc" id="L307">                    return true;</span>
+                }
+
+            }
+<span class="nc" id="L311">        }</span>
+
+<span class="nc" id="L313">        return false;</span>
+    }
+
+    /**
+     * THis method return the list of the winner
+     *
+     * @return listWinner
+     */
+    @Override
+    public List&lt;Player&gt; getWinner() {
+<span class="nc" id="L323">        List&lt;Player&gt; listWinner = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L324" title="All 4 branches missed.">        if (opponent.hasFlag() &amp;&amp; !current.hasFlag()) {</span>
+<span class="nc" id="L325">            listWinner.add(opponent);</span>
+<span class="nc bnc" id="L326" title="All 4 branches missed.">        } else if (current.hasFlag() &amp;&amp; !opponent.hasFlag()) {</span>
+<span class="nc" id="L327">            listWinner.add(current);</span>
+<span class="nc bnc" id="L328" title="All 4 branches missed.">        } else if (current.hasFlag() &amp;&amp; opponent.hasFlag()) {</span>
+<span class="nc" id="L329">            listWinner.add(current);</span>
+<span class="nc" id="L330">            listWinner.add(opponent);</span>
+        }
+
+<span class="nc" id="L333">        return listWinner;</span>
+    }
+
+    /**
+     * This method return a list of move when nbStep is one
+     *
+     * @return listemove
+     */
+    private List&lt;Move&gt; moveNbStepIsOne() {
+<span class="nc" id="L342">        List&lt;Move&gt; listeMove = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L343" title="All 2 branches missed.">        for (Direction direction : Direction.values()) {</span>
+<span class="nc" id="L344">            Move move = new Move(getSelected(),</span>
+                    selected,
+<span class="nc" id="L346">                    selected.next(direction));</span>
+<span class="nc bnc" id="L347" title="All 2 branches missed.">            if (!this.board.isInside(move.getEnd())) {</span>
+<span class="nc" id="L348">                listeMove.remove(move);</span>
+<span class="nc bnc" id="L349" title="All 2 branches missed.">            } else if (this.board.isInside(move.getEnd())</span>
+<span class="nc bnc" id="L350" title="All 2 branches missed.">                    &amp;&amp; this.board.isFree(move.getEnd())</span>
+<span class="nc bnc" id="L351" title="All 2 branches missed.">                    &amp;&amp; getSelected().canCross(board.getSquare(move.getEnd()))</span>
+<span class="nc bnc" id="L352" title="All 2 branches missed.">                    || (!board.isFree(move.getEnd())</span>
+<span class="nc bnc" id="L353" title="All 2 branches missed.">                    &amp;&amp; !this.board.isMyOwn(move.getEnd(),</span>
+<span class="nc" id="L354">                            current.getColor()))) {</span>
+<span class="nc" id="L355">                listeMove.add(move);</span>
+
+            }
+        }
+<span class="nc" id="L359">        return listeMove;</span>
+    }
+
+    /**
+     * This method return a list of move when nbStep is two
+     *
+     * @return listemove
+     */
+    private List&lt;Move&gt; moveNbStepIsTwo() {
+<span class="nc" id="L368">        List&lt;Move&gt; listeMove = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L369" title="All 2 branches missed.">        for (Direction direction : Direction.values()) {</span>
+<span class="nc" id="L370">            Move move = new Move(getSelected(), selected, selected.next(direction)</span>
+<span class="nc" id="L371">                    .next(direction));</span>
+<span class="nc bnc" id="L372" title="All 2 branches missed.">            if (!this.board.isInside(move.getEnd())) {</span>
+<span class="nc" id="L373">                listeMove.remove(move);</span>
+<span class="nc bnc" id="L374" title="All 2 branches missed.">            } else if (this.board.isInside(move.getEnd())</span>
+<span class="nc bnc" id="L375" title="All 2 branches missed.">                    &amp;&amp; this.board.isFree(move.getEnd())</span>
+<span class="nc bnc" id="L376" title="All 2 branches missed.">                    &amp;&amp; getSelected().canCross(board.getSquare(move.getEnd()))</span>
+<span class="nc bnc" id="L377" title="All 2 branches missed.">                    || (!board.isFree(move.getEnd())</span>
+<span class="nc bnc" id="L378" title="All 2 branches missed.">                    &amp;&amp; !this.board.isMyOwn(move.getEnd(),</span>
+<span class="nc" id="L379">                            current.getColor()))) {</span>
+<span class="nc" id="L380">                listeMove.add(move);</span>
+            }
+
+        }
+
+<span class="nc" id="L385">        return listeMove;</span>
+    }
+
+    /**
+     * This method check if a move is possible
+     *
+     * @param move
+     * @return boolean
+     */
+    private boolean isPossible(List&lt;Move&gt; move) {
+<span class="nc bnc" id="L395" title="All 2 branches missed.">        for (int i = 0; i &lt; move.size(); i++) {</span>
+<span class="nc bnc" id="L396" title="All 2 branches missed.">            if (this.board.isInside(move.get(i).getEnd())</span>
+<span class="nc bnc" id="L397" title="All 2 branches missed.">                    &amp;&amp; this.board.isFree(move.get(i).getEnd())</span>
+<span class="nc bnc" id="L398" title="All 2 branches missed.">                    &amp;&amp; getSelected().canCross(board.getSquare(move.get(i).getEnd()))</span>
+<span class="nc bnc" id="L399" title="All 2 branches missed.">                    || (!board.isFree(move.get(i).getEnd())</span>
+<span class="nc bnc" id="L400" title="All 2 branches missed.">                    &amp;&amp; !this.board.isMyOwn(move.get(i).getEnd(),</span>
+<span class="nc" id="L401">                            current.getColor()))) {</span>
+<span class="nc" id="L402">                return true;</span>
+
+            }
+
+        }
+
+<span class="nc" id="L408">        return false;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

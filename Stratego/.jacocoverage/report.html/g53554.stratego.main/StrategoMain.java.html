@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>StrategoMain.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Stratego&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">g53554.stratego.main</a> &gt; <span class="el_source">StrategoMain.java</span></div><h1>StrategoMain.java</h1><pre class="source lang-java linenums">package g53554.stratego.main;
+
+import g53554.stratego.controller.Controller;
+import g53554.stratego.model.Game;
+import g53554.stratego.model.Model;
+import g53554.stratego.view.View;
+
+/**
+ * This is the main of the game where the game can be execute 
+ * @author jussy
+ */
+<span class="nc" id="L12">public class StrategoMain {</span>
+
+    public static void main(String[] args) {
+<span class="nc" id="L15">        View vue = new View();</span>
+<span class="nc" id="L16">        Model model= new Game();</span>
+<span class="nc" id="L17">        Controller controller = new Controller(model, vue);</span>
+<span class="nc" id="L18">        controller.initialized();</span>
+<span class="nc" id="L19">        controller.startGame();</span>
+
+<span class="nc" id="L21">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

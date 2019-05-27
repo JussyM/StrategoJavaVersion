@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Move.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Stratego&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">g53554.stratego.model</a> &gt; <span class="el_source">Move.java</span></div><h1>Move.java</h1><pre class="source lang-java linenums">package g53554.stratego.model;
+
+import java.util.Objects;
+
+/**
+ *
+ * @author jussy
+ */
+public class Move {
+
+    private Piece piece;
+    private Position start;
+    private Position end;
+
+    /**
+     * This method construct the attribut
+     *
+     * @param piece
+     * @param start
+     * @param end
+     */
+<span class="nc" id="L22">    public Move(Piece piece, Position start, Position end) {</span>
+<span class="nc bnc" id="L23" title="All 6 branches missed.">        if (piece == null || start == null || end == null) {</span>
+<span class="nc" id="L24">            throw new IllegalArgumentException(&quot;La pièce est null&quot;);</span>
+
+        }
+<span class="nc" id="L27">        this.piece = piece;</span>
+<span class="nc" id="L28">        this.start = start;</span>
+<span class="nc" id="L29">        this.end = end;</span>
+<span class="nc" id="L30">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L34">        int hash = 5;</span>
+<span class="nc" id="L35">        hash = 19 * hash + Objects.hashCode(this.piece);</span>
+<span class="nc" id="L36">        hash = 19 * hash + Objects.hashCode(this.start);</span>
+<span class="nc" id="L37">        hash = 19 * hash + Objects.hashCode(this.end);</span>
+<span class="nc" id="L38">        return hash;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (this == obj) {</span>
+<span class="nc" id="L44">            return true;</span>
+        }
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L47">            return false;</span>
+        }
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L50">            return false;</span>
+        }
+<span class="nc" id="L52">        final Move other = (Move) obj;</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (!Objects.equals(this.piece, other.piece)) {</span>
+<span class="nc" id="L54">            return false;</span>
+        }
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (!Objects.equals(this.start, other.start)) {</span>
+<span class="nc" id="L57">            return false;</span>
+        }
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (!Objects.equals(this.end, other.end)) {</span>
+<span class="nc" id="L60">            return false;</span>
+        }
+<span class="nc" id="L62">        return true;</span>
+    }
+
+    /**
+     * This method get the end position
+     *
+     * @return end
+     */
+    public Position getEnd() {
+<span class="nc" id="L71">        return end;</span>
+    }
+
+    /**
+     * this method get the start position
+     *
+     * @return start
+     */
+    public Position getStart() {
+<span class="nc" id="L80">        return start;</span>
+    }
+
+    /**
+     * This method get the piece
+     *
+     * @return piece
+     */
+    public Piece getPiece() {
+<span class="nc" id="L89">        return piece;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L94">        return &quot;Move{&quot; + &quot;piece=&quot; + piece + &quot;, start=&quot; + start + &quot;, end=&quot; + end + '}';</span>
+    }
+    
+    
+    
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

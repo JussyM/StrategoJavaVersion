@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Piece.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Stratego&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">g53554.stratego.model</a> &gt; <span class="el_source">Piece.java</span></div><h1>Piece.java</h1><pre class="source lang-java linenums">package g53554.stratego.model;
+
+import java.util.Objects;
+
+/**
+ * This class is the piece that will be use in the game principally on the board
+ *
+ * @author jussy
+ */
+public class Piece {
+
+    private int rank;
+    private PlayerColor color;
+<span class="nc" id="L14">    private int nbSteps=1;</span>
+
+    /**
+     * This method initialized the attribut of the class Piece
+     *
+     * @param rank
+     * @param color
+     */
+<span class="nc" id="L22">    public Piece(int rank, PlayerColor color) {</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">        if (rank &lt; 0) {</span>
+<span class="nc" id="L24">            throw new IllegalArgumentException(&quot;Le rang est négatif&quot;);</span>
+        } else {
+<span class="nc" id="L26">            this.rank = rank;</span>
+<span class="nc" id="L27">            this.color = color;</span>
+        }
+<span class="nc" id="L29">    }</span>
+
+    /**
+     * New constructor of piece
+     *
+     * @param rank
+     * @param color
+     * @param nbSteps
+     */
+<span class="nc" id="L38">    public Piece(int rank, PlayerColor color, int nbSteps) {</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (nbSteps &lt; 0) {</span>
+<span class="nc" id="L40">            throw new IllegalArgumentException(&quot;la case est négatif&quot;);</span>
+        }
+<span class="nc" id="L42">        this.rank = rank;</span>
+<span class="nc" id="L43">        this.color = color;</span>
+<span class="nc" id="L44">        this.nbSteps = nbSteps;</span>
+       
+
+<span class="nc" id="L47">    }</span>
+
+    /**
+     * This method is the hashcode of the piece
+     *
+     * @return hash
+     */
+    @Override
+    public int hashCode() {
+<span class="nc" id="L56">        int hash = 5;</span>
+<span class="nc" id="L57">        hash = 53 * hash + this.rank;</span>
+<span class="nc" id="L58">        hash = 53 * hash + Objects.hashCode(this.color);</span>
+<span class="nc" id="L59">        return hash;</span>
+    }
+
+    /**
+     * This method compare the attribut of each piece
+     *
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (this == obj) {</span>
+<span class="nc" id="L71">            return true;</span>
+        }
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L74">            return false;</span>
+        }
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L77">            return false;</span>
+        }
+<span class="nc" id="L79">        final Piece other = (Piece) obj;</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (this.rank != other.rank) {</span>
+<span class="nc" id="L81">            return false;</span>
+        }
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (this.color != other.color) {</span>
+<span class="nc" id="L84">            return false;</span>
+        }
+<span class="nc" id="L86">        return true;</span>
+    }
+
+    /**
+     * This method get the color
+     *
+     * @return color
+     */
+    public PlayerColor getColor() {
+<span class="nc" id="L95">        return color;</span>
+    }
+
+    /**
+     * This method also get the value of rank
+     *
+     * @return rank
+     */
+    public int getRank() {
+<span class="nc" id="L104">        return rank;</span>
+    }
+
+    /**
+     * getter for nbrSteps
+     *
+     * @return nbSteps
+     */
+    public int getNbSteps() {
+<span class="nc" id="L113">        return nbSteps;</span>
+    }
+
+    /**
+     * Verifie if the rank in parameter is lower
+     *
+     * @param other
+     * @return strong
+     */
+    public boolean isStronger(Piece other) {
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        return rank &gt; other.getRank();</span>
+
+    }
+
+    /**
+     * Verifie if the rank is parameter is the same thing with the attribut
+     *
+     * @param other
+     * @return sameRank
+     */
+    public boolean hasSameRank(Piece other) {
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        return rank == other.getRank();</span>
+    }
+
+    /**
+     * this method check if a piece can cross a square
+     *
+     * @param square
+     * @return boolean
+     */
+    public boolean canCross(Square square) {
+<span class="nc" id="L144">        return square.isLand();</span>
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

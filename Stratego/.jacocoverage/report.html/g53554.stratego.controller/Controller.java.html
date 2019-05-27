@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Controller.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Stratego&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">g53554.stratego.controller</a> &gt; <span class="el_source">Controller.java</span></div><h1>Controller.java</h1><pre class="source lang-java linenums">package g53554.stratego.controller;
+
+import g53554.stratego.main.Color;
+import g53554.stratego.model.Model;
+import g53554.stratego.view.View;
+import java.util.ArrayList;
+
+/**
+ * This class creat the dynamism of the game is where we put all the method
+ * usful to control and play the game
+ *
+ * @author 53554
+ */
+public class Controller {
+
+    private Model game;
+    private View view;
+    private String cmd;
+
+    /**
+     * This method initialized the attribute declared
+     *
+     * @param game
+     * @param view
+     */
+<span class="nc" id="L26">    public Controller(Model game, View view) {</span>
+<span class="nc bnc" id="L27" title="All 4 branches missed.">        if (game == null || view == null) {</span>
+<span class="nc" id="L28">            throw new IllegalArgumentException(&quot;Le jeu n'est pas initialiser&quot;);</span>
+        }
+<span class="nc" id="L30">        this.game = game;</span>
+<span class="nc" id="L31">        this.view = view;</span>
+<span class="nc" id="L32">    }</span>
+
+    /**
+     * This method initialized the game
+     */
+    public void initialized() {
+<span class="nc" id="L38">        game.initialize();</span>
+<span class="nc" id="L39">        view.initialize();</span>
+
+<span class="nc" id="L41">    }</span>
+
+    /**
+     * This method enable to begin the game
+     */
+    public void startGame() {
+<span class="nc" id="L47">        game.start();</span>
+<span class="nc" id="L48">        view.displayHelp();</span>
+        do {
+<span class="nc" id="L50">            view.displayBoard(game.getBoard(), game.getcurrent());</span>
+<span class="nc" id="L51">            System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L52">            view.displayCurrentPlayer(game.getcurrent());</span>
+<span class="nc" id="L53">            gameCmde();</span>
+<span class="nc bnc" id="L54" title="All 4 branches missed.">        } while (!game.isOver() &amp;&amp; !quit());</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (game.isOver()) {</span>
+<span class="nc" id="L56">            view.displayOver(game.getWinner());</span>
+        }
+
+<span class="nc" id="L59">    }</span>
+
+    /**
+     * This method will extract and return the value given by the player
+     *
+     * @param cmd
+     * @return arrays
+     */
+    private int[] selectValue(String cmd) {
+<span class="nc" id="L68">        ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L69">        String[] splited = cmd.split(&quot; &quot;);</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        for (String current : splited) {</span>
+            try {
+<span class="nc" id="L72">                int parsedInt = Integer.parseInt(current);</span>
+<span class="nc" id="L73">                list.add(parsedInt);</span>
+<span class="nc" id="L74">            } catch (NumberFormatException e) {</span>
+<span class="nc" id="L75">            }</span>
+        }
+<span class="nc" id="L77">        int[] result = new int[list.size()];</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        for (int i = 0; i &lt; list.size(); i++) {</span>
+<span class="nc" id="L79">            result[i] = list.get(i);</span>
+        }
+<span class="nc" id="L81">        return result;</span>
+
+    }
+
+    /**
+     * This method group all the command useful for the game and it respectives
+     * roles
+     *
+     * @param cmde
+     */
+    private void gameCmde() {
+<span class="nc" id="L92">        Color couleur = new Color();</span>
+<span class="nc" id="L93">        cmd = view.askCommand();</span>
+<span class="nc" id="L94">        String endGamecmde = &quot;quit&quot;;</span>
+<span class="nc" id="L95">        String piecePostionCmde = &quot;select(.*)&quot;;</span>
+<span class="nc" id="L96">        String movePieceCmd = &quot;move(.*)&quot;;</span>
+<span class="nc" id="L97">        String applyMoveCmd = &quot;apply(.*)&quot;;</span>
+        int row;
+        int column;
+        int applyValue;
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (cmd.matches(endGamecmde)) {</span>
+<span class="nc" id="L102">            view.quit();</span>
+
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        } else if (cmd.matches(piecePostionCmde)) {</span>
+            try {
+<span class="nc" id="L106">                row = selectValue(cmd)[0];</span>
+<span class="nc" id="L107">                column = selectValue(cmd)[1];</span>
+<span class="nc" id="L108">                game.select(row, column);</span>
+<span class="nc" id="L109">                view.displaySelected(game.getSelected());</span>
+<span class="nc" id="L110">                view.displayBoard(game.getBoard(), game.getcurrent());</span>
+<span class="nc" id="L111">                System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L112">                gameCmde();</span>
+<span class="nc" id="L113">            } catch (ArrayIndexOutOfBoundsException e) {</span>
+<span class="nc" id="L114">                System.out.println(couleur.toRed(&quot;commande imcomplete&quot;));</span>
+<span class="nc" id="L115">                System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L116">                gameCmde();</span>
+<span class="nc" id="L117">            }</span>
+
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        } else if (cmd.matches(movePieceCmd)) {</span>
+            try {
+<span class="nc bnc" id="L121" title="All 2 branches missed.">                if (game.getSelected() == null);</span>
+
+<span class="nc" id="L123">            } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L124">                System.out.println(couleur.toRed(&quot;Aucune piece n'a été selectioner &quot;));</span>
+<span class="nc" id="L125">                System.out.println(couleur.toRed(&quot;commande imcomplete&quot;));</span>
+<span class="nc" id="L126">                System.out.println(&quot;Veuillez ressayé&quot;);</span>
+<span class="nc" id="L127">                System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L128">                gameCmde();</span>
+<span class="nc" id="L129">            }</span>
+<span class="nc" id="L130">            view.displayMoves(game.getMoves());</span>
+<span class="nc" id="L131">            gameCmde();</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">        } else if (cmd.matches(applyMoveCmd)) {</span>
+            try {
+<span class="nc" id="L134">                applyValue = selectValue(cmd)[0];</span>
+<span class="nc" id="L135">                game.apply(game.getMoves().get(applyValue));</span>
+<span class="nc" id="L136">            } catch (ArrayIndexOutOfBoundsException e) {</span>
+<span class="nc" id="L137">                System.out.println(couleur.toRed(&quot;commande imcomplete&quot;));</span>
+<span class="nc" id="L138">                System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L139">                gameCmde();</span>
+
+<span class="nc" id="L141">            }</span>
+
+        } else {
+<span class="nc" id="L144">            System.out.println(&quot;La commande entrez n'est pas valable :(&quot;);</span>
+<span class="nc" id="L145">            System.out.println(&quot;Veuillez ressayé&quot;);</span>
+<span class="nc" id="L146">            System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L147">            gameCmde();</span>
+
+        }
+<span class="nc" id="L150">    }</span>
+
+    private boolean quit() {
+<span class="nc" id="L153">        return cmd.equals(&quot;quit&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

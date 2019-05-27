@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Board.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Stratego&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">g53554.stratego.model</a> &gt; <span class="el_source">Board.java</span></div><h1>Board.java</h1><pre class="source lang-java linenums">package g53554.stratego.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * This class is the board of the game with an arrays of double dimension it
+ * will help us to creat the board with all element include
+ *
+ * @author 53554
+ */
+public class Board {
+
+    private final Square[][] squares;
+    private final static int ROW = 6;
+    private final static int COLUMN = 5;
+
+    /**
+     * This is constructor that build the board with no parameter with no
+     * parameter And put the board to default setting
+     */
+<span class="nc" id="L22">    public Board() {</span>
+<span class="nc" id="L23">        squares = new Square[ROW][COLUMN];</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        for (int i = 0; i &lt; squares.length; i++) {</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">            for (int j = 0; j &lt; squares[i].length; j++) {</span>
+<span class="nc" id="L26">                squares[i][j] = new Square(SquareType.LAND);</span>
+
+            }
+
+        }
+<span class="nc" id="L31">        squares[2][1] = new Square(SquareType.WATER);</span>
+<span class="nc" id="L32">        squares[2][2] = new Square(SquareType.WATER);</span>
+<span class="nc" id="L33">        squares[2][3] = new Square(SquareType.WATER);</span>
+
+<span class="nc" id="L35">    }</span>
+
+    /**
+     * This method get the square of the board
+     *
+     * @return square
+     */
+    public Square[][] getSquare() {
+<span class="nc" id="L43">        return squares;</span>
+    }
+
+    /**
+     * This method verified if position give in parameter is inside the square
+     * if it will return a boolean
+     *
+     * @param position
+     * @return inside
+     */
+    public boolean isInside(Position position) {
+<span class="nc" id="L54">        boolean isinside = false;</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        if ((position.getRow() &gt;= 0</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">                &amp;&amp; position.getRow() &lt; squares.length)</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">                &amp;&amp; (position.getColumn() &gt;= 0</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">                &amp;&amp; position.getColumn() &lt; squares[0].length)) {</span>
+<span class="nc" id="L59">            isinside = true;</span>
+
+        }
+<span class="nc" id="L62">        return isinside;</span>
+    }
+
+    /**
+     * This methode return the square at the position given in a parameter and
+     * display an exeption if the postion is out of the board
+     *
+     * @param position
+     * @return square
+     */
+    public Square getSquare(Position position) {
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (isInside(position) == false) {</span>
+<span class="nc" id="L74">            throw new IllegalArgumentException(&quot;La position est hors du tableau&quot;);</span>
+        }
+
+<span class="nc" id="L77">        return squares[position.getRow()][position.getColumn()];</span>
+
+    }
+
+    /**
+     * This method put a piece at the postion in parameter and also display an
+     * expetion if the position is out of the board
+     *
+     * @param piece
+     * @param position
+     */
+    public void put(Piece piece, Position position) {
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (isInside(position) == false) {</span>
+<span class="nc" id="L90">            throw new IllegalArgumentException(&quot;La position est hors du tableau&quot;);</span>
+        }
+<span class="nc" id="L92">        this.squares[position.getRow()][position.getColumn()].put(piece);</span>
+
+<span class="nc" id="L94">    }</span>
+
+    /**
+     * This method check if a square at the position given in parameter is free
+     *
+     * @param position
+     * @return isFree
+     */
+    public boolean isFree(Position position) {
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        if (isInside(position) == false) {</span>
+<span class="nc" id="L104">            throw new IllegalArgumentException(&quot;La position est hors du tableau&quot;);</span>
+        }
+
+<span class="nc" id="L107">        return this.squares[position.getRow()][position.getColumn()].isFree();</span>
+
+    }
+
+    /**
+     * This method check if the color given in paramater is the same with the
+     * one in the board
+     *
+     * @param position
+     * @param color
+     * @return isMyOwn
+     */
+    public boolean isMyOwn(Position position, PlayerColor color) {
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (isInside(position) == false) {</span>
+<span class="nc" id="L121">            throw new IllegalArgumentException(&quot;La position est hors du tableau &quot;);</span>
+        }
+
+<span class="nc" id="L124">        return this.squares[position.getRow()][position.getColumn()].isMyOwn(color);</span>
+    }
+
+    /**
+     * This method return the piece at the postion given in the parameter
+     *
+     * @param position
+     * @return piece
+     */
+    public Piece getPiece(Position position) {
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        if (!isInside(position)) {</span>
+<span class="nc" id="L135">            throw new IllegalArgumentException(&quot;La position est hors du tableau&quot;);</span>
+        }
+
+<span class="nc" id="L138">        return squares[position.getRow()][position.getColumn()].getPiece();</span>
+
+    }
+
+    /**
+     * This method remove a piece from the board
+     *
+     * @param position
+     *
+     */
+    public void remove(Position position) {
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        if (!isInside(position)) {</span>
+<span class="nc" id="L150">            throw new IllegalArgumentException(&quot;La position est hors du tableau&quot;);</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">        } else if (getPiece(position) != null) {</span>
+<span class="nc" id="L152">            this.getSquare(position).remove();</span>
+
+        }
+
+<span class="nc" id="L156">    }</span>
+
+    /**
+     * This method return a list of all the position occupied by a player
+     *
+     * @param player
+     * @return listPosition
+     */
+    public List&lt;Position&gt; getTakenSquare(Player player) {
+<span class="nc" id="L165">        List&lt;Position&gt; listPosition = new ArrayList&lt;&gt;();</span>
+        Position positionPlayer;
+<span class="nc bnc" id="L167" title="All 2 branches missed.">        for (int i = 0; i &lt; this.squares.length; i++) {</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">            for (int j = 0; j &lt; this.squares[i].length; j++) {</span>
+<span class="nc" id="L169">                positionPlayer = new Position(i, j);</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">                if (this.squares[i][j].getPiece() != null</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">                        &amp;&amp; this.isMyOwn(positionPlayer, player.getColor())) {</span>
+
+<span class="nc" id="L173">                    listPosition.add(positionPlayer);</span>
+                }
+
+            }
+
+        }
+
+<span class="nc" id="L180">        return listPosition;</span>
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -139,8 +139,7 @@ public class View {
      */
     public String askCommand() {
         System.out.println("Veuillez entrez une commande: ");
-        String cmde = in.nextLine();
-        return cmde;
+        return in.nextLine();
     }
 
     /**
@@ -159,10 +158,9 @@ public class View {
                 PrintEqualSign(square);
                 for (int j = 0; j < board.getSquare().length; j++) {
                     System.out.printf("  %nrow#%02d|| ", j);
-                    for (int k = 0; k < square[j].length; k++) {
-                        Piece piece = square[j][k].getPiece();
-                        displayPiece(piece, square[j][k], player);
-
+                    for (Square item : square[j]) {
+                        Piece piece = item.getPiece();
+                        displayPiece(piece, item, player);
                     }
 
                 }

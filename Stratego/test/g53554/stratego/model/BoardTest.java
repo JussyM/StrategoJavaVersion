@@ -1,5 +1,4 @@
 package g53554.stratego.model;
-
 import g53554.stratego.model.pieces.Flag;
 import g53554.stratego.model.pieces.General;
 import java.util.ArrayList;
