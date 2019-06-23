@@ -1,5 +1,4 @@
 package g53554.stratego.controller;
-
 import g53554.stratego.main.Color;
 import g53554.stratego.model.Model;
 import g53554.stratego.view.View;
@@ -114,8 +113,10 @@ public class Controller {
                 System.out.println("");
                 gameCmde();
             } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (IllegalArgumentException e){
+                
                 System.out.println(couleur.toRed("commande imcomplete ou"
-                        + " non valide"));
+                        + " non valide ou la case réfère à un la case d'un joueur adverse"));
                 System.out.println("");
                 gameCmde();
             }

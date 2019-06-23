@@ -1,5 +1,4 @@
 package g53554.stratego.main;
-
 import g53554.stratego.controller.Controller;
 import g53554.stratego.model.Game;
 import g53554.stratego.model.Model;

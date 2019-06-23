@@ -70,7 +70,7 @@ public class Board {
      * @return square
      */
     public Square getSquare(Position position) {
-        if (isInside(position) == false) {
+        if (!isInside(position)) {
             throw new IllegalArgumentException("La position est hors du tableau");
         }
 
@@ -86,7 +86,7 @@ public class Board {
      * @param position
      */
     public void put(Piece piece, Position position) {
-        if (isInside(position) == false) {
+        if (!isInside(position)) {
             throw new IllegalArgumentException("La position est hors du tableau");
         }
         this.squares[position.getRow()][position.getColumn()].put(piece);
@@ -100,7 +100,7 @@ public class Board {
      * @return isFree
      */
     public boolean isFree(Position position) {
-        if (isInside(position) == false) {
+        if (!isInside(position)) {
             throw new IllegalArgumentException("La position est hors du tableau");
         }
 
@@ -117,7 +117,7 @@ public class Board {
      * @return isMyOwn
      */
     public boolean isMyOwn(Position position, PlayerColor color) {
-        if (isInside(position) == false) {
+        if (!isInside(position)) {
             throw new IllegalArgumentException("La position est hors du tableau ");
         }
 

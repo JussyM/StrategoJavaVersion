@@ -91,12 +91,11 @@ public class Square {
      * @return free
      */
     public boolean isFree() {
-        boolean isFree = false;
         if (this.piece == null) {
-            isFree = true;
+            return true;
         }
 
-        return isFree;
+        return false;
 
     }
 

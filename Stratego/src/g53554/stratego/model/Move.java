@@ -1,5 +1,4 @@
 package g53554.stratego.model;
-
 import java.util.Objects;
 
 /**

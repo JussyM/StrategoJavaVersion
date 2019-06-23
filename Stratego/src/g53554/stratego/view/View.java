@@ -1,5 +1,4 @@
 package g53554.stratego.view;
-
 import g53554.stratego.model.Square;
 import g53554.stratego.model.Board;
 import java.util.Scanner;
@@ -17,6 +16,7 @@ import java.util.List;
  * @author 53554
  */
 public class View {
+    private Color couleur;
 
     private Scanner in;
 
