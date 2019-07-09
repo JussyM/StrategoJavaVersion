@@ -1,5 +1,4 @@
 package g53554.stratego.model;
-
 import g53554.stratego.model.pieces.Bomb;
 import g53554.stratego.model.pieces.Eclaireur;
 import g53554.stratego.model.pieces.Espion;
@@ -201,7 +200,7 @@ public class Game implements Model {
             throw new IllegalArgumentException("La position selectionner est null ");
 
         } else if (getSelected().getNbSteps() == 0) {
-            listeMove = listeMove;
+            listeMove.isEmpty();
         } else if (getSelected().getNbSteps() == 1) {
             listeMove = moveNbStepIsOne();
         } else if (getSelected().getNbSteps() == 2) {

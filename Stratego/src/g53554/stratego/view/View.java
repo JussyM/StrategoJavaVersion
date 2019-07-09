@@ -1,4 +1,5 @@
 package g53554.stratego.view;
+
 import g53554.stratego.model.Square;
 import g53554.stratego.model.Board;
 import java.util.Scanner;
@@ -10,12 +11,12 @@ import g53554.stratego.model.PlayerColor;
 import java.util.List;
 
 /**
- * This class interact with the player or the user by doing a display or asking
- * information from the keyboard
+ * This class interact with the player or the user by doing a display or asking information from the keyboard
  *
  * @author 53554
  */
 public class View {
+
     private Color couleur;
 
     private Scanner in;
@@ -375,6 +376,16 @@ public class View {
 
             }
         }
+    }
+
+    /**
+     * Method grouping piece name and it colors
+     * @return namepiece 
+     */
+    private String[][] namePiece() {
+        String[][] namePiece = {{"Rouge", "Bleu"}, {"General", "Drapeau", "Demineur", "Bomb", "Espion", "Marechal"}};
+
+        return namePiece;
     }
 
 }
