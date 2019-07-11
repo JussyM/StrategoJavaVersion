@@ -158,4 +158,10 @@ public class Color {
     public   String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
     public   String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
     public   String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
+    
+    //Color Back_ground
+    
+    public String WhiteBackground = "\u001b[47m";
+    public String toDefault = "\u001b[0m" ;
+    
 }

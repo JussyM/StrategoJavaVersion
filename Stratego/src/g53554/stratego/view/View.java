@@ -11,13 +11,14 @@ import g53554.stratego.model.PlayerColor;
 import java.util.List;
 
 /**
- * This class interact with the player or the user by doing a display or asking information from the keyboard
+ * This class interact with the player or the user by doing a display or asking
+ * information from the keyboard
  *
  * @author 53554
  */
 public class View {
 
-    private Color couleur;
+    private Color couleur = new Color();
 
     private Scanner in;
 
@@ -32,7 +33,6 @@ public class View {
      * This method display a welcome message for the user or the player
      */
     public void initialize() {
-        Color couleur = new Color();
         System.out.println(couleur.toCyan("******************************"));
         System.out.println(couleur.toBlue("*****Bienvenu au Stratego*****"));
         System.out.println(couleur.toCyan("******************************"));
@@ -60,7 +60,6 @@ public class View {
      * This method display some guide line that the user can encode
      */
     public void displayHelp() {
-        Color couleur = new Color();
         System.out.println(couleur.toYellow("Usage :"));
         System.out.println("     " + couleur.toYellow("Taper ") + couleur.toRed("select <row,column>") + couleur.toYellow(" pour selectionner la pièce de la case mentionnée"));
         System.out.println("     " + couleur.toYellow("Taper ") + couleur.toRed("moves") + couleur.toYellow(" pour afficher la liste des déplacements possibles de la pièce séléctionnée"));
@@ -75,7 +74,6 @@ public class View {
      * @param moves
      */
     public void displayMoves(List<Move> moves) {
-        Color couleur = new Color();
         String namePiece = "";
         System.out.println(" " + moves.size() + couleur.toYellow(" Déplacement possible"));
         for (int i = 0; i < moves.size(); i++) {
@@ -181,9 +179,9 @@ public class View {
         //GE=Géneral, DR=Drapeau , DM=Demineur(Miner), BO=Bomb, ES=Espion, 
         //MA= Maréchale 
         if (piece == null && square.isLand()) {
-            System.out.print(" [" + "\u001b[47m" + "  " + "\u001b[0m" + "]");
+            System.out.print(" [" + couleur.WhiteBackground + "  " + couleur.toDefault + "]");
         } else if (piece == null && !square.isLand()) {
-            System.out.print(" [" + "\u001b[46m" + "  " + "\u001b[0m" + "]");
+            System.out.print(" [" + couleur.WhiteBackground + "  " + couleur.toDefault + "]");
         } else {
             HideCurrentPiece(piece, player);
         }
@@ -300,36 +298,36 @@ public class View {
      * @param piece
      */
     private void hideBluePiece(Piece piece) {
-        Color couleur = new Color();
+
         if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 9) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("**") + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 0) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("**") + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 11) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("**") + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 3) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("**") + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 1) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("**") + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 10) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("**") + "]");
         } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 2) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toBlue("**") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("**") + "]");
         } else {
             if (piece.getColor() == PlayerColor.RED && piece.getRank() == 9) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toRed("GE") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("GE") + "]");
             } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 0) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toRed("DR") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("DR") + "]");
             } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 11) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toRed("BO") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("BO") + "]");
             } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 3) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toRed("DM") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("DM") + "]");
             } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 10) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toRed("MA") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("MA") + "]");
             } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 1) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toRed("ES") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("ES") + "]");
             } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 2) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toRed("EC") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("EC") + "]");
 
             }
         }
@@ -342,37 +340,37 @@ public class View {
      * @param piece
      */
     private void hideRedPiece(Piece piece) {
-        Color couleur = new Color();
+
         if (piece.getColor() == PlayerColor.RED && piece.getRank() == 9) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("$$") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 0) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("$$") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 11) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("$$") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 3) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("$$") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 10) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("$$") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 1) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("$$") + "]");
         } else if (piece.getColor() == PlayerColor.RED && piece.getRank() == 2) {
-            System.out.print(" [" + "\u001b[47m" + couleur.toRed("$$") + "]");
+            System.out.print(" [" + couleur.WhiteBackground + couleur.toRed("$$") + "]");
 
         } else {
             if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 9) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("GE") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("GE") + "]");
             } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 0) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("DR") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("DR") + "]");
             } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 11) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("BO") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("BO") + "]");
             } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 3) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("DM") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("DM") + "]");
             } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 10) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("MA") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("MA") + "]");
             } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 1) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("ES") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("ES") + "]");
             } else if (piece.getColor() == PlayerColor.BLUE && piece.getRank() == 2) {
-                System.out.print(" [" + "\u001b[47m" + couleur.toBlue("EC") + "]");
+                System.out.print(" [" + couleur.WhiteBackground + couleur.toBlue("EC") + "]");
 
             }
         }
@@ -380,10 +378,22 @@ public class View {
 
     /**
      * Method grouping piece name and it colors
-     * @return namepiece 
+     *
+     * @return namepiece
      */
-    private String[][] namePiece() {
-        String[][] namePiece = {{"Rouge", "Bleu"}, {"General", "Drapeau", "Demineur", "Bomb", "Espion", "Marechal"}};
+    private String[] namePiece() {
+        String[] namePiece = {"General rouge",
+            "Drapeau rouge",
+            "Demineur rouge",
+            "Bomb rouge",
+            "Espion rouge",
+            "Marechal rouge",
+            "General bleu",
+            "Drapeau bleu",
+            "Demineur bleu",
+            "Bomb bleu",
+            "Espion bleu",
+            "Marechal bleu"};
 
         return namePiece;
     }
