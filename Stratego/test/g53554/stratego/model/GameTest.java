@@ -13,7 +13,7 @@ import g53554.stratego.model.pieces.Flag;
 import g53554.stratego.model.pieces.General;
 import g53554.stratego.model.pieces.Bomb;
 import g53554.stratego.model.pieces.Eclaireur;
-import g53554.stratego.model.pieces.Espion;
+import g53554.stratego.model.pieces.Spy;
 import g53554.stratego.model.pieces.Maréchal;
 import g53554.stratego.model.pieces.Miner;
 import static org.junit.Assert.assertTrue;
@@ -43,11 +43,11 @@ public class GameTest {
         newDefaultBoard[1][0].put(new Bomb(RED));
         newDefaultBoard[1][2].put(new Miner(RED));
         newDefaultBoard[5][1].put(new Maréchal(RED));
-        newDefaultBoard[0][0].put(new Espion(RED));
+        newDefaultBoard[0][0].put(new Spy(RED));
         newDefaultBoard[3][1].put(new Bomb(BLUE));
         newDefaultBoard[2][0].put(new Miner(BLUE));
         newDefaultBoard[2][4].put(new Maréchal(BLUE));
-        newDefaultBoard[0][3].put(new Espion(BLUE));
+        newDefaultBoard[0][3].put(new Spy(BLUE));
         newDefaultBoard[0][2].put(new Eclaireur(BLUE));
         newDefaultBoard[0][4].put(new Eclaireur(RED));
 

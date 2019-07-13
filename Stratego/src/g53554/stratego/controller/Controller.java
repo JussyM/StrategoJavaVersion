@@ -116,7 +116,8 @@ public class Controller {
             } catch (IllegalArgumentException e){
                 
                 System.out.println(couleur.toRed("commande imcomplete ou"
-                        + " non valide ou la case réfère à un la case d'un joueur adverse"));
+                        + " non valide ou la case réfère à un la case d'un "
+                        + "joueur adverse"));
                 System.out.println("");
                 gameCmde();
             }

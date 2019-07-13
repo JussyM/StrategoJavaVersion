@@ -166,7 +166,7 @@ public class View {
 
     /**
      * This method display the piece inside the board with background colour
-     * GE=Géneral, DR=Drapeau , DM=Demineur(Miner), BO=Bomb, ES=Espion, MA=
+     * GE=Géneral, DR=Drapeau , DM=Demineur(Miner), BO=Bomb, ES=Espion(Spy), MA=
      * Maréchale
      *
      * @param square, player

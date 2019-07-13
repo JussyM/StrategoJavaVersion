@@ -1,7 +1,7 @@
 package g53554.stratego.model;
 import g53554.stratego.model.pieces.Bomb;
 import g53554.stratego.model.pieces.Eclaireur;
-import g53554.stratego.model.pieces.Espion;
+import g53554.stratego.model.pieces.Spy;
 import g53554.stratego.model.pieces.Flag;
 import g53554.stratego.model.pieces.General;
 import g53554.stratego.model.pieces.Maréchal;
@@ -47,11 +47,11 @@ public class Game implements Model {
         board.put(new Flag(PlayerColor.BLUE), new Position(4, 2));
         board.put(new General(PlayerColor.BLUE), new Position(4, 1));
         board.put(new Bomb(PlayerColor.RED), new Position(1, 0));
-        board.put(new Espion(PlayerColor.RED), new Position(0, 0));
+        board.put(new Spy(PlayerColor.RED), new Position(0, 0));
         board.put(new Maréchal(PlayerColor.RED), new Position(5, 1));
         board.put(new Miner(PlayerColor.RED), new Position(1, 2));
         board.put(new Bomb(PlayerColor.BLUE), new Position(3, 1));
-        board.put(new Espion(PlayerColor.BLUE), new Position(0, 3));
+        board.put(new Spy(PlayerColor.BLUE), new Position(0, 3));
         board.put(new Maréchal(PlayerColor.BLUE), new Position(2, 4));
         board.put(new Miner(PlayerColor.BLUE), new Position(2, 0));
         board.put(new Eclaireur(PlayerColor.BLUE), new Position(0, 2));
@@ -60,11 +60,11 @@ public class Game implements Model {
         opponent.addPiece(new Flag(PlayerColor.BLUE));
         opponent.addPiece(new General(PlayerColor.BLUE));
         current.addPiece(new Bomb(PlayerColor.RED));
-        current.addPiece(new Espion(PlayerColor.RED));
+        current.addPiece(new Spy(PlayerColor.RED));
         current.addPiece(new Maréchal(PlayerColor.RED));
         current.addPiece(new Miner(PlayerColor.RED));
         opponent.addPiece(new Bomb(PlayerColor.BLUE));
-        opponent.addPiece(new Espion(PlayerColor.BLUE));
+        opponent.addPiece(new Spy(PlayerColor.BLUE));
         opponent.addPiece(new Maréchal(PlayerColor.BLUE));
         opponent.addPiece(new Miner(PlayerColor.BLUE));
         current.addPiece(new Eclaireur(PlayerColor.RED));
