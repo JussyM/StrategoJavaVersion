@@ -75,7 +75,7 @@ public class View {
      */
     public void displayMoves(List<Move> moves) {
         String namePiece = "";
-        System.out.println( " "+moves.size()+ couleur.toYellow(" Déplacement(s) possible(s)"));
+        System.out.println(" " + moves.size() + couleur.toYellow(" Déplacement(s) possible(s)"));
         for (int i = 0; i < moves.size(); i++) {
             if (moves.get(i).getPiece().getRank() == 9
                     && moves.get(i).getPiece().getColor() == PlayerColor.RED) {
@@ -137,6 +137,7 @@ public class View {
      * @return cmde
      */
     public String askCommand() {
+        System.out.println("");
         System.out.println("Veuillez entrez une commande: ");
         return in.nextLine();
     }
@@ -155,14 +156,7 @@ public class View {
             if (i == square[0].length - 1) {
                 System.out.println("");
                 PrintEqualSign(square);
-                for (int j = 0; j < board.getSquare().length; j++) {
-                    System.out.printf("  %nrow#%02d|| ", j);
-                    for (Square item : square[j]) {
-                        Piece piece = item.getPiece();
-                        displayPiece(piece, item, player);
-                    }
-
-                }
+                displayPiece(square, player);
 
             }
 
@@ -172,19 +166,29 @@ public class View {
 
     /**
      * This method display the piece inside the board with background colour
+     * GE=Géneral, DR=Drapeau , DM=Demineur(Miner), BO=Bomb, ES=Espion, MA=
+     * Maréchale
      *
-     * @param piece
+     * @param square, player
      */
-    private void displayPiece(Piece piece, Square square, Player player) {
-        //GE=Géneral, DR=Drapeau , DM=Demineur(Miner), BO=Bomb, ES=Espion, 
-        //MA= Maréchale 
-        if (piece == null && square.isLand()) {
-            System.out.print(" [" + couleur.WhiteBackground + "  " + couleur.toDefault + "]");
-        } else if (piece == null && !square.isLand()) {
-            System.out.print(" [" + couleur.WhiteBackground + "  " + couleur.toDefault + "]");
-        } else {
-            HideCurrentPiece(piece, player);
+    private void displayPiece(Square[][] square, Player player) {
+        Board board = new Board();
+        for (int i = 0; i < board.getSquare().length; i++) {
+            System.out.printf("  %nrow#%02d|| ", i);
+            for (Square item : square[i]) {
+                Piece piece = item.getPiece();
+                if (piece == null && item.isLand()) {
+                    System.out.print(" [" + couleur.WhiteBackground + "  "
+                            + couleur.toDefault + "]");
+                } else if (piece == null && !item.isLand()) {
+                    System.out.print(" [" + couleur.WhiteBackground + "  "
+                            + couleur.toDefault + "]");
+                } else {
+                    HideCurrentPiece(piece, player);
+                }
+            }
         }
+
     }
 
     /**
@@ -230,10 +234,12 @@ public class View {
             } else {
                 switch (Winner.get(i).getColor()) {
                     case RED:
-                        System.out.println("Félicitation joueur rouge vous avez gagné ");
+                        System.out.println("Félicitation joueur rouge vous avez "
+                                + "gagné ");
                         break;
                     case BLUE:
-                        System.out.println("Félicitation joueur bleu vous avez gagné ");
+                        System.out.println("Félicitation joueur bleu vous avez "
+                                + "gagné ");
                         break;
                 }
             }
@@ -288,7 +294,12 @@ public class View {
      * @param player
      */
     public void displayCurrentPlayer(Player player) {
-        System.out.println("A votre tour joueur " + player.getColor());
+        System.out.println("");
+        if (player.getColor() == PlayerColor.BLUE) {
+            System.out.println("A votre tour joueur " + couleur.toBlue("BLUE"));
+        } else {
+            System.out.println("A votre tour joueur " + couleur.toRed("RED"));
+        }
 
     }
 

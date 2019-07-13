@@ -1,5 +1,4 @@
 package g53554.stratego.model;
-
 import g53554.stratego.model.pieces.Bomb;
 import g53554.stratego.model.pieces.Eclaireur;
 import g53554.stratego.model.pieces.Espion;
@@ -164,11 +163,15 @@ public class Game implements Model {
     @Override
     public void select(int row, int column) {
         if (!this.board.isInside(new Position(row, column))) {
-            throw new IllegalArgumentException("les coordonnées en paramètre sont hors du plateau");
+            throw new IllegalArgumentException("les coordonnées en paramètre "
+                    + "sont hors du plateau");
         } else if (this.board.isFree(new Position(row, column))) {
-            throw new IllegalArgumentException("Les coordonnées en paramètre réfère à une case vide");
-        } else if (this.board.getSquare(new Position(row, column)).isMyOwn(opponent.getColor())) {
-            throw new IllegalArgumentException("la case est occuper par le joueur adverse");
+            throw new IllegalArgumentException("Les coordonnées en paramètre "
+                    + "réfère à une case vide");
+        } else if (this.board.getSquare(new Position(row, column))
+                .isMyOwn(opponent.getColor())) {
+            throw new IllegalArgumentException("la case est occuper par "
+                    + "le joueur adverse");
 
         }
         this.selected = new Position(row, column);
@@ -183,7 +186,8 @@ public class Game implements Model {
     @Override
     public Piece getSelected() {
         if (this.selected == null) {
-            throw new IllegalArgumentException("La position selectionner est hors du tableau");
+            throw new IllegalArgumentException("La position selectionner "
+                    + "est hors du tableau");
         }
 
         return this.board.getPiece(selected);
@@ -198,7 +202,8 @@ public class Game implements Model {
     public List<Move> getMoves() {
         List<Move> listeMove = new ArrayList<>();
         if (selected == null) {
-            throw new IllegalArgumentException("La position selectionner est null ");
+            throw new IllegalArgumentException("La position selectionner "
+                    + "est null ");
 
         } else if (getSelected().getNbSteps() == 0) {
             listeMove.isEmpty();
@@ -352,10 +357,10 @@ public class Game implements Model {
     private List<Move> moveNbStepIsTwo() {
         List<Move> listeMove = new ArrayList<>();
         for (Direction direction : Direction.values()) {
-            Move moveInTwodirection = new Move(getSelected(), 
+            Move moveInTwodirection = new Move(getSelected(),
                     selected, selected.next(direction)
-                    .next(direction));
-            Move moveInOneDirection = new Move(getSelected(), 
+                            .next(direction));
+            Move moveInOneDirection = new Move(getSelected(),
                     selected, selected.next(direction));
             if (isPossible(moveInOneDirection)) {
                 listeMove.add(moveInOneDirection);
