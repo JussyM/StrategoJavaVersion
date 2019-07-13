@@ -115,7 +115,7 @@ public class Controller {
             } catch (ArrayIndexOutOfBoundsException e) {
             } catch (IllegalArgumentException e){
                 
-                System.out.println(couleur.toRed("commande imcomplete ou"
+                view.displayErrors(couleur.toRed("commande imcomplete ou"
                         + " non valide ou la case réfère à un la case d'un "
                         + "joueur adverse"));
                 System.out.println("");
@@ -127,9 +127,9 @@ public class Controller {
                 if (game.getSelected() == null);
 
             } catch (IllegalArgumentException e) {
-                System.out.println(couleur.toRed("Aucune piece n'a été selectioner "));
-                System.out.println(couleur.toRed("commande imcomplete"));
-                System.out.println("Veuillez ressayé");
+                view.displayErrors(couleur.toRed("Aucune piece n'a été selectioner "));
+                view.displayErrors(couleur.toRed("commande imcomplete"));
+                view.displayErrors("Veuillez ressayé");
                 System.out.println("");
                 gameCmde();
             }
@@ -140,15 +140,15 @@ public class Controller {
                 applyValue = selectValue(cmd)[0];
                 game.apply(game.getMoves().get(applyValue));
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println(couleur.toRed("commande imcomplete"));
+                view.displayErrors(couleur.toRed("commande imcomplete"));
                 System.out.println("");
                 gameCmde();
 
             }
 
         } else {
-            System.out.println("La commande entrez n'est pas valable :(");
-            System.out.println("Veuillez ressayé");
+            view.displayErrors("La commande entrez n'est pas valable :(");
+            view.displayErrors("Veuillez ressayé");
             System.out.println("");
             gameCmde();
 

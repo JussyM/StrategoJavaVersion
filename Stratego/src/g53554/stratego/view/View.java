@@ -53,6 +53,7 @@ public class View {
      * @param message
      */
     public void displayErrors(String message) {
+        System.out.println(message);
 
     }
 
@@ -61,10 +62,20 @@ public class View {
      */
     public void displayHelp() {
         System.out.println(couleur.toYellow("Usage :"));
-        System.out.println("     " + couleur.toYellow("Taper ") + couleur.toRed("select <row,column>") + couleur.toYellow(" pour selectionner la pièce de la case mentionnée"));
-        System.out.println("     " + couleur.toYellow("Taper ") + couleur.toRed("moves") + couleur.toYellow(" pour afficher la liste des déplacements possibles de la pièce séléctionnée"));
-        System.out.println("     " + couleur.toYellow("Taper ") + couleur.toRed("apply <index> ") + couleur.toYellow("pour appliquer le déplacement d'indice donnée"));
-        System.out.println(couleur.toYellow("     " + "Taper " + couleur.toRed("quit") + couleur.toYellow(" pour arrêter le jeu")));
+        System.out.println("     " + couleur.toYellow("Taper ")
+                + couleur.toRed("select <row,column>") 
+                + couleur.toYellow(" pour selectionner la pièce de la "
+                        + "case mentionnée"));
+        System.out.println("     " + couleur.toYellow("Taper ") 
+                + couleur.toRed("moves") 
+                + couleur.toYellow(" pour afficher la liste des déplacements"
+                        + " possibles de la pièce séléctionnée"));
+        System.out.println("     " + couleur.toYellow("Taper ") 
+                + couleur.toRed("apply <index> ") 
+                + couleur.toYellow("pour appliquer le déplacement d'indice donnée"));
+        System.out.println(couleur.toYellow("     " + "Taper " 
+                + couleur.toRed("quit") 
+                + couleur.toYellow(" pour arrêter le jeu")));
 
     }
 
