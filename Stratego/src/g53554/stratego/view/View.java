@@ -75,7 +75,7 @@ public class View {
      */
     public void displayMoves(List<Move> moves) {
         String namePiece = "";
-        System.out.println(" " + moves.size() + couleur.toYellow(" Déplacement possible"));
+        System.out.println( " "+moves.size()+ couleur.toYellow(" Déplacement(s) possible(s)"));
         for (int i = 0; i < moves.size(); i++) {
             if (moves.get(i).getPiece().getRank() == 9
                     && moves.get(i).getPiece().getColor() == PlayerColor.RED) {
@@ -122,7 +122,7 @@ public class View {
 
             }
 
-            System.out.println(i + " -" + namePiece + " peut se déplacer"
+            System.out.println(i + "- " + namePiece + " peut se déplacer"
                     + " vers la ligne "
                     + moves.get(i).getEnd().getRow()
                     + " et la colonne " + moves.get(i).getEnd().getColumn());

@@ -1,4 +1,5 @@
 package g53554.stratego.model;
+
 import g53554.stratego.model.pieces.Bomb;
 import g53554.stratego.model.pieces.Eclaireur;
 import g53554.stratego.model.pieces.Espion;
@@ -335,9 +336,7 @@ public class Game implements Model {
             Move move = new Move(getSelected(),
                     selected,
                     selected.next(direction));
-            if (!isPossible(move)) {
-                listeMove.remove(move);
-            } else if (isPossible(move)) {
+            if (isPossible(move)) {
                 listeMove.add(move);
 
             }
@@ -353,20 +352,17 @@ public class Game implements Model {
     private List<Move> moveNbStepIsTwo() {
         List<Move> listeMove = new ArrayList<>();
         for (Direction direction : Direction.values()) {
-            Move move = new Move(getSelected(), selected, selected.next(direction)
+            Move moveInTwodirection = new Move(getSelected(), 
+                    selected, selected.next(direction)
                     .next(direction));
-            Move move1 = new Move(getSelected(), selected, selected.next(direction));
-            if (!isPossible(move1)) {
-                listeMove.remove(move1);
-            } else {
-                listeMove.add(move1);
+            Move moveInOneDirection = new Move(getSelected(), 
+                    selected, selected.next(direction));
+            if (isPossible(moveInOneDirection)) {
+                listeMove.add(moveInOneDirection);
 
-                if (!isPossible(move)) {
-                    listeMove.remove(move);
-                } else {
-                    if (isPossible(move)) {
-                        listeMove.add(move);
-                    }
+                if (isPossible(moveInTwodirection)) {
+                    listeMove.add(moveInTwodirection);
+
                 }
 
             }
