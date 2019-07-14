@@ -43,7 +43,8 @@ public class View {
      * This method display a goodbye message to the user or the player
      */
     public void quit() {
-        System.out.println("Bye Bye Thanks for Playing");
+        System.out.println("");
+        System.out.println(couleur.toBlue("Bye Bye Thanks for Playing"));
 
     }
 
@@ -63,19 +64,19 @@ public class View {
     public void displayHelp() {
         System.out.println(couleur.toYellow("Usage :"));
         System.out.println("     " + couleur.toYellow("Taper ")
-                + couleur.toRed("select <row,column>") 
+                + couleur.toRed("select <row,column>")
                 + couleur.toYellow(" pour selectionner la pièce de la "
                         + "case mentionnée"));
-        System.out.println("     " + couleur.toYellow("Taper ") 
-                + couleur.toRed("moves") 
+        System.out.println("     " + couleur.toYellow("Taper ")
+                + couleur.toRed("moves")
                 + couleur.toYellow(" pour afficher la liste des déplacements"
                         + " possibles de la pièce séléctionnée"));
-        System.out.println("     " + couleur.toYellow("Taper ") 
-                + couleur.toRed("apply <index> ") 
+        System.out.println("     " + couleur.toYellow("Taper ")
+                + couleur.toRed("apply <index> ")
                 + couleur.toYellow("pour appliquer le déplacement d'indice "
                         + "donnée"));
-        System.out.println(couleur.toYellow("     " + "Taper " 
-                + couleur.toRed("quit") 
+        System.out.println(couleur.toYellow("     " + "Taper "
+                + couleur.toRed("quit")
                 + couleur.toYellow(" pour arrêter le jeu")));
 
     }
@@ -87,7 +88,7 @@ public class View {
      */
     public void displayMoves(List<Move> moves) {
         String namePiece = "";
-        System.out.println(" " + moves.size() 
+        System.out.println(" " + moves.size()
                 + couleur.toYellow(" Déplacement(s) possible(s)"));
         for (int i = 0; i < moves.size(); i++) {
             if (moves.get(i).getPiece().getRank() == 9
@@ -152,6 +153,7 @@ public class View {
     public String askCommand() {
         System.out.println("");
         System.out.println("Veuillez entrez une commande: ");
+        System.out.println("");
         return in.nextLine();
     }
 
@@ -270,43 +272,43 @@ public class View {
         String nomPiece = "";
         if (piece.getRank() == 9 && piece.getColor() == PlayerColor.RED) {
             nomPiece = "Géneral rouge";
-        } else if (piece.getRank() == 0 
+        } else if (piece.getRank() == 0
                 && piece.getColor() == PlayerColor.RED) {
             nomPiece = "Drapeau rouge";
-        } else if (piece.getRank() == 0 
+        } else if (piece.getRank() == 0
                 && piece.getColor() == PlayerColor.BLUE) {
             nomPiece = "Drapeau bleu";
-        } else if (piece.getRank() == 9 
+        } else if (piece.getRank() == 9
                 && piece.getColor() == PlayerColor.BLUE) {
             nomPiece = "Géneral bleu";
-        } else if (piece.getRank() == 1 
+        } else if (piece.getRank() == 1
                 && piece.getColor() == PlayerColor.BLUE) {
             nomPiece = "Espion bleu";
-        } else if (piece.getRank() == 10 
+        } else if (piece.getRank() == 10
                 && piece.getColor() == PlayerColor.BLUE) {
             nomPiece = "Maréchal bleu";
-        } else if (piece.getRank() == 11 
+        } else if (piece.getRank() == 11
                 && piece.getColor() == PlayerColor.BLUE) {
             nomPiece = "Bombe bleu";
-        } else if (piece.getRank() == 3 
+        } else if (piece.getRank() == 3
                 && piece.getColor() == PlayerColor.BLUE) {
             nomPiece = "Demineur bleu";
-        } else if (piece.getRank() == 1 
+        } else if (piece.getRank() == 1
                 && piece.getColor() == PlayerColor.RED) {
             nomPiece = "Espion rouge";
-        } else if (piece.getRank() == 10 
+        } else if (piece.getRank() == 10
                 && piece.getColor() == PlayerColor.RED) {
             nomPiece = "Maréchal rouge";
-        } else if (piece.getRank() == 11 
+        } else if (piece.getRank() == 11
                 && piece.getColor() == PlayerColor.RED) {
             nomPiece = "Bombe rouge";
-        } else if (piece.getRank() == 3 
+        } else if (piece.getRank() == 3
                 && piece.getColor() == PlayerColor.RED) {
             nomPiece = "Démineur rouge";
-        } else if (piece.getRank() == 2 
+        } else if (piece.getRank() == 2
                 && piece.getColor() == PlayerColor.RED) {
             nomPiece = "Eclaireur rouge";
-        } else if (piece.getRank() == 2 
+        } else if (piece.getRank() == 2
                 && piece.getColor() == PlayerColor.BLUE) {
             nomPiece = "Eclaireur bleu";
         }
@@ -336,61 +338,61 @@ public class View {
      */
     private void hideBluePiece(Piece piece) {
 
-        if (piece.getColor() == PlayerColor.BLUE 
+        if (piece.getColor() == PlayerColor.BLUE
                 && piece.getRank() == 9) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toBlue("**") + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE 
+        } else if (piece.getColor() == PlayerColor.BLUE
                 && piece.getRank() == 0) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toBlue("**") + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE 
+        } else if (piece.getColor() == PlayerColor.BLUE
                 && piece.getRank() == 11) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toBlue("**") + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE 
+        } else if (piece.getColor() == PlayerColor.BLUE
                 && piece.getRank() == 3) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toBlue("**") + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE 
+        } else if (piece.getColor() == PlayerColor.BLUE
                 && piece.getRank() == 1) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toBlue("**") + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE 
+        } else if (piece.getColor() == PlayerColor.BLUE
                 && piece.getRank() == 10) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toBlue("**") + "]");
-        } else if (piece.getColor() == PlayerColor.BLUE 
+        } else if (piece.getColor() == PlayerColor.BLUE
                 && piece.getRank() == 2) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toBlue("**") + "]");
         } else {
             if (piece.getColor() == PlayerColor.RED && piece.getRank() == 9) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toRed("GE") + "]");
-            } else if (piece.getColor() == PlayerColor.RED 
+            } else if (piece.getColor() == PlayerColor.RED
                     && piece.getRank() == 0) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toRed("DR") + "]");
-            } else if (piece.getColor() == PlayerColor.RED 
+            } else if (piece.getColor() == PlayerColor.RED
                     && piece.getRank() == 11) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toRed("BO") + "]");
-            } else if (piece.getColor() == PlayerColor.RED 
+            } else if (piece.getColor() == PlayerColor.RED
                     && piece.getRank() == 3) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toRed("DM") + "]");
-            } else if (piece.getColor() == PlayerColor.RED 
+            } else if (piece.getColor() == PlayerColor.RED
                     && piece.getRank() == 10) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toRed("MA") + "]");
-            } else if (piece.getColor() == PlayerColor.RED 
+            } else if (piece.getColor() == PlayerColor.RED
                     && piece.getRank() == 1) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toRed("ES") + "]");
-            } else if (piece.getColor() == PlayerColor.RED 
+            } else if (piece.getColor() == PlayerColor.RED
                     && piece.getRank() == 2) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toRed("EC") + "]");
 
             }
@@ -405,89 +407,67 @@ public class View {
      */
     private void hideRedPiece(Piece piece) {
 
-        if (piece.getColor() == PlayerColor.RED 
+        if (piece.getColor() == PlayerColor.RED
                 && piece.getRank() == 9) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toRed("$$") + "]");
-        } else if (piece.getColor() == PlayerColor.RED 
+        } else if (piece.getColor() == PlayerColor.RED
                 && piece.getRank() == 0) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toRed("$$") + "]");
-        } else if (piece.getColor() == PlayerColor.RED 
+        } else if (piece.getColor() == PlayerColor.RED
                 && piece.getRank() == 11) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toRed("$$") + "]");
-        } else if (piece.getColor() == PlayerColor.RED 
+        } else if (piece.getColor() == PlayerColor.RED
                 && piece.getRank() == 3) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toRed("$$") + "]");
-        } else if (piece.getColor() == PlayerColor.RED 
+        } else if (piece.getColor() == PlayerColor.RED
                 && piece.getRank() == 10) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toRed("$$") + "]");
-        } else if (piece.getColor() == PlayerColor.RED 
+        } else if (piece.getColor() == PlayerColor.RED
                 && piece.getRank() == 1) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toRed("$$") + "]");
-        } else if (piece.getColor() == PlayerColor.RED 
+        } else if (piece.getColor() == PlayerColor.RED
                 && piece.getRank() == 2) {
-            System.out.print(" [" + couleur.WhiteBackground 
+            System.out.print(" [" + couleur.WhiteBackground
                     + couleur.toRed("$$") + "]");
 
         } else {
-            if (piece.getColor() == PlayerColor.BLUE 
+            if (piece.getColor() == PlayerColor.BLUE
                     && piece.getRank() == 9) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toBlue("GE") + "]");
-            } else if (piece.getColor() == PlayerColor.BLUE 
+            } else if (piece.getColor() == PlayerColor.BLUE
                     && piece.getRank() == 0) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toBlue("DR") + "]");
-            } else if (piece.getColor() == PlayerColor.BLUE 
+            } else if (piece.getColor() == PlayerColor.BLUE
                     && piece.getRank() == 11) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toBlue("BO") + "]");
-            } else if (piece.getColor() == PlayerColor.BLUE 
+            } else if (piece.getColor() == PlayerColor.BLUE
                     && piece.getRank() == 3) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toBlue("DM") + "]");
-            } else if (piece.getColor() == PlayerColor.BLUE 
+            } else if (piece.getColor() == PlayerColor.BLUE
                     && piece.getRank() == 10) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toBlue("MA") + "]");
-            } else if (piece.getColor() == PlayerColor.BLUE 
+            } else if (piece.getColor() == PlayerColor.BLUE
                     && piece.getRank() == 1) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toBlue("ES") + "]");
-            } else if (piece.getColor() == PlayerColor.BLUE 
+            } else if (piece.getColor() == PlayerColor.BLUE
                     && piece.getRank() == 2) {
-                System.out.print(" [" + couleur.WhiteBackground 
+                System.out.print(" [" + couleur.WhiteBackground
                         + couleur.toBlue("EC") + "]");
 
             }
         }
-    }
-
-    /**
-     * Method grouping piece name and it colors
-     *
-     * @return namepiece
-     */
-    private String[] namePiece() {
-        String[] namePiece = {"General rouge",
-            "Drapeau rouge",
-            "Demineur rouge",
-            "Bomb rouge",
-            "Espion rouge",
-            "Marechal rouge",
-            "General bleu",
-            "Drapeau bleu",
-            "Demineur bleu",
-            "Bomb bleu",
-            "Espion bleu",
-            "Marechal bleu"};
-
-        return namePiece;
     }
 
 }
