@@ -127,7 +127,8 @@ public class Controller {
                 if (game.getSelected() == null);
 
             } catch (IllegalArgumentException e) {
-                view.displayErrors(couleur.toRed("Aucune piece n'a été selectioner "));
+                view.displayErrors(couleur.toRed("Aucune piece n'a été "
+                        + "selectioner "));
                 view.displayErrors(couleur.toRed("commande imcomplete"));
                 view.displayErrors("Veuillez ressayé");
                 System.out.println("");
