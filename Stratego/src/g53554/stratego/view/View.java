@@ -198,7 +198,7 @@ public class View {
                     System.out.print(" [" + couleur.WhiteBackground + "  "
                             + couleur.toDefault + "]");
                 } else if (piece == null && !item.isLand()) {
-                    System.out.print(" [" + couleur.WhiteBackground + "  "
+                    System.out.print(" [" + couleur.BLUE_BACKGROUND + "  "
                             + couleur.toDefault + "]");
                 } else {
                     HideCurrentPiece(piece, player);

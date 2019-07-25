@@ -1,4 +1,5 @@
 package g53554.stratego.controller;
+
 import g53554.stratego.main.Color;
 import g53554.stratego.model.Model;
 import g53554.stratego.view.View;
@@ -113,8 +114,8 @@ public class Controller {
                 System.out.println("");
                 gameCmde();
             } catch (ArrayIndexOutOfBoundsException e) {
-            } catch (IllegalArgumentException e){
-                
+            } catch (IllegalArgumentException e) {
+
                 view.displayErrors(couleur.toRed("commande imcomplete ou"
                         + " non valide ou la case réfère à un la case d'un "
                         + "joueur adverse"));
@@ -155,12 +156,18 @@ public class Controller {
 
         }
     }
+
     /**
-    * Check if the the cmd is quit 
-    *
-    */
+     * Check if the the cmd is quit
+     *
+     */
 
     private boolean quit() {
         return cmd.equals("quit");
+    }
+    
+
+    private void confirmMoves() {
+
     }
 }
