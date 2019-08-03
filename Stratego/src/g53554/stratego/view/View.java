@@ -62,6 +62,7 @@ public class View {
      * This method display some guide line that the user can encode
      */
     public void displayHelp() {
+        System.out.println("");
         System.out.println(couleur.toYellow("Usage :"));
         System.out.println("     " + couleur.toYellow("Taper ")
                 + couleur.toRed("select <row,column>")
@@ -78,6 +79,7 @@ public class View {
         System.out.println(couleur.toYellow("     " + "Taper "
                 + couleur.toRed("quit")
                 + couleur.toYellow(" pour arrêter le jeu")));
+        System.out.println("");
 
     }
 
@@ -198,7 +200,7 @@ public class View {
                     System.out.print(" [" + couleur.WhiteBackground + "  "
                             + couleur.toDefault + "]");
                 } else if (piece == null && !item.isLand()) {
-                    System.out.print(" [" + couleur.BLUE_BACKGROUND + "  "
+                    System.out.print(" [" + couleur.CYAN_BACKGROUND + "  "
                             + couleur.toDefault + "]");
                 } else {
                     HideCurrentPiece(piece, player);
