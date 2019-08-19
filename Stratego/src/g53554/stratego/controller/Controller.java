@@ -95,9 +95,9 @@ public class Controller {
         Color couleur = new Color();
         cmd = view.askCommand();
         String endGamecmde = "quit";
-        String piecePostionCmde = "select(.*)";
+        String piecePostionCmde = "select\\s\\d\\s\\d";
         String movePieceCmd = "move(.*)";
-        String applyMoveCmd = "apply(.*)";
+        String applyMoveCmd = "apply\\s\\d";
         int row;
         int column;
         int applyValue;

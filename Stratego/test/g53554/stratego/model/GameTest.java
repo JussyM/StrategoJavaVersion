@@ -21,17 +21,23 @@ import static org.junit.Assert.assertTrue;
 public class GameTest {
 
     private final Square[][] newDefaultBoard = {
-        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), 
+            new Square(SquareType.LAND),
             new Square(SquareType.LAND), new Square(SquareType.LAND)},
-        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), 
+            new Square(SquareType.LAND),
             new Square(SquareType.LAND), new Square(SquareType.LAND)},
-        {new Square(SquareType.WATER), new Square(SquareType.WATER), new Square(SquareType.WATER),
+        {new Square(SquareType.WATER), new Square(SquareType.WATER), 
+            new Square(SquareType.WATER),
             new Square(SquareType.LAND), new Square(SquareType.LAND)},
-        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), 
+            new Square(SquareType.LAND),
             new Square(SquareType.LAND), new Square(SquareType.LAND)},
-        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+        {new Square(SquareType.LAND), new Square(SquareType.LAND), 
+            new Square(SquareType.LAND),
             new Square(SquareType.LAND), new Square(SquareType.LAND)},
-        {new Square(SquareType.LAND), new Square(SquareType.LAND), new Square(SquareType.LAND),
+        {new Square(SquareType.LAND), new Square(SquareType.LAND),
+            new Square(SquareType.LAND),
             new Square(SquareType.LAND), new Square(SquareType.LAND)}};
 
     @Before
