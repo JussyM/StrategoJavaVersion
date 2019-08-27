@@ -405,11 +405,80 @@ public class Game implements Model {
 
     /**
      * Return a list of inactive piece of the current player
+     *
      * @return current.getLost()
      */
-
     public List<Piece> getLost() {
         return this.current.getLost();
     }
 
+    /**
+     * Restore the piece in parameter for the current player
+     *
+     * @param piece
+     */
+    public void restore(Piece piece) {
+        Board board = new Board();
+        Position posHasard = new Position(ligne(), colonne());
+        current.restore(piece);
+        if (posHasardValide(posHasard)) {
+            board.put(piece, posHasard);
+        }
+
+    }
+
+    /**
+     * return a row
+     *
+     * @return ligne
+     */
+    private int ligne() {
+        Board board = new Board();
+        int ligne = 0;
+        for (int i = 0; i < board.findFree().size(); i++) {
+            ligne = tireHasard(board.findFree().get(i).getRow(),
+                    board.findFree().get(i + 1).getRow());
+        }
+        return ligne;
+
+    }
+
+    /**
+     * Return a value
+     *
+     * @param valueA
+     * @param valueB
+     * @return Integer
+     */
+    private int tireHasard(int valueA, int valueB) {
+        return (int) (Math.random() * (valueB - valueA + 1) + valueA);
+    }
+
+    /**
+     * return a column
+     *
+     * @return
+     */
+    private int colonne() {
+        Board board = new Board();
+        int colonne = 0;
+        for (int i = 0; i < board.findFree().size(); i++) {
+            colonne = tireHasard(board.findFree().get(i).getColumn(),
+                    board.findFree().get(i + 1).getColumn());
+        }
+        return colonne;
+
+    }
+
+    /**
+     * Return a boolean true if the position is free and inside the board 
+     * @param pos
+     * @return true or false 
+     */
+
+    private boolean posHasardValide(Position pos) {
+        Board board = new Board();
+        return board.isInside(pos) && board.isFree(pos);
+
+    }
 }
