@@ -1,4 +1,5 @@
 package g53554.stratego.model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -178,6 +179,26 @@ public class Board {
 
         return listPosition;
 
+    }
+
+    /**
+     * Return a list of all the free Postion on the board 
+     * @return freepostion
+     */
+
+    public List<Position> findFree() {
+        List<Position> freePostion = new ArrayList<>();
+        Position freePos;
+        for (int i = 0; i < this.squares.length; i++) {
+            for (int j = 0; j < this.squares[i].length; j++) {
+                freePos = new Position(i, j);
+                if (this.squares[i][j] == null) {
+                    freePostion.add(freePos);
+                }
+            }
+
+        }
+        return freePostion;
     }
 
 }
