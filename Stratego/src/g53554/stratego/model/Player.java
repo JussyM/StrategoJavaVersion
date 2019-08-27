@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Player {
 
     private PlayerColor color;
-    private List<Piece> pieces;
+    private Stock pieces;
 
     /**
      * This method initialized the attribute of the class
@@ -26,7 +26,7 @@ public class Player {
             throw new NullPointerException();
         }
         this.color = color;
-        this.pieces = new ArrayList<>();
+        this.pieces = new Stock();
     }
 
     /**
@@ -83,7 +83,7 @@ public class Player {
      *
      * @return
      */
-    public List<Piece> getPieces() {
+    public Stock getPieces() {
         return pieces;
 
     }
@@ -120,8 +120,8 @@ public class Player {
      */
     public boolean hasFlag() {
         boolean contain = false;
-        for (int i = 0; i < getPieces().size(); i++) {
-            if (getPieces().get(i).getRank() == 0) {
+        for (int i = 0; i < this.pieces.actives.size(); i++) {
+            if (this.pieces.actives.get(i).getNbSteps() == 0) {
                 contain = true;
 
             }
@@ -129,4 +129,22 @@ public class Player {
         return contain;
 
     }
+
+    /**
+     * Return a list of inactive piece of the player
+     *
+     * @return pieces.inactives
+     */
+    public List<Piece> getLost() {
+        return this.pieces.inactives;
+    }
+
+    /**
+     * Restore the piece in parameter
+     * @param piece
+     */
+    public void restore(Piece piece) {
+       this.pieces.restore(piece);
+    }
+
 }

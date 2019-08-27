@@ -1,4 +1,5 @@
 package g53554.stratego.model;
+
 import g53554.stratego.model.pieces.Bomb;
 import g53554.stratego.model.pieces.Eclaireur;
 import g53554.stratego.model.pieces.Spy;
@@ -401,6 +402,14 @@ public class Game implements Model {
 
         return isPossible;
     }
-    
+
+    /**
+     * Return a list of inactive piece of the current player
+     * @return current.getLost()
+     */
+
+    public List<Piece> getLost() {
+        return this.current.getLost();
+    }
 
 }
