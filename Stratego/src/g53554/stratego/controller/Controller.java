@@ -98,7 +98,8 @@ public class Controller {
         String piecePostionCmde = "select\\s\\d\\s\\d";
         String movePieceCmd = "move(.*)";
         String applyMoveCmd = "apply\\s\\d";
-        String showPieceLostCmd= "lost";
+        String showPieceLostCmd = "lost";
+        String restoreCmd = "restore\\s\\d";
         int row;
         int column;
         int applyValue;
@@ -148,8 +149,9 @@ public class Controller {
                 gameCmde();
 
             }
-        }else if(cmd.matches(showPieceLostCmd)){
-            view.lostPieces(game.getLost());
+        } else if (cmd.matches(showPieceLostCmd)) {
+            view.lostPieceName(game.getLost());
+        } else if (cmd.matches(restoreCmd)) {
 
         } else {
             view.displayErrors("La commande entrez n'est pas valable :(");
@@ -164,11 +166,9 @@ public class Controller {
      * Check if the the cmd is quit
      *
      */
-
     private boolean quit() {
         return cmd.equals("quit");
     }
-    
 
 //    private void confirmMoves() {
 //

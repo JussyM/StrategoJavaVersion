@@ -8,6 +8,7 @@ import g53554.stratego.model.Move;
 import g53554.stratego.model.Piece;
 import g53554.stratego.model.Player;
 import g53554.stratego.model.PlayerColor;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -536,63 +537,162 @@ public class View {
     }
 
     /**
-     * Return a name for the lost piece
+     * Return a list of value of the inactive piece for the lost piece
+     *
      * @param lost
      */
-
-    public void lostPieces(List<Piece> lost) {
+    public List<Integer> lostPiecesValue(List<Piece> lost) {
+        List<Integer> cptList = new ArrayList<>();
         String namePiece = "";
+        int cpt = 0;
         String[] name;
         name = pieceName();
         for (int i = 0; i < lost.size(); i++) {
             if (lost.get(i).getRank() == 9
                     && lost.get(i).getColor() == PlayerColor.RED) {
                 namePiece = name[0];
+                cpt++;
+                cptList.add(cpt);
             } else if (lost.get(i).getRank() == 0
                     && lost.get(i).getColor() == PlayerColor.RED) {
                 namePiece = name[1];
+                cpt++;
+                cptList.add(cpt);
             } else if (lost.get(i).getRank() == 0
                     && lost.get(i).getColor() == PlayerColor.BLUE) {
                 namePiece = name[7];
+                cpt++;
+                cptList.add(cpt);
             } else if (lost.get(i).getRank() == 9
                     && lost.get(i).getColor() == PlayerColor.BLUE) {
                 namePiece = name[6];
+                cpt++;
+                cptList.add(cpt);
             } else if (lost.get(i).getRank() == 11
                     && lost.get(i).getColor() == PlayerColor.BLUE) {
                 namePiece = name[9];
+                cpt++;
+                cptList.add(cpt);
             } else if (lost.get(i).getRank() == 11
                     && lost.get(i).getColor() == PlayerColor.RED) {
                 namePiece = name[3];
+                cpt++;
+                cptList.add(cpt);
             } else if (lost.get(i).getRank() == 3
                     && lost.get(i).getColor() == PlayerColor.BLUE) {
                 namePiece = name[8];
+                cpt++;
+                cptList.add(cpt);
             } else if (lost.get(i).getRank() == 3
                     && lost.get(i).getColor() == PlayerColor.RED) {
                 namePiece = name[2];
+                cpt++;
+                cptList.add(cpt);
             } else if (lost.get(i).getRank() == 1
                     && lost.get(i).getColor() == PlayerColor.RED) {
                 namePiece = name[4];
+                cpt++;
+                cptList.add(cpt);
             } else if (lost.get(i).getRank() == 10
                     && lost.get(i).getColor() == PlayerColor.RED) {
                 namePiece = name[5];
+                cpt++;
+                cptList.add(cpt);
+            } else if (lost.get(i).getRank() == 1
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[10];
+                cpt++;
+                cptList.add(cpt);
+            } else if (lost.get(i).getRank() == 10
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[11];
+                cpt++;
+                cptList.add(cpt);
+            } else if (lost.get(i).getRank() == 2
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[13];
+                cpt++;
+                cptList.add(cpt);
+            } else if (lost.get(i).getRank() == 2
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[6];
+                cpt++;
+                cptList.add(cpt);
+
+            }
+
+            System.out.println(cpt + "- " + namePiece);
+
+        }
+        return cptList;
+    }
+
+    public void lostPieceName(List<Piece> lost) {
+        String namePiece = "";
+        int cpt = 0;
+        String[] name;
+        name = pieceName();
+        for (int i = 0; i < lost.size(); i++) {
+            if (lost.get(i).getRank() == 9
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[0];
+                cpt++;
+            } else if (lost.get(i).getRank() == 0
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[1];
+                cpt++;
+            } else if (lost.get(i).getRank() == 0
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[7];
+                cpt++;
+            } else if (lost.get(i).getRank() == 9
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[6];
+                cpt++;
+            } else if (lost.get(i).getRank() == 11
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[9];
+                cpt++;
+            } else if (lost.get(i).getRank() == 11
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[3];
+                cpt++;
+            } else if (lost.get(i).getRank() == 3
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[8];
+                cpt++;
+            } else if (lost.get(i).getRank() == 3
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[2];
+                cpt++;
+            } else if (lost.get(i).getRank() == 1
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[4];
+                cpt++;
+            } else if (lost.get(i).getRank() == 10
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[5];
+                cpt++;
             } else if (lost.get(i).getRank() == 1
                     && lost.get(i).getColor() == PlayerColor.BLUE) {
                 namePiece = name[10];
             } else if (lost.get(i).getRank() == 10
                     && lost.get(i).getColor() == PlayerColor.BLUE) {
                 namePiece = name[11];
+                cpt++;
             } else if (lost.get(i).getRank() == 2
                     && lost.get(i).getColor() == PlayerColor.BLUE) {
                 namePiece = name[13];
+                cpt++;
             } else if (lost.get(i).getRank() == 2
                     && lost.get(i).getColor() == PlayerColor.RED) {
                 namePiece = name[6];
-
+                cpt++;
             }
 
-            System.out.println(i + "- " + namePiece);
+            System.out.println(cpt + "- " + namePiece);
 
         }
-    }
 
+    }
 }
