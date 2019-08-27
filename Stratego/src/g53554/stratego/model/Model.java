@@ -1,4 +1,5 @@
 package g53554.stratego.model;
+
 import java.util.List;
 
 /**
@@ -73,9 +74,16 @@ public interface Model {
     Player getcurrent();
 
     /**
-     * This methos return a list of the winner
+     * This method return a list of the winner
+     *
      * @return listWinner
      */
     List<Player> getWinner();
+
+    /**
+     * return a list of the piece lost by the player
+     * @return getLost
+     */
+    List<Piece> getLost();
 
 }

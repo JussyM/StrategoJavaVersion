@@ -98,6 +98,7 @@ public class Controller {
         String piecePostionCmde = "select\\s\\d\\s\\d";
         String movePieceCmd = "move(.*)";
         String applyMoveCmd = "apply\\s\\d";
+        String showPieceLostCmd= "lost";
         int row;
         int column;
         int applyValue;
@@ -147,6 +148,8 @@ public class Controller {
                 gameCmde();
 
             }
+        }else if(cmd.matches(showPieceLostCmd)){
+            view.lostPieces(game.getLost());
 
         } else {
             view.displayErrors("La commande entrez n'est pas valable :(");

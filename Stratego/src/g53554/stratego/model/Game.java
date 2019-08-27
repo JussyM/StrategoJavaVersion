@@ -408,6 +408,7 @@ public class Game implements Model {
      *
      * @return current.getLost()
      */
+    @Override
     public List<Piece> getLost() {
         return this.current.getLost();
     }

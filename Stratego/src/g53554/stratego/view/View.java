@@ -501,6 +501,31 @@ public class View {
     }
 
     /**
+     * Name pice without color
+     *
+     * @return namePiece
+     */
+    private String[] pieceName() {
+        String[] namePiece = {"General",
+            "Drapeau",
+            "Demineur",
+            "Bombe ",
+            "Espion",
+            "Marechal",
+            "Eclaireur",
+            "General",
+            "Drapeau",
+            "Demineur",
+            "Bombe",
+            "Espion",
+            "Marechal",
+            "Eclaireur"};
+
+        return namePiece;
+
+    }
+
+    /**
      * Method grouping name piece abreviation
      *
      * @return namePiece
@@ -508,6 +533,66 @@ public class View {
     private String[] namePiece2() {
         String[] namePiece = {"GE", "DR", "DM", "BO", "ES", "MA", "EC"};
         return namePiece;
+    }
+
+    /**
+     * Return a name for the lost piece
+     * @param lost
+     */
+
+    public void lostPieces(List<Piece> lost) {
+        String namePiece = "";
+        String[] name;
+        name = pieceName();
+        for (int i = 0; i < lost.size(); i++) {
+            if (lost.get(i).getRank() == 9
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[0];
+            } else if (lost.get(i).getRank() == 0
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[1];
+            } else if (lost.get(i).getRank() == 0
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[7];
+            } else if (lost.get(i).getRank() == 9
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[6];
+            } else if (lost.get(i).getRank() == 11
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[9];
+            } else if (lost.get(i).getRank() == 11
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[3];
+            } else if (lost.get(i).getRank() == 3
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[8];
+            } else if (lost.get(i).getRank() == 3
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[2];
+            } else if (lost.get(i).getRank() == 1
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[4];
+            } else if (lost.get(i).getRank() == 10
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[5];
+            } else if (lost.get(i).getRank() == 1
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[10];
+            } else if (lost.get(i).getRank() == 10
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[11];
+            } else if (lost.get(i).getRank() == 2
+                    && lost.get(i).getColor() == PlayerColor.BLUE) {
+                namePiece = name[13];
+            } else if (lost.get(i).getRank() == 2
+                    && lost.get(i).getColor() == PlayerColor.RED) {
+                namePiece = name[6];
+
+            }
+
+            System.out.println(i + "- " + namePiece);
+
+        }
     }
 
 }
