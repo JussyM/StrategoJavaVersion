@@ -23,16 +23,15 @@ public class PlayerTest {
         assertTrue(result.isEmpty());
     }
 
-    @Test
-    public void testGetPiecesWhenStockFill() {
-        System.out.println("testGetPiecesWhenStockFill");
-        Player instance = new Player(PlayerColor.BLUE);
-        instance.addPiece(new Piece(0, PlayerColor.BLUE));
-        instance.addPiece(new Piece(0, PlayerColor.BLUE));
-        List<Piece> result = instance.getPieces();
-        assertFalse(result.isEmpty());
-    }
-
+//    @Test
+//    public void testGetPiecesWhenStockFill() {
+//        System.out.println("testGetPiecesWhenStockFill");
+//        Player instance = new Player(PlayerColor.BLUE);
+//        instance.addPiece(new Piece(0, PlayerColor.BLUE));
+//        instance.addPiece(new Piece(0, PlayerColor.BLUE));
+//        List<Piece> result = instance.getPieces();
+//        assertFalse(result.isEmpty());
+//    }
     @Test
     public void testAddPiece() {
         System.out.println("addPiece");
